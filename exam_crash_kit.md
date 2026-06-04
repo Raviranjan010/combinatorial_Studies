@@ -12,7 +12,7 @@
 1.4 Process Scheduling
 1.5 CPU Scheduling Algorithms
 1.6 Process Synchronization
-1.7 Deadlock
+1.7 Deadlock-
 
 ### **CHAPTER 2: DATABASE MANAGEMENT SYSTEMS**
 2.1 Introduction to DBMS
