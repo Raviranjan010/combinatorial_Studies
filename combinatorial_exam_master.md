@@ -1,4 +1,4 @@
-# 📘 Combinatorial / CS Exam Master Notes
+# 📘 Combinatorial / CS Exam Master Notes!
 
 > **🎯 Quick Start**: Read Rapid Revision Sheets first → MCQ Bank → Top 100 → Shortcuts. Total time: 2-3 hours.
 
