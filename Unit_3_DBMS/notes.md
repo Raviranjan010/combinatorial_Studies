@@ -17,6 +17,7 @@
 9. [Concurrency Anomalies (Dirty, Non-Repeatable & Phantom Reads)](#9-concurrency-anomalies-dirty-non-repeatable--phantom-reads)
 10. [Conflict Serializability & Precedence Graphs](#10-conflict-serializability--precedence-graphs)
 11. [Database Recovery Systems (WAL, Checkpoints & REDO/UNDO)](#11-database-recovery-systems-wal-checkpoints--redoundo)
+12. [Common Pitfalls & Mistakes to Avoid](#12-common-pitfalls--mistakes-to-avoid)
 
 ---
 
@@ -801,3 +802,36 @@ Scanning the entire log from the beginning of time after a crash is slow and ine
 *   If transaction $T_i$ committed *before* the checkpoint: **Do nothing** (changes are already safe on disk).
 *   If transaction $T_i$ committed *after* the checkpoint but *before* the crash: **REDO $T_i$**.
 *   If transaction $T_i$ was active *during* the crash (uncommitted): **UNDO $T_i$**.
+
+---
+
+## 12. Common Pitfalls & Mistakes to Avoid
+
+> [!WARNING]
+> ### 1. `DELETE` vs. `TRUNCATE`
+> *   **The Mistake:** Believing they are identical and both can be rolled back.
+> *   **The Reality:** 
+>     - **`DELETE` (DML):** Deletes rows one by one. It logs each deletion, allows `WHERE` filters, is slower, and can be rolled back inside a transaction.
+>     - **`TRUNCATE` (DDL):** Deallocates data pages. It does not log individual row deletions, is extremely fast, resets auto-increment values, and cannot be filtered with a `WHERE` clause.
+
+> [!WARNING]
+> ### 2. Primary Key vs. Unique Key
+> *   **The Mistake:** Believing a Unique key does not allow NULL values.
+> *   **The Reality:**
+>     - **Primary Key:** Must be unique and **cannot** contain `NULL` values. A table can have only one Primary Key.
+>     - **Unique Key:** Must be unique but **can** contain `NULL` values (usually one or more depending on RDBMS). A table can have multiple Unique Keys.
+
+> [!WARNING]
+> ### 3. Lossless Join vs. Dependency Preserving
+> *   **The Mistake:** Assuming every high-level normal form (like BCNF) decomposition preserves all functional dependencies.
+> *   **The Reality:**
+>     - A decomposition must **always** be lossless to prevent spurious/fake rows during joins.
+>     - However, decomposing a table to **BCNF** may sometimes lose functional dependencies (meaning we can only enforce them by joining tables). 3NF always guarantees dependency preservation.
+
+> [!WARNING]
+> ### 4. `WHERE` vs. `HAVING`
+> *   **The Mistake:** Trying to filter grouped/aggregated values in a `WHERE` clause.
+> *   **The Reality:**
+>     - **`WHERE`:** Filters rows *before* grouping occurs. It cannot contain aggregate functions like `AVG()`, `SUM()`, etc.
+>     - **`HAVING`:** Filters groups *after* `GROUP BY` has executed. It is used exclusively to filter aggregated results.
+

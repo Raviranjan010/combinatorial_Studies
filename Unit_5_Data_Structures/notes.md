@@ -1,263 +1,250 @@
-# 📈 Data Structures — Unit V: Complete Beginner-Friendly Notes
+# 📈 Data Structures — Unit V: Comprehensive Lecture Notes
 
-> **How to use these notes:** Read top to bottom. Every concept is explained with a simple analogy first, then the technical definition. Don't skip analogies — they are the key to truly *understanding* rather than just memorizing.
+> **Target Audience:** Students and candidates preparing for technical interviews. This unit covers linear structures, hierarchical trees, graph models, hashing, and priority queues with step-by-step algorithms, ASCII graphics, and "Mistakes to Avoid" sections.
 
 ---
 
 ## 📌 Table of Contents
 
-1. [Introduction to Data Structures](#1-introduction-to-data-structures)
-2. [Arrays vs. Linked Lists](#2-arrays-vs-linked-lists)
-3. [Stacks & Queues](#3-stacks--queues)
-4. [Trees & Binary Search Trees (BST)](#4-trees--binary-search-tree-bst)
-5. [Balanced Trees (AVL, Red-Black, B/B+ Trees)](#5-balanced-trees-avl-red-black-bb-trees)
-6. [Graphs](#6-graphs)
-7. [Hashing](#7-hashing)
-8. [Heaps](#8-heaps)
+1. [Introduction to Data Structures & Memory Layout](#1-introduction-to-data-structures--memory-layout)
+2. [Linked Lists: Singly, Doubly, and Circular](#2-linked-lists-singly-doubly-and-circular)
+3. [Stacks & Queues: Constraints & Implementations](#3-stacks--queues-constraints--implementations)
+4. [Trees: Binary Trees, BST, and Self-Balancing Trees (AVL, Red-Black, B/B+)](#4-trees-binary-trees-bst-and-self-balancing-trees)
+5. [Graphs: Representations (Matrix vs. List) & Traversals (BFS & DFS)](#5-graphs-representations--traversals)
+6. [Hashing: Hash Functions, Collisions, and Resolution Strategies](#6-hashing-hash-functions-collisions-and-resolution-strategies)
+7. [Heaps: Priority Queues, Binary Heaps & Heapify Mechanics](#7-heaps-priority-queues-binary-heaps--heapify-mechanics)
+8. [Common Pitfalls & Mistakes to Avoid](#8-common-pitfalls--mistakes-to-avoid)
 
 ---
 
-## 1. Introduction to Data Structures
+## 1. Introduction to Data Structures & Memory Layout
 
-### 🧰 The Tool Organizer Analogy
+A **Data Structure** is a systematic way of organizing, managing, and storing data in a computer so that operations (such as search, insertion, deletion, and updates) can be performed efficiently.
 
-Imagine you are a **carpenter**:
-- If you dump all your nails, screws, hammers, and saws into a single bucket, finding a specific screw takes forever (**inefficient searching**).
-- Instead, you buy a **toolbox with compartments**: a tray for screws, loops for screwdrivers, and a slot for the saw. 
-
-Each compartment is designed for a specific tool. In programming, a **Data Structure** is that toolbox, organizing data so that operations (searching, inserting, deleting) are as fast and efficient as possible.
-
----
-
-## 2. Arrays vs. Linked Lists
-
-How do we store a list of items in memory? We have two main layouts:
-
-### 🚂 2.1 The Array — "The Passenger Train"
-**Analogy:** A passenger train with consecutive, numbered cabins. 
-- If you have a ticket for Seat 5, you can walk directly to Cabin 5 (**$O(1)$ constant-time random access**).
-- But if you want to add a new cabin in the middle of the train, you must decouple all subsequent cabins and shift them back (**$O(N)$ insertion cost**).
-
-```
-   Array (Contiguous Memory):
-   ┌───────┬───────┬───────┬───────┬───────┐
-   │ Seat 0│ Seat 1│ Seat 2│ Seat 3│ Seat 4│
-   └───────┴───────┴───────┴───────┴───────┘
-   Address: 0x100  0x104   0x108   0x10C   0x110  (consecutive)
-```
+### 🧠 Cache Locality & Memory Layout
+How data structures reside in physical RAM directly impacts their CPU performance:
+*   **Contiguous Layout (Arrays):** Elements are stored side-by-side in memory blocks.
+    *   *Hardware Benefit:* Excellent cache spatial locality. When the CPU accesses `arr[0]`, the hardware pre-fetches the entire block (`arr[1]`, `arr[2]`, etc.) into the L1/L2 cache.
+*   **Non-Contiguous Layout (Linked Lists, Trees):** Elements (nodes) are allocated dynamically at arbitrary memory locations and linked via address pointers.
+    *   *Hardware Drawback:* Poor cache locality. Traversing a linked list causes multiple CPU cache misses because nodes are scattered across RAM.
 
 ---
 
-### 🗺️ 2.2 The Linked List — "The Scavenger Hunt"
-**Analogy:** A scavenger hunt. You are at Station A. You don't know where Station C is. You only know the clue pointing to Station B. When you reach Station B, you get the clue pointing to Station C.
-- To find the last station, you must visit every station in between (**$O(N)$ sequential access**).
-- But if you want to add a new station, you just write a new clue and update the pointers without moving any stations (**$O(1)$ insertion**).
+## 2. Linked Lists: Singly, Doubly, and Circular
+
+A **Linked List** is a dynamic linear data structure composed of nodes, where each node contains data and a reference (pointer) to the next node.
 
 ```
-   Linked List (Non-Contiguous Memory):
-   ┌───────────┐      ┌───────────┐      ┌───────────┐
-   │ Head:  10 ├───▶  │ Data:  20 ├───▶  │ Data:  30 ├───▶ NULL
-   │ Next: 0x55│      │ Next: 0x99│      │ Next: NULL│
-   └───────────┘      └───────────┘      └───────────┘
-   Address: 0x11      Address: 0x55      Address: 0x99  (scattered)
+Singly Linked List:
+┌──────────────┐      ┌──────────────┐      ┌──────────────┐
+│ Head: Data10 ├───►  │ Data20       ├───►  │ Data30       ├───► NULL
+│ Next: 0x500  │      │ Next: 0x800  │      │ Next: NULL   │
+└──────────────┘      └──────────────┘      └──────────────┘
+Address: 0x100        Address: 0x500        Address: 0x800
 ```
+
+### 2.1 Linked List Variants
+1.  **Singly Linked List (SLL):** One pointer per node (`next`). Unidirectional traversal.
+2.  **Doubly Linked List (DLL):** Two pointers per node (`next` and `prev`). Bidirectional traversal.
+3.  **Circular Linked List (CLL):** The last node's `next` pointer references the head node, forming a closed ring.
 
 ---
 
-### 📊 2.3 Detailed Comparison
+### 2.2 Trace: Inserting a Node in the Middle of an SLL
+Let's insert a node with value `15` between `Node(10)` and `Node(20)`:
 
-| Feature | Array | Linked List |
-| :--- | :--- | :--- |
-| **Size** | Fixed at allocation. | Dynamic (grows and shrinks at runtime). |
-| **Memory Allocation**| Contiguous block of RAM. | Non-contiguous, allocated as nodes. |
-| **Access Time** | **$O(1)$** (Direct access via index). | **$O(N)$** (Must traverse from Head). |
-| **Insert/Delete** | **$O(N)$** (Requires element shifting). | **$O(1)$** (At a known node position). |
-| **Cache Locality** | **Excellent** (Adjacent items pre-fetched).| **Poor** (Nodes scattered across memory). |
-| **Memory Overhead** | None (only stores data). | High (each node stores data + pointer). |
+```
+Step 1: Create new node N(15).
+        N(15)->next = NULL
+
+Step 2: Traverse to the node before insertion point: Current = Node(10)
+        Current->next points to Node(20)
+
+Step 3: Bind new node to next node first:
+        N(15)->next = Current->next   (N(15)->next now points to Node(20))
+
+Step 4: Update preceding node pointer:
+        Current->next = N(15)         (Node(10)->next now points to N(15))
+```
+If you perform Step 4 before Step 3, you lose the reference to `Node(20)`, orphanizing the rest of the list and causing a memory leak!
 
 ---
 
-### 🔄 2.4 Linked List Variants
-1.  **Singly Linked List:** Each node contains a single pointer to the next node. Traverse is unidirectional.
-2.  **Doubly Linked List (DLL):** Each node contains two pointers: `next` and `prev`. Enables bidirectional traversal.
-3.  **Circular Linked List:** The last node's `next` pointer references the head node, forming a closed ring.
+## 3. Stacks & Queues: Constraints & Implementations
+
+Both are restricted linear data structures where insertion and deletion occur at defined boundaries.
+
+### 3.1 Stack (LIFO - Last In First Out)
+*   **Analogy:** A vertical stack of books. You add to the top and remove from the top.
+*   **Operations:** `push(x)` ($O(1)$), `pop()` ($O(1)$), `peek()` ($O(1)$).
+*   **C++ Array Implementation Variables:**
+    *   `top`: Stores the array index of the topmost element. Initialized to `-1`.
+    *   *Overflow Condition:* `top == MAX_SIZE - 1`
+    *   *Underflow Condition:* `top == -1`
 
 ---
 
-## 3. Stacks & Queues
+### 3.2 Queue (FIFO - First In First Out)
+*   **Analogy:** A queue line at a bank. You join the line at the rear and leave at the front.
+*   **Operations:** `enqueue(x)` ($O(1)$), `dequeue()` ($O(1)$).
+*   **Linear Queue Issue:** As elements are dequeued, the front pointer moves forward, leaving unused empty spaces at the front of the array that cannot be reused.
 
-Both are restricted linear structures where insert/delete operations happen at specific endpoints.
-
-### 🥞 3.1 Stack (LIFO - Last In First Out)
-**Analogy:** A pile of **cafeteria trays**. You add trays to the top, and you take trays from the top. The last tray placed is the first tray removed.
+#### The Solution: Circular Queue
+Use modulo arithmetic to wrap array pointers around back to index 0:
 
 ```
-   Stack Operations:
-          [ 30 ]  ◀── TOP (Push / Pop happens here)
-          [ 20 ]
-          [ 10 ]  ◀── BOTTOM
+        0      1      2      3
+      [ 40 ] [ 10 ] [ 20 ] [ 30 ]
+        ▲                   ▲
+        Front               Rear
 ```
-- **Operations:**
-  - `push(x)`: Adds element to the top. (Raises *Stack Overflow* if full).
-  - `pop()`: Removes and returns the top element. (Raises *Stack Underflow* if empty).
-  - `peek()`: Returns the top element without removing it.
-- **Applications:** Function call stacks in recursion, Undo/Redo operations, parenthesis matching compiler checks.
+*   **Enqueue index calculation:**
+    $$\text{rear} = (\text{rear} + 1) \mathbin{\%} \text{capacity}$$
+*   **Dequeue index calculation:**
+    $$\text{front} = (\text{front} + 1) \mathbin{\%} \text{capacity}$$
+*   **Queue Full Condition:**
+    $$(\text{rear} + 1) \mathbin{\%} \text{capacity} == \text{front}$$
+*   **Queue Empty Condition:**
+    $$\text{front} == -1$$
 
 ---
 
-### 🚶 3.2 Queue (FIFO - First In First Out)
-**Analogy:** A **queue line at a movie ticket counter**. The first person in line gets the ticket and leaves first.
-
-```
-   Queue Operations:
-   ◀── Dequeue ── [ 10 ] [ 20 ] [ 30 ] ── Enqueue ──◀
-                   Front         Rear
-```
-- **Operations:**
-  - `enqueue(x)`: Adds element to the **Rear** of the queue.
-  - `dequeue()`: Removes and returns the element from the **Front** of the queue.
-- **Variants:**
-  - **Circular Queue:** Pointers wrap around to index 0 when reaching the end of the array, preventing wasted space.
-  - **Priority Queue:** Elements are dequeued based on priority rather than arrival order.
-  - **Deque (Double-Ended Queue):** Insertions and deletions are allowed at both the Front and Rear.
-
----
-
-## 4. Trees & Binary Search Tree (BST)
+## 4. Trees: Binary Trees, BST, and Self-Balancing Trees
 
 A **Tree** is a hierarchical, non-linear structure of nodes connected by edges, containing no cycles.
 
-```
-            ( 50 )          ← Root Node
-           /      \
-        ( 30 )  ( 70 )      ← Parent Nodes
-        /    \      \
-     ( 20 ) ( 40 ) ( 80 )   ← Leaf Nodes (No children)
-```
+### 4.1 Binary Search Tree (BST) Ordering
+For every node $X$ in a BST:
+*   All keys in the **left subtree** of $X$ must be less than $X$.
+*   All keys in the **right subtree** of $X$ must be greater than $X$.
 
-- **Binary Tree:** A tree where every node has at most 2 children (Left and Right).
-- **Binary Search Tree (BST):** A binary tree with the ordering property:
-  - The value of the **left child** must be less than the parent node.
-  - The value of the **right child** must be greater than the parent node.
-
-### 📐 4.1 Binary Tree Properties
-For a binary tree of height $h$ (where a single root node has $h=0$):
-*   **Max nodes at level $l$** = $2^l$.
-*   **Max total nodes in tree** = $2^{h+1} - 1$.
-*   **Leaf Nodes Formula:** Let $n_0$ be the leaf count, and $n_2$ be the number of nodes with exactly 2 children:
-    $$n_0 = n_2 + 1$$
+```
+              ( 50 )
+             /      \
+          ( 30 )  ( 70 )
+          /    \      \
+       ( 20 ) ( 40 ) ( 80 )
+```
+*   **Inorder Traversal (L-Root-R) of a BST always yields sorted keys:** `20 30 40 50 70 80`
+*   **Preorder Traversal (Root-L-R):** `50 30 20 40 70 80`
+*   **Postorder Traversal (L-R-Root):** `20 40 30 80 70 50`
 
 ---
 
-### 🔄 4.2 Tree Traversals
-Using the tree diagram above, let's trace the traversals:
+### 4.2 Balanced Trees
 
-#### 1. Inorder (Left $\to$ Root $\to$ Right)
-- **Trace:** Go left as far as possible, read, read parent, go right.
-- **Output:** `20 30 40 50 70 80`
-- > ⚠️ **Must-Remember:** Inorder traversal of a BST always yields values in **sorted order**.
+#### A) AVL Tree (Height-Balanced)
+An AVL tree is a BST where the height difference (**Balance Factor**) between the left and right subtrees of any node is at most $\pm 1$:
+$$\text{Balance Factor (BF)} = \text{Height}(Left) - \text{Height}(Right) \quad \text{where } BF \in \{-1, 0, 1\}$$
 
-#### 2. Preorder (Root $\to$ Left $\to$ Right)
-- **Trace:** Read root, go left, go right.
-- **Output:** `50 30 20 40 70 80`
+If an insertion or deletion causes $BF = \pm 2$, balance is restored using rotations:
+1.  **Single LL Rotation:** Parent node is rotated right when a node is added to the left child's left subtree.
+2.  **Single RR Rotation:** Parent node is rotated left when a node is added to the right child's right subtree.
+3.  **Double LR Rotation:** Left-Right rotation. Perform left rotation on child, then right rotation on parent.
+4.  **Double RL Rotation:** Right-Left rotation. Perform right rotation on child, then left rotation on parent.
 
-#### 3. Postorder (Left $\to$ Right $\to$ Root)
-- **Trace:** Go left, go right, read root.
-- **Output:** `20 40 30 80 70 50`
+```
+   LL Imbalance (BF = +2):           RR Rotation (Right Rotate Node 30):
+         ( 30 )  BF = +2                       ( 20 )
+        /                                     /      \
+     ( 20 )  BF = +1                       ( 10 )  ( 30 )
+    /
+ ( 10 )  BF = 0
+```
+
+#### B) Red-Black Tree
+A self-balancing BST that uses a color flag (Red/Black) to maintain balance.
+*   **Rules:**
+    1.  Every node is either Red or Black.
+    2.  The root is always Black.
+    3.  Every leaf (NULL pointer) is Black.
+    4.  If a node is Red, both its children must be Black (no adjacent Red nodes).
+    5.  For each node, all paths from the node to descendant leaves contain the same number of Black nodes.
+
+#### C) B-Trees and B+ Trees
+Multi-way search trees designed for external storage systems (hard drives, SSDs).
+*   **B-Tree:** Keys and data pointers are stored in both internal and leaf nodes.
+*   **B+ Tree:** All data pointers are stored **only in leaf nodes**, and leaf nodes are linked sequentially. Internal nodes store only search keys. This maximizes fan-out and facilitates fast range queries.
 
 ---
 
-## 5. Balanced Trees (AVL, Red-Black, B/B+ Trees)
+## 5. Graphs: Representations & Traversals
 
-### ⚠️ The Skewed Tree Problem
-If we insert sorted keys into a BST ($10, 20, 30, 40$):
+A **Graph** $G = (V, E)$ consists of a set of vertices $V$ connected by edges $E$.
 
-```
-     ( 10 )
-         \
-        ( 20 )
-            \
-           ( 30 )
-               \
-              ( 40 )  ← Degenerates into a Linked List!
-```
-The tree skews, and search times degrade from $O(\log N)$ to $O(N)$ sequential scans. To prevent this, we use **self-balancing trees**:
-
-*   **AVL Tree:** A BST where the height difference (**Balance Factor**) between left and right subtrees of any node is at most $\pm 1$:
-    $$\text{Balance Factor} = \text{Height}(Left) - \text{Height}(Right)$$
-    If BF violates this ($\pm 2$), the tree performs **Rotations** (Single LL/RR, Double LR/RL) to restore balance.
-*   **Red-Black Tree:** A self-balancing BST that uses a color flag (Red or Black) on nodes. It is less balanced than AVL but requires fewer rotations during insertions/deletions.
-*   **B-Tree & B+ Tree:** Multi-way search trees (nodes have more than 2 children) designed to optimize secondary disk storage. By storing hundreds of keys in a single node, they minimize disk read operations, making them ideal for database indexing.
-
----
-
-## 6. Graphs
-
-A **Graph** is a set of vertices (nodes) connected by edges.
-
-```
-       [ A ] ─── (weight: 5) ─── [ B ]
-         │                         │
-         │                         │
-      (weight: 2)               (weight: 1)
-         │                         │
-         ▼                         ▼
-       [ C ] ──────────────────▶ [ D ]
-```
-- **Directed Graph:** Edges have arrows indicating direction (e.g., $C \to D$).
-- **Weighted Graph:** Edges have values representing costs/distances.
-
-### 📊 6.1 Adjacency Matrix vs. Adjacency List
-
-How do we represent a graph in code?
+### 5.1 Graph Representation
 
 #### 1. Adjacency Matrix
-A 2D array of size $V \times V$.
-- *Pros:* Constant time ($O(1)$) to check if an edge exists between two nodes.
-- *Cons:* Always consumes $O(V^2)$ space, which is wasteful for sparse graphs (graphs with few edges).
+A 2D array of size $V \times V$, where `matrix[i][j] = 1` indicates an edge between node $i$ and node $j$.
+*   *Pros:* $O(1)$ check for edge existence.
+*   *Cons:* Always consumes $O(V^2)$ memory space, making it inefficient for sparse graphs.
 
 #### 2. Adjacency List
-An array of lists of size $V$. Slot $i$ contains a list of all vertices adjacent to node $i$.
-- *Pros:* Space-efficient ($O(V + E)$), making it ideal for sparse graphs.
-- *Cons:* Checking if an edge exists requires traversing a list ($O(V)$ time).
+An array of lists of size $V$, where slot $i$ contains a linked list of all neighbors of node $i$.
+*   *Pros:* Space-efficient ($O(V + E)$), ideal for sparse graphs.
+*   *Cons:* Checking edge existence takes $O(\text{degree}(v))$ time.
 
 ---
 
-### 🔀 6.2 Graph Traversals
-*   **Breadth-First Search (BFS):**
-    - **Analogy:** Slicing a stone into a quiet pond. ripples spread outward in concentric circles.
-    - **Method:** Explores all neighbors at the current level before moving to the next. Uses a **Queue**.
-    - **Application:** Finding the shortest path in an unweighted graph.
-*   **Depth-First Search (DFS):**
-    - **Analogy:** Exploring a maze. You walk down a path until you hit a wall, then backtrack to the last split.
-    - **Method:** Explores deep down a branch before backtracking. Uses a **Stack** or **Recursion**.
-    - **Application:** Cycle detection, Topological sorting.
+### 5.2 Graph Traversals
+
+#### Breadth-First Search (BFS)
+Explores neighbors level-by-level using a **Queue** data structure.
+*   *Trace Table (Start Node A):*
+```
+Graph: A-B, A-C, B-D, C-D
+Queue Initial: [A]
+Step 1: Dequeue A. Visit A. Enqueue unvisited neighbors of A: [B, C]. Mark Visited = {A, B, C}
+Step 2: Dequeue B. Visit B. Enqueue unvisited neighbors of B: [C, D]. Mark Visited = {A, B, C, D}
+Step 3: Dequeue C. Visit C. Neighbors are already visited.
+Step 4: Dequeue D. Visit D.
+Final Order: A, B, C, D
+```
+
+#### Depth-First Search (DFS)
+Explores deep along branches before backtracking. Uses **Recursion (System Stack)**.
+*   *Order:* A, B, D, C (using same graph).
 
 ---
 
-## 7. Hashing
+## 6. Hashing: Hash Functions, Collisions, and Resolution Strategies
 
-### 🗄️ The Storage Locker Analogy
-Imagine a room with **100 storage lockers** (indices 0 to 99). 
-When you bring an item (e.g., Key: `"Alice"`), you run it through a formula (**Hash Function**):
-- $h(\text{"Alice"}) = 37$.
-You store Alice's file in locker 37. When you return to search for Alice, you re-run the formula, get 37, and open locker 37 immediately. This provides **$O(1)$ average search time**.
+**Hashing** maps keys of arbitrary size to fixed-size array indices using a **Hash Function**:
+$$index = h(key) \mathbin{\%} \text{Table\_Size}$$
+
+### 6.1 Collisions
+A **Collision** occurs when two distinct keys produce the identical hash index: $h(K_1) == h(K_2)$.
+
+```
+                     COLLISION RESOLUTION
+                               │
+            ┌──────────────────┴──────────────────┐
+            ▼                                     ▼
+   [Separate Chaining]                   [Open Addressing]
+   LinkedList at each slot               Find empty slot in array
+                                                  │
+                            ┌─────────────────────┼─────────────────────┐
+                            ▼                     ▼                     ▼
+                    [Linear Probing]     [Quadratic Probing]    [Double Hashing]
+                     Index: h(x) + i      Index: h(x) + i^2     h(x) + i * h2(x)
+```
+
+#### 1. Separate Chaining (Open Hashing)
+Each slot in the hash table points to a linked list. Colliding items are simply appended to the list at that slot.
+*   *Load Factor ($\alpha$):* $\alpha = \frac{N}{M}$ (where $N$ is keys, $M$ is table slots). Here, $\alpha$ can exceed 1.0.
+
+#### 2. Open Addressing (Closed Hashing)
+All keys are stored within the table array itself. Thus, $\alpha \le 1.0$. If a collision occurs, we probe other slots:
+*   **Linear Probing:** Check indices sequentially: $h(x), \ h(x)+1, \ h(x)+2, \ \dots$
+    *   *Issue:* **Primary Clustering** — long contiguous blocks of occupied slots build up, slowing down search times.
+*   **Quadratic Probing:** Check slots at quadratic offsets: $h(x) + i^2 \pmod{M}$.
+*   **Double Hashing:** Check slots using a step size calculated from a second hash function:
+    $$Index = (h_1(key) + i \times h_2(key)) \mathbin{\%} M$$
+    This eliminates primary and secondary clustering.
 
 ---
 
-### 💥 7.1 Collisions
-What if $h(\text{"Bob"}) = 37$ as well? Two different keys mapping to the same slot is a **Collision**.
-
-#### Collision Resolution Methods:
-1.  **Separate Chaining (Open Hashing):** Each slot in the hash table points to a linked list. Colliding items are appended to the list at that slot. (Load factor $\alpha$ can exceed 1.0).
-2.  **Open Addressing (Closed Hashing):** All items are stored within the table itself. If a collision occurs, find another empty slot:
-    *   *Linear Probing:* Check slots sequentially: $h(x), h(x)+1, h(x)+2, \dots$ (Causes *primary clustering*).
-    *   *Quadratic Probing:* Check slots at quadratic intervals: $h(x) + i^2$.
-    *   *Double Hashing:* Calculate probe steps using a second hash function: $h(x) + i \cdot h_2(x)$.
-
----
-
-## 8. Heaps
+## 7. Heaps: Priority Queues, Binary Heaps & Heapify Mechanics
 
 A **Binary Heap** is a complete binary tree stored inside a contiguous array.
 
@@ -270,18 +257,52 @@ A **Binary Heap** is a complete binary tree stored inside a contiguous array.
   ( 30 ) (40)(10)
 ```
 
-### 📐 8.1 Heap Properties & Index Mappings
-*   **Max-Heap:** Parent node value $\ge$ children. The maximum value is always at the root.
-*   **Min-Heap:** Parent node value $\le$ children. The minimum value is always at the root.
-
-#### Index Formulas (0-Indexed Array)
+### 7.1 Array Mappings (0-Indexed)
 For any node at index $i$:
-- **Left Child Index:** $2i + 1$
-- **Right Child Index:** $2i + 2$
-- **Parent Index:** $\lfloor (i - 1) / 2 \rfloor$
+*   **Left Child Index:** $2i + 1$
+*   **Right Child Index:** $2i + 2$
+*   **Parent Index:** $\lfloor (i - 1) / 2 \rfloor$
 
-### ⚙️ 8.2 Heap Operations
-*   **Heapify:** The process of restoring heap properties by swapping a node down the tree ($O(\log N)$ time).
-*   **Build Heap:** Converting a raw array into a heap. By processing nodes bottom-up, this takes **$O(N)$** time.
-*   **Insert / Extract Min-Max:** Takes **$O(\log N)$** time (requires swapping nodes up or down the height of the tree).
-*   **Heapsort:** Sorts an array by repeatedly extracting the root element ($O(N \log N)$ time in all cases).
+### 7.2 Heap Operations
+*   **Heapify (Down-Heap):** Corrects a single imbalance at index $i$ by swapping it with its largest child (for Max-Heap) and recursing down ($O(\log N)$ time).
+*   **Build Heap:** Converts an unsorted array into a heap. We run `Heapify` starting from the last non-leaf node ($\lfloor N/2 - 1 \rfloor$) up to the root (index 0).
+    *   *Time Complexity:* Provably **$O(N)$** because most nodes reside near the bottom of the tree, requiring short swap paths.
+*   **Insertion:** Append new item at the end of the array, then swap up (Up-Heap) to restore properties ($O(\log N)$ time).
+
+---
+
+## 8. Common Pitfalls & Mistakes to Avoid
+
+> [!WARNING]
+> ### 1. Pointer Loss during Linked List Insertions
+> *   **The Mistake:** Reassigning the preceding node's pointer before binding the new node's next pointer.
+> *   **The Reality:**
+>     ```cpp
+>     // ❌ INCORRECT (loss of reference to temp->next)
+>     temp->next = new_node;
+>     new_node->next = temp->next;
+>     
+>     // ✅ CORRECT
+>     new_node->next = temp->next;
+>     temp->next = new_node;
+>     ```
+
+> [!WARNING]
+> ### 2. Mismatched AVL Balance Factor Signs
+> *   **The Mistake:** Thinking a right-heavy tree has a positive balance factor.
+> *   **The Reality:** Standard AVL definition is $BF = \text{Height}(Left) - \text{Height}(Right)$.
+>     *   If a node is **Left-Heavy**, $BF > 0$.
+>     *   If a node is **Right-Heavy**, $BF < 0$.
+>     *   If $|BF| \ge 2$, rotations are triggered.
+
+> [!WARNING]
+> ### 3. Confusing Heapify and Build-Heap Complexities
+> *   **The Mistake:** Stating that building a heap from an array of size $N$ takes $O(N \log N)$ time.
+> *   **The Reality:**
+>     - A single `Heapify` call on a node takes $O(\log N)$ time.
+>     - However, **Build-Heap** runs `Heapify` bottom-up. The mathematical sum of node heights converges, yielding a tight time bound of **$O(N)$**.
+
+> [!WARNING]
+> ### 4. Linear Probing Deletion Orphanization
+> *   **The Mistake:** Deleting an element in a linear probed hash table by simply setting the array slot to `NULL` / Empty.
+> *   **The Reality:** If you set a slot to empty, future searches for elements probed *past* that slot will stop scanning when they hit the empty cell, returning false (not found). You must mark deleted slots with a special **Tombstone** flag (e.g. `DELETED`) so searches know to keep scanning.

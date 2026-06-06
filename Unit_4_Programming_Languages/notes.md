@@ -1,222 +1,436 @@
-# ☕ Programming Languages — Unit IV: Complete Beginner-Friendly Notes
+# ☕ Programming Languages — Unit IV: Comprehensive Lecture Notes
 
-> **How to use these notes:** Read top to bottom. Every concept is explained with a simple analogy first, then the technical definition. Don't skip analogies — they are the key to truly *understanding* rather than just memorizing.
+> **Target Audience:** Students and job candidates preparing for technical interviews. This unit provides rigorous conceptual explanations, concrete code traces, memory diagrams, and "Mistakes to Avoid" sections for C, C++, and Java.
 
 ---
 
 ## 📌 Table of Contents
 
-1. [C vs. C++ vs. Java Paradigm & Compilation](#1-c-vs-c-vs-java-paradigm--compilation)
-2. [Pointers, Double Pointers & References](#2-pointers-double-pointers--references)
-3. [Storage Classes (C/C++)](#3-storage-classes-cc)
-4. [Object-Oriented Programming (OOP) Principles](#4-object-oriented-programming-oop-principles)
-5. [Parameter Passing & Binding](#5-parameter-passing--binding)
-6. [Memory Management (C++ Heap vs. Java Garbage Collection)](#6-memory-management-c-heap-vs-java-garbage-collection)
+1. [C vs. C++ vs. Java: Paradigms & Compilation](#1-c-vs-c-vs-java-paradigms--compilation)
+2. [Pointers, Pointer Arithmetic & References](#2-pointers-pointer-arithmetic--references)
+3. [Storage Classes: Scope, Lifetime, and Memory Segments](#3-storage-classes-scope-lifetime-and-memory-segments)
+4. [Object-Oriented Programming (OOP) Deep Dive](#4-object-oriented-programming-oop-deep-dive)
+   - 4.1 Classes, Objects, and Access Specifiers
+   - 4.2 The Diamond Problem & Virtual Inheritance
+   - 4.3 Runtime Polymorphism: VTABLE & VPTR Mechanics
+5. [Parameter Passing Techniques & Binding](#5-parameter-passing-techniques--binding)
+6. [Memory Management: C++ Heap vs. JVM Generational Garbage Collection](#6-memory-management-c-heap-vs-jvm-generational-garbage-collection)
+7. [Common Pitfalls & Mistakes to Avoid](#7-common-pitfalls--mistakes-to-avoid)
 
 ---
 
-## 1. C vs. C++ vs. Java Paradigm & Compilation
+## 1. C vs. C++ vs. Java: Paradigms & Compilation
 
-### 🚗 The Car Analogy
-
-- **C** is like a **manual kit car**. You must configure all gears, belts, and bolts yourself. It's incredibly fast and lightweight, but if you drop a bolt, the car will crash (**manual memory management, no protection**).
-- **C++** is like a **sports car**. It has the speed of the manual car, but adds modern conveniences like cup holders, power steering, and turbo boost (**Classes, Templates, OOP**).
-- **Java** is like a **self-driving electric car**. It handles the speed, steering, and maintenance automatically. It's safer and easier to drive, but it runs on a custom charging track (**Java Virtual Machine**) and is slightly heavier.
+Operating systems, system programs, and business applications are written across procedural and object-oriented languages. Understanding their compilation pipeline and design paradigms is fundamental.
 
 ```
-       C Source Code               C++ Source Code             Java Source Code
-       (procedural)                  (OOP + multi)               (pure OOP)
-            │                            │                            │
-            ▼                            ▼                            ▼
-       C Compiler                  C++ Compiler                 Java Compiler
-      (e.g., GCC)                  (e.g., G++)                    (javac)
-            │                            │                            │
-            ▼                            ▼                            ▼
-      Native Binary                Native Binary                JVM Bytecode
-      (e.g., .exe/.out)            (e.g., .exe/.out)            (.class file)
-    [Platform Dependent]         [Platform Dependent]         [Platform Independent]
-                                                                      │
-                                                                      ▼
-                                                                     JVM
-                                                              (Executes on OS)
++-----------------------------------------------------------------------------+
+|                               PARADIGMS                                     |
++------------------------------------+----------------------------------------+
+| C: Procedural / Imperative         | - Focus on functions and top-down step-|
+|                                    |   by-step execution.                   |
+|                                    | - No built-in classes or encapsulation.|
++------------------------------------+----------------------------------------+
+| C++: Multi-Paradigm                | - Supports Procedural, OOP (Classes),  |
+|                                    |   and Generic Programming (Templates). |
+|                                    | - Manual memory control.               |
++------------------------------------+----------------------------------------+
+| Java: Pure Object-Oriented (Almost)| - Everything (except primitives) lives |
+|                                    |   inside classes.                      |
+|                                    | - Runs on a VM with automatic GC.      |
++------------------------------------+----------------------------------------+
+```
+
+### ⚙️ Compilation Pipelines
+
+#### C & C++ Compilation (Direct-to-Machine-Code)
+C and C++ code is compiled directly into platform-specific machine code.
+```
+  [Source Files (.c / .cpp)]
+             │
+             ▼
+        [Preprocess] ────► Resolves #include, #define, #ifdef
+             │
+             ▼
+         [Compile]   ────► Translates to Assembly Code (.s)
+             │
+             ▼
+        [Assemble]   ────► Translates to Object Code (.o / .obj)
+             │
+             ▼
+          [Link]     ────► Resolves library symbols, produces Native Binary (.exe / .out)
+```
+*   **Pros:** ⚡ Maximum execution speed; raw access to hardware instructions.
+*   **Cons:** ❌ Platform dependent. A binary compiled for Windows x86-64 will not run on macOS ARM64.
+
+#### Java Compilation (Write Once, Run Anywhere - WORA)
+Java compiles source code to an intermediate bytecode representation which runs on the **Java Virtual Machine (JVM)**.
+```
+  [Source File (.java)]
+             │
+             ▼  (javac compiler)
+     [Bytecode (.class)]
+             │
+             ▼
+      [JVM Classloader]
+             │
+             ▼
+   [JVM Execution Engine] ──► Interprets bytecode OR uses JIT (Just-In-Time) Compiler
+                             to translate hot paths to Native Machine Instructions.
+```
+*   **Pros:** 🌐 Platform independent. The same `.class` file runs on any OS containing a compatible JVM.
+*   **Cons:** 🐢 Small startup overhead due to class loading and JIT compilation.
+
+---
+
+## 2. Pointers, Pointer Arithmetic & References
+
+Pointers and references allow variables to refer to memory addresses instead of copying data values.
+
+### 📮 Memory Address Mechanics
+A **pointer** is a variable that stores the physical memory address of another variable.
+
+```cpp
+int x = 42;
+int *ptr = &x;   // ptr stores the address of x
+int **dptr = &ptr; // dptr stores the address of ptr
+```
+
+Let's map this in RAM:
+```
+Memory Address:   0x1000                 0x2000                 0x3000
+Variable:         [  42  ]  ◄─────────── [0x1000]  ◄─────────── [0x2000]
+Name:                x                     ptr                    dptr
+Type:               int                   int*                   int**
+```
+
+*   **Address-of Operator (`&`):** Retrieves the memory address of a variable.
+*   **Dereferencing Operator (`*`):** Reads or writes the value stored at the address contained in the pointer.
+    *   `*ptr = 99;` changes `x` to `99`.
+    *   `**dptr = 100;` changes `x` to `100`.
+
+### 🧮 Pointer Arithmetic
+Pointers are typed so the compiler knows how many bytes to skip when adding or subtracting integers.
+*   **Formula:** If `ptr` points to address `A` of type `T`, then:
+    $$\text{Address of } (ptr + n) = A + (n \times \text{sizeof}(T))$$
+
+#### Worked Example:
+```c
+int arr[5] = {10, 20, 30, 40, 50};
+int *ptr = arr; // points to arr[0] at address 0x1000 (assuming 4-byte integers)
+```
+1.  `ptr + 1` resolves to:
+    $$0x1000 + (1 \times 4) = 0x1004 \implies \text{points to } arr[1] \text{ (20)}$$
+2.  `ptr + 3` resolves to:
+    $$0x1000 + (3 \times 4) = 0x100C \implies \text{points to } arr[3] \text{ (40)}$$
+
+### 🔗 References (C++)
+A reference is an **alias** (another name) for an existing variable.
+```cpp
+int x = 10;
+int &ref = x; // ref is a reference to x
+ref = 20;     // x is now 20
+```
+
+#### Key Differences: Pointers vs. References
+```
++----------------------------------+------------------------------------+
+|            POINTER               |             REFERENCE              |
++----------------------------------+------------------------------------+
+| Can point to NULL.               | Cannot be NULL.                    |
++----------------------------------+------------------------------------+
+| Can be reassigned to point to    | Must be initialized when declared; |
+| different variables.             | cannot be rebound to another var.  |
++----------------------------------+------------------------------------+
+| Occupies its own memory space    | Shares the same address space as   |
+| (4 or 8 bytes to store address). | the referred variable.             |
++----------------------------------+------------------------------------+
 ```
 
 ---
 
-## 2. Pointers, Double Pointers & References
+## 3. Storage Classes: Scope, Lifetime, and Memory Segments
 
-### 📮 The Mailbox Analogy
-- **Variable (`int x = 10;`):** A physical mailbox holding a letter with the number $10$ inside.
-- **Pointer (`int *ptr = &x;`):** A sticky note containing the **street address** of the mailbox.
-- **Dereferencing (`*ptr`):** Walking to the address written on the sticky note, opening the mailbox, and reading or modifying the letter inside.
-- **Double Pointer (`int **dptr = &ptr;`):** A second sticky note containing the address of the *first sticky note*.
+Storage classes specify where a variable is stored in RAM, its initial default value, its visibility (scope), and how long it remains in memory (lifetime).
 
 ```
-   Memory Address:   0x1001                 0x2002                 0x3003
-   Variable:         [  10  ]  ◀─────────── [0x1001]  ◀─────────── [0x2002]
-   Name:                x                     ptr                    dptr
-   Type:               int                   int*                   int**
+┌─────────────────────────────────────────────────────────────┐
+|                     PROCESS RAM LAYOUT                      |
+├─────────────────────────────────────────────────────────────┤
+| STACK: Local variables, function frames (grows downward)    |
+├─────────────────────────────────────────────────────────────┤
+| HEAP: Dynamically allocated memory via new/malloc           |
+├─────────────────────────────────────────────────────────────┤
+| DATA SEGMENT (BSS + Initialized): Global & static variables |
+├─────────────────────────────────────────────────────────────┤
+| TEXT SEGMENT: Executable binary instructions                |
+└─────────────────────────────────────────────────────────────┘
 ```
 
-### 🔗 References vs. Pointers (C++)
-*   **Pointer:** A separate variable holding an address. Can point to `NULL`, can be reassigned, and supports pointer arithmetic.
-*   **Reference:** A direct alias/nickname for a variable. Cannot be `NULL`, must be initialized when declared, and cannot be changed to reference another variable.
-    ```cpp
-    int x = 10;
-    int &ref = x; // ref is just a nickname for x. ref shares the same address as x.
-    ```
+### The C/C++ Storage Classes
+
+#### 1. `auto` (default for local variables)
+*   **Location:** Stack.
+*   **Lifetime:** Deleted when the enclosing execution block `{}` exits.
+*   **Scope:** Local.
+
+#### 2. `register`
+*   **Location:** CPU Registers (if available, otherwise defaults to stack).
+*   **Properties:** Extremely fast access. You **cannot** use the address-of operator `&` on a register variable in C because registers do not have memory addresses.
+
+#### 3. `static`
+*   **Location:** Data Segment.
+*   **Lifetime:** Persists for the entire duration of the program.
+*   **Behavior (Inside a function):** It retains its value between multiple function calls and is initialized **only once**.
+*   **Behavior (Global scope):** Limits visibility of the variable to the file it is declared in, preventing linker conflicts.
+
+##### Code Example: Static Variable Trace
+```cpp
+#include <iostream>
+using namespace std;
+
+void counter() {
+    static int count = 0; // Initialized only once, stored in Data Segment
+    count++;
+    cout << count << " ";
+}
+
+int main() {
+    counter(); // Outputs: 1
+    counter(); // Outputs: 2
+    counter(); // Outputs: 3
+    return 0;
+}
+```
+
+#### 4. `extern`
+*   **Location:** Data Segment.
+*   **Purpose:** Declares a variable or function defined in another source file. It informs the compiler of the variable's existence without allocating new memory, leaving symbol resolution to the linker.
 
 ---
 
-## 3. Storage Classes (C/C++)
+## 4. Object-Oriented Programming (OOP) Deep Dive
 
-Storage classes define the scope (visibility), lifetime (how long it stays in memory), default value, and memory location of variables.
+OOP structures code around objects containing data fields (attributes) and methods (functions).
 
-### 🏢 The Office Storage Analogy
-*   **`auto` (Stack):** A **temporary scratchpad** on your desk. Useful only while working at your desk; thrown away when you leave the office.
-*   **`register` (CPU):** A **quick desk drawer**. Extremely fast access, but limited space.
-*   **`static` (Static Data Segment):** A **permanent bulletin board** in the office. It keeps its contents even when you go home, and is cleared only when the office closes down.
-*   **`extern` (Global Data Segment):** A **public billboard** visible to everyone outside the building, letting different teams share the same resources.
-
-| Storage Class | Keyword | Storage Location | Default Value | Scope | Lifetime |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **Automatic** | `auto` | RAM Stack | Garbage value | Local (block) | Block exit |
-| **Register** | `register` | CPU Register | Garbage value | Local (block) | Block exit |
-| **Static** | `static` | RAM Data Segment| `0` | Local/Global | Program exit |
-| **External** | `extern` | RAM Data Segment| `0` | Global | Program exit |
+### 4.1 Classes, Objects, and Access Specifiers
+*   **Class:** A blueprint or layout. It occupies no physical memory.
+*   **Object:** A physical instance of a class. It is created in memory and holds actual data.
+*   **Access Specifiers:**
+    *   `private`: Accessible only within the class.
+    *   `protected`: Accessible within the class and its child subclasses.
+    *   `public`: Accessible from anywhere in the application.
 
 ---
 
-## 4. Object-Oriented Programming (OOP) Principles
+### 4.2 The Diamond Problem & Virtual Inheritance
+In multiple inheritance, the Diamond Problem occurs when a child class inherits from two parent classes that both derive from a single grandparent class.
 
-OOP designs software around **data (objects)** rather than functions.
+```
+       [ Grandparent: A ]
+          /         \
+    [ Parent: B ]  [ Parent: C ]
+          \         /
+         [ Child: D ]
+```
 
-### 🏗️ 4.1 Class vs. Object
-*   **Class:** A blueprint/template (e.g., an architect's drawing of a house). It consumes no physical space.
-*   **Object:** The actual physical house built from the blueprint. It occupies physical memory.
+#### The Ambiguity Code:
+```cpp
+class A {
+public:
+    void show() { cout << "Grandparent A"; }
+};
+
+class B : public A {};
+class C : public A {};
+class D : public B, public C {};
+
+int main() {
+    D obj;
+    // obj.show(); // ❌ COMPILER ERROR: Ambiguous call! B and C both contain copies of A.
+}
+```
+
+#### The C++ Solution: Virtual Inheritance
+By inheriting the base class as `virtual`, we instruct the compiler to maintain only a single shared instance of the grandparent class.
+
+```cpp
+class B : virtual public A {};
+class C : virtual public A {};
+class D : public B, public C {};
+
+int main() {
+    D obj;
+    obj.show(); // ✅ Works! Only one copy of A is inherited.
+}
+```
+
+#### The Java Approach: Interfaces
+Java disallows multiple inheritance of classes (`class D extends B, C` is illegal). Instead, a class can implement multiple **interfaces**, which act as absolute contracts without holding member state, preventing resource duplication.
 
 ---
 
-### 🛡️ 4.2 The 4 Pillars of OOP
+### 4.3 Runtime Polymorphism: VTABLE & VPTR Mechanics
+Polymorphism allows a single interface to execute different behaviors.
+*   **Compile-time Polymorphism:** Overloading functions or operators (resolved at compile time by renaming functions, i.e., name mangling).
+*   **Runtime Polymorphism:** Overriding virtual functions, resolved at runtime using **Vtables** (Virtual Function Tables).
 
-```mermaid
-graph TD
-    OOP[OOP Pillars] --> Encapsulation[1. Encapsulation: <br> Private data + Public interfaces]
-    OOP --> Abstraction[2. Abstraction: <br> Hiding internal mechanics]
-    OOP --> Inheritance[3. Inheritance: <br> Reusing code via parent-child relations]
-    OOP --> Polymorphism[4. Polymorphism: <br> Overloading vs. Overriding]
-```
-
-#### 1. Encapsulation (Data Hiding)
-Bundles data and methods together inside a class and restricts direct modification using access specifiers:
-- `private`: Accessible only within the class.
-- `protected`: Accessible within the class and its child subclasses.
-- `public`: Accessible from anywhere.
-
-#### 2. Abstraction
-Exposes only essential features while hiding the underlying implementation details. Achieved via:
-- **Abstract Classes:** Can contain both concrete and abstract methods (must have at least one pure virtual function in C++: `virtual void run() = 0;`).
-- **Interfaces:** Acts as a contract. In Java, contains only abstract methods and static constants.
-
-#### 3. Inheritance
-Allows a child class to inherit members of a parent class.
-*   **The Diamond Problem:** Occurs in multiple inheritance if class $D$ inherits from $B$ and $C$, which both inherit from $A$. If $A$ has a method `show()`, and $D$ calls `show()`, it is ambiguous whether it should run $B$'s or $C$'s version.
-    *   *C++ Solution:* Use `virtual inheritance`:
-        ```cpp
-        class B : virtual public A {};
-        class C : virtual public A {};
-        class D : public B, public C {}; // Only one copy of A is created
-        ```
-    *   *Java Solution:* Disallows multiple class inheritance. A class can only extend one parent class but can implement multiple interfaces.
-
-#### 4. Polymorphism ("Many Forms")
-*   **Compile-time (Static) Polymorphism:** Function/Operator Overloading.
-    ```cpp
-    int add(int a, int b);
-    double add(double a, double b); // Same name, different parameter types
-    ```
-*   **Runtime (Dynamic) Polymorphism:** Method Overriding. Uses **Virtual Functions** resolved at runtime using **VTABLEs** and **VPTRs**.
+#### How Virtual Functions work under the hood:
+When a class declares a `virtual` function:
+1.  The compiler creates a static **VTABLE** for that class. The VTABLE contains pointers to all virtual methods declared in the class.
+2.  Every instance of the class receives a hidden pointer called **VPTR** (`__vptr`).
+3.  The `__vptr` is set during object construction to point to the VTABLE of its concrete class.
 
 ```
-Object in RAM:             VTABLE in Data Segment:
-┌──────────────┐           ┌────────────────────────────┐
-│   __vptr    ─┼──────────▶│ [0]: &Derived::speak()      │
-├──────────────┤           │ [1]: &Base::run()          │
-│  data fields │           └────────────────────────────┘
-└──────────────┘
+Base Class: Animal { virtual void speak(); }
+Derived Class: Dog : Animal { void speak() override; void bark(); }
+
+Object of Dog in Heap:               Dog's VTABLE in Data Segment:
+┌───────────────────────┐            ┌────────────────────────────────┐
+│   __vptr              ├───────────►│ [0]: &Dog::speak()             │
+├───────────────────────┤            └────────────────────────────────┘
+│   dog_data_field      │
+└───────────────────────┘
 ```
+
+When calling `animalRef->speak()`, the CPU performs a dereference loop:
+$$\text{Object} \longrightarrow \text{VPTR} \longrightarrow \text{VTABLE[index]} \longrightarrow \text{Execution address of Dog::speak()}$$
+This lookup adds a tiny pointer dereference overhead but enables dynamic runtime polymorphism.
 
 ---
 
-## 5. Parameter Passing & Binding
+## 5. Parameter Passing Techniques & Binding
 
-How arguments are passed to functions:
+How arguments are mapped to parameters during function invocation.
 
 ### 5.1 Parameter Passing Methods
 
-#### Pass by Value
-Passes a copy of the argument. Modifying it inside the function has no effect on the caller's variable.
+#### 1. Pass by Value
+*   **Mechanism:** Copies the argument's value into the function's stack parameter.
+*   **Safety:** Modifying the parameter inside the function has no effect on the caller's variable.
+*   **Cost:** High for large objects because it invokes copy constructors.
+
+#### 2. Pass by Pointer (Address)
+*   **Mechanism:** Passes the memory address of the variable.
+*   **Safety:** Modifying the dereferenced parameter directly updates the caller's variable.
+*   **Cost:** Low (only passes an 8-byte address).
+
+#### 3. Pass by Reference
+*   **Mechanism:** Passes a direct alias of the argument variable.
+*   **Safety:** Modifying the reference variable updates the caller's variable directly without pointer dereference symbols (`*` or `->`).
+
+#### Code Execution Trace:
+Let's trace these three methods in C++:
 ```cpp
-void update(int val) { val = 20; }
-// if x = 10, update(x) leaves x as 10.
+#include <iostream>
+using namespace std;
+
+void byValue(int a) { a = 99; }
+void byPointer(int *a) { *a = 99; }
+void byReference(int &a) { a = 99; }
+
+int main() {
+    int x = 10;
+    
+    byValue(x);
+    cout << x << " "; // Outputs: 10 (x is unchanged)
+    
+    byPointer(&x);
+    cout << x << " "; // Outputs: 99 (x is modified)
+    
+    x = 10; // reset
+    byReference(x);
+    cout << x << endl; // Outputs: 99 (x is modified)
+    
+    return 0;
+}
 ```
 
-#### Pass by Address (Pointer)
-Passes the memory address of the variable. Dereferencing modifies the caller's variable.
-```cpp
-void update(int *ptr) { *ptr = 20; }
-// update(&x) changes x to 20.
-```
-
-#### Pass by Reference
-Passes an alias for the variable. Modifies the caller's variable directly.
-```cpp
-void update(int &ref) { ref = 20; }
-// update(x) changes x to 20.
-```
+### 5.2 Binding: Static vs. Dynamic
+*   **Static (Early) Binding:** The compiler maps function calls to their code blocks at compile time. This is used for non-virtual functions and overloaded methods. It is resolved based on the **static type (declared type)** of the pointer.
+*   **Dynamic (Late) Binding:** The binding is deferred until runtime, mapping calls based on the **dynamic type (actual object type)** using VTABLE lookups.
 
 ---
 
-### 5.2 Static vs. Dynamic Binding
-*   **Static (Early) Binding:** The compiler links the function call to its definition at compile time (e.g., standard function calls and overloaded methods).
-*   **Dynamic (Late) Binding:** The function call is resolved at runtime based on the actual object type (e.g., virtual/overridden methods).
+## 6. Memory Management: C++ Heap vs. JVM Generational Garbage Collection
+
+Programs must allocate memory dynamically when size requirements are unknown at compile time.
+
+### 6.1 C++ Manual Heap Management
+*   **Keywords:** `new` (allocates heap space, calls constructor), `delete` (calls destructor, releases heap space).
+*   **Arrays:** Use `new[]` and `delete[]`. Mismatched delete operations (e.g. `delete` instead of `delete[]` on an array) lead to undefined behavior or memory leaks.
+
+#### Manual Memory Anomalies:
+*   **Memory Leak:** Allocating space with `new` but forgetting to release it using `delete`. The memory remains marked as occupied but is unreachable.
+*   **Dangling Pointer:** A pointer pointing to a memory address that has already been released via `delete`. Accessing it causes crashes or memory corruption.
+*   **Double Free:** Invoking `delete` twice on the same heap address, corrupting the heap manager.
 
 ---
 
-## 6. Memory Management (C++ Heap vs. Java Garbage Collection)
+### 6.2 JVM Generational Garbage Collection
+Java has no explicit `delete` keyword. The **Garbage Collector (GC)** runs in the background to reclaim memory occupied by unreachable objects.
 
-### 🧺 The Warehouse Analogy (Stack vs. Heap)
-- **Stack (Fast, Automatic):** Like a stack of dinner plates. You add to the top and remove from the top. When a function finishes, its plate is removed automatically, cleaning up all local variables.
-- **Heap (Flexible, Manual):** Like a large warehouse floor. You can reserve space of any size, but you must keep track of where it is and clean it up when you are done.
+#### The Generational Hypothesis
+Most allocated objects have a very short lifetime (e.g., local variables in loops). Thus, the JVM splits the heap into distinct generations to optimize GC sweeps:
 
 ```
-STACK (Automatic LIFO)                 HEAP (Free Memory Pool)
-┌───────────────────────┐              ┌───────────────────────────┐
-│ [Local variables]     │              │  [Allocated Object 1]     │
-│ [Return Addresses]    │              │  [Allocated Array]        │
-│                       │              │                           │
-│ Fast, compiler managed│              │  Requires manual free or  │
-│                       │              │  Garbage Collection       │
-└───────────────────────┘              └───────────────────────────┘
+┌────────────────────────────────────────────────────────────────────────────┐
+|                              JVM HEAP MEMORY                               |
+├───────────────────────────────────────────────┬────────────────────────────┤
+|             YOUNG GENERATION                  |      OLD GENERATION        |
+├─────────────────┬──────────────┬──────────────┤      (TENURED)             |
+|   Eden Space    | Survivor S0  | Survivor S1  |                            |
+| (New objects)   |  (Minor GC)  |  (Minor GC)  | (Long-lived objects)       |
+└─────────────────┴──────────────┴──────────────┴────────────────────────────┘
 ```
 
-### 6.1 C++ Memory Management
-*   **Keywords:** `new` (allocates on heap), `delete` (releases from heap).
-*   **Issues:**
-    *   **Memory Leak:** Allocating memory with `new` but forgetting to call `delete`. The memory remains occupied but unreachable.
-    *   **Dangling Pointer:** A pointer pointing to a memory address that has already been deallocated using `delete`.
-    *   **Double Free:** Calling `delete` twice on the exact same pointer, causing memory corruption.
+1.  **Young Generation:**
+    *   **Eden Space:** All new objects are allocated here.
+    *   **Survivor Spaces (S0 / S1):** When Eden fills up, a **Minor GC** occurs. Reachable objects are copied to S0 or S1, and Eden is cleared.
+    *   At each Minor GC, surviving objects are swapped between S0 and S1, incrementing their **age counter**.
+2.  **Old Generation (Tenured):**
+    *   If an object survives enough GC rounds (exceeds the age threshold, default is 15), it is promoted to the **Old Generation**.
+    *   When the Old Generation fills up, a **Major GC (Full GC)** runs, scanning the entire heap. This is a heavier "Stop-the-World" operation.
+
+#### Mark-and-Sweep Algorithm
+GC identifies unreachable objects using **Reachability Analysis**:
+1.  **Mark:** Start from **GC Roots** (active thread local variables, static references) and traverse the reference graph. Mark all encountered objects as "reachable".
+2.  **Sweep:** Scan the heap and release the memory of all unmarked objects.
 
 ---
 
-### 6.2 Java Memory Management (JVM Garbage Collection)
-*   Java allocates objects on the heap using `new` but does not have a `delete` keyword.
-*   **Garbage Collector (GC)** runs in the background to automatically identify and reclaim unreachable objects on the heap.
-*   **Mark-and-Sweep Algorithm:**
-    1.  **Mark:** Starting from **GC Roots** (active local variables, static references), traverse the object graph and mark all reachable objects.
-    2.  **Sweep:** Scan the heap and release the memory of all unmarked (unreachable) objects.
+## 7. Common Pitfalls & Mistakes to Avoid
 
-```
-  GC Roots ──▶ [Object A (Reachable)] ──▶ [Object B (Reachable)]
-               [Object C (Unreachable)]  ◀── Mark & Sweep deletes this!
-```
+> [!WARNING]
+> ### 1. Pointer to Constant (`const int *ptr`) vs. Constant Pointer (`int *const ptr`)
+> *   **The Mistake:** Confusing which element is immutable.
+> *   **The Reality:**
+>     *   `const int *ptr` (Pointer to constant): You **cannot modify the value** pointed to (`*ptr = 20` is illegal), but you can point to a different address (`ptr = &y` is legal).
+>     *   `int *const ptr` (Constant pointer): You **cannot change the address** contained in the pointer (`ptr = &y` is illegal), but you can modify the value at that address (`*ptr = 20` is legal).
+
+> [!WARNING]
+> ### 2. Object Slicing in Inheritance
+> *   **The Mistake:** Passing a derived object by value to a function accepting a base class parameter.
+> *   **The Reality:**
+>     ```cpp
+>     class Base { int x; };
+>     class Derived : public Base { int y; };
+>     void print(Base b); // Pass by value
+>     ```
+>     When you pass a `Derived` object to `print(b)`, the compiler allocates space for `Base` on the stack and copies only the `Base` portion of the object, slicing off the `Derived` specific members (`y` and the Vtable/VPTR). To preserve polymorphism, you must pass arguments by **pointer** or **reference** (`void print(Base &b)`).
+
+> [!WARNING]
+> ### 3. Static Method Overriding (Method Hiding)
+> *   **The Mistake:** Believing that declaring a static method as overridden in a subclass will result in runtime polymorphism.
+> *   **The Reality:** In Java and C++, static methods cannot be overridden. If a subclass declares a static method with the same signature, it **hides** the parent class method. The method called is determined entirely at compile time based on the reference type, not the runtime object type.
+
+> [!WARNING]
+> ### 4. Missing Virtual Destructor in Base Classes
+> *   **The Mistake:** Omitting `virtual` on the base class destructor when working with polymorphism.
+> *   **The Reality:**
+>     If you delete a derived class object through a base class pointer:
+>     ```cpp
+>     Base *ptr = new Derived();
+>     delete ptr; // If ~Base() is not virtual, only Base's destructor is called!
+>     ```
+>     This leaves all resources allocated inside `Derived` unreleased, causing memory leaks. To prevent this, always declare the base destructor as virtual: `virtual ~Base() {}`.

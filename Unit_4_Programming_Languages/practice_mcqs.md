@@ -446,3 +446,541 @@ int main() {
 - D) Is used to delete objects
 - **Answer: ✅ B**
 - **Explanation**: The `this` pointer is an implicit parameter passed to all non-static member functions, pointing to the calling object instance.
+
+---
+
+## 🔷 Topic 3: Advanced Pointers & Storage Classes
+
+#### Q51. What is the output of the following C code snippet?
+```c
+int a = 10;
+const int *ptr = &a;
+*ptr = 20;
+printf("%d", a);
+```
+- A) 10
+- B) 20
+- C) Compiler Error
+- D) Runtime Crash
+- **Answer: ✅ C**
+- **Explanation**: `const int *ptr` defines a pointer to a constant integer. The value pointed to by `ptr` cannot be changed via `ptr` (i.e., `*ptr = 20` is illegal), causing a compiler error.
+
+#### Q52. What is the output of the following C++ code?
+```cpp
+int x = 5;
+int *const ptr = &x;
+int y = 10;
+ptr = &y;
+cout << x;
+```
+- A) 5
+- B) 10
+- C) Compiler Error
+- D) Runtime Crash
+- **Answer: ✅ C**
+- **Explanation**: `int *const ptr` defines a constant pointer. The address stored in `ptr` cannot be changed after initialization (i.e., `ptr = &y` is illegal), causing a compiler error.
+
+#### Q53. What is pointer subtraction in C/C++?
+```cpp
+int arr[5] = {1, 2, 3, 4, 5};
+int *p1 = &arr[1];
+int *p2 = &arr[4];
+cout << (p2 - p1);
+```
+- A) 12
+- B) 3
+- C) 4
+- D) Compiler Error
+- **Answer: ✅ B**
+- **Explanation**: Subtracting two pointers of the same type yields the number of elements between them (of the pointed-to type), not the raw byte difference. Here, `p2 - p1` equals $4 - 1 = 3$.
+
+#### Q54. Which of the following is true about a static global variable in C?
+- A) It can be accessed in any other file using the `extern` keyword
+- B) It is visible only within the file in which it is declared
+- C) It is stored on the stack
+- D) Its lifetime is limited to the main function
+- **Answer: ✅ B**
+- **Explanation**: Applying `static` to a global variable restricts its linkage to internal, meaning it is only visible within the compilation unit (file) where it is defined.
+
+#### Q55. In C, what is the default value of an uninitialized static variable?
+- A) Garbage value
+- B) 0
+- C) NULL
+- D) Compilation Error
+- **Answer: ✅ B**
+- **Explanation**: Variables in the data segment (global and static variables) are automatically initialized to 0 (or NULL for pointers) if not explicitly initialized by the programmer.
+
+#### Q56. What happens if you try to take the address of a register variable in C?
+- A) You get the CPU register address
+- B) It causes a compiler error
+- C) It defaults to a stack address
+- D) It runs slowly
+- **Answer: ✅ B**
+- **Explanation**: CPU registers do not have memory addresses. Therefore, applying the address-of operator `&` to a variable declared with the `register` storage class is illegal in C.
+
+#### Q57. What is the linkage of a variable declared with the `extern` keyword?
+- A) No linkage
+- B) Internal linkage
+- C) External linkage
+- D) Static linkage
+- **Answer: ✅ C**
+- **Explanation**: The `extern` keyword gives a variable external linkage, meaning it can be shared and referenced across multiple source files during the linking phase.
+
+#### Q58. In C++, a reference variable:
+- A) Can be changed to refer to another variable after initialization
+- B) Must be initialized at the time of declaration
+- C) Can be a NULL reference
+- D) Takes 4 bytes of storage that you can access with the `&` operator
+- **Answer: ✅ B**
+- **Explanation**: A C++ reference is an alias. It must be bound to a variable at the time of creation and cannot be rebound or set to NULL.
+
+#### Q59. What is a dangling pointer?
+- A) A pointer that has not been initialized
+- B) A pointer pointing to a memory location that has been deallocated (freed)
+- C) A pointer pointing to NULL
+- D) A pointer that points to another pointer
+- **Answer: ✅ B**
+- **Explanation**: A dangling pointer points to a memory location that was deleted or freed. Accessing it leads to undefined behavior.
+
+#### Q60. How can you prevent dangling pointers?
+- A) By reinitializing the pointer to NULL immediately after freeing the memory
+- B) By using the `static` keyword
+- C) By avoiding the use of pointers
+- D) By compiling with optimization flags
+- **Answer: ✅ A**
+- **Explanation**: Setting a pointer to `NULL` (or `nullptr` in C++) immediately after freeing ensures that any future access can be checked against NULL.
+
+---
+
+## 🔷 Topic 4: Advanced OOP, Inheritance & Polymorphism
+
+#### Q61. What is the output of the following C++ program?
+```cpp
+class Base {
+public:
+    virtual void print() { cout << "Base "; }
+};
+class Derived : public Base {
+public:
+    void print() override { cout << "Derived "; }
+};
+int main() {
+    Base *ptr = new Derived();
+    ptr->print();
+    delete ptr;
+}
+```
+- A) Base
+- B) Derived
+- C) Compiler Error
+- D) Runtime Crash
+- **Answer: ✅ B**
+- **Explanation**: `print` is declared as virtual in `Base` and overridden in `Derived`. At runtime, the call `ptr->print()` is dynamically bound to the actual object type, which is `Derived`.
+
+#### Q62. What is the output of the program in Q61 if `virtual` is removed from the `Base` class `print` declaration?
+- A) Base
+- B) Derived
+- C) Compiler Error
+- D) Runtime Crash
+- **Answer: ✅ A**
+- **Explanation**: Without the `virtual` keyword, the function call is bound statically at compile time based on the pointer's declared type, which is `Base*`.
+
+#### Q63. In C++, what is a pure virtual function?
+- A) A function that is defined inside an interface
+- B) A virtual function with no implementation, declared with `virtual void func() = 0;`
+- C) A function that cannot be overridden
+- D) A constructor that has no parameters
+- **Answer: ✅ B**
+- **Explanation**: A pure virtual function is declared with `= 0` and has no definition in the base class. Any class containing a pure virtual function is an abstract class and cannot be instantiated.
+
+#### Q64. What is "Object Slicing" in C++?
+- A) Splitting an array of objects
+- B) The truncation of derived class members when a derived object is passed by value to a base class parameter
+- C) Dynamic casting failure
+- D) Deallocating a portion of an object from the heap
+- **Answer: ✅ B**
+- **Explanation**: Passing a derived object by value forces the compiler to copy only the base portion into the base object, slicing off the derived class properties and Vtable pointers.
+
+#### Q65. How can you prevent Object Slicing in C++?
+- A) By passing objects by reference or pointer
+- B) By declaring the base class as virtual
+- C) By using the `static` keyword on members
+- D) By disabling inheritance
+- **Answer: ✅ A**
+- **Explanation**: Passing by reference (`Base &b`) or pointer (`Base *b`) preserves the derived object's memory layout and dynamic Vtable pointers.
+
+#### Q66. Why should destructors in a base class be declared as `virtual`?
+- A) To allow the base class to access derived class variables
+- B) To ensure that the derived class destructor is called when deleting a derived object through a base class pointer
+- C) To speed up program execution
+- D) To prevent class copying
+- **Answer: ✅ B**
+- **Explanation**: If a base class pointer deletes a derived object and the base destructor is not virtual, only the base destructor executes, causing memory leaks of derived-class resources.
+
+#### Q67. What is the size of an object of a class in C++ containing only virtual functions and no data members?
+- A) 0 bytes
+- B) 1 byte
+- C) Size of a pointer (4 bytes on 32-bit, 8 bytes on 64-bit platforms)
+- D) Size of the Vtable
+- **Answer: ✅ C**
+- **Explanation**: Any object containing virtual functions must store an implicit pointer (`__vptr`) to its class's Vtable. The object size is the size of this pointer.
+
+#### Q68. Can a constructor be declared as `virtual` in C++?
+- A) Yes, always
+- B) No, constructors cannot be virtual because an object must exist in memory before its Vtable can be accessed
+- C) Only in abstract classes
+- D) Only in multiple inheritance
+- **Answer: ✅ B**
+- **Explanation**: Constructors cannot be virtual. To construct an object, the compiler needs to know the exact concrete type at compile time to allocate stack/heap frames. Vtable pointers are set during constructor execution.
+
+#### Q69. Can a static method be virtual in C++?
+- A) Yes, to allow static polymorphism
+- B) No, static methods belong to the class scope and run without an object instance or a `this` pointer, meaning they cannot access a VPTR
+- C) Only if declared public
+- D) Only in templates
+- **Answer: ✅ B**
+- **Explanation**: Virtual calls require an object instance to lookup the VPTR. Because static methods have no instance context, they cannot be virtual.
+
+#### Q70. What is the function of `dynamic_cast` in C++?
+- A) To convert a constant variable to non-constant
+- B) To perform safe downcasting of polymorphic class pointers, returning `nullptr` (or throwing an exception for references) if the cast is invalid
+- C) To cast pointers of unrelated classes
+- D) To speed up compilation
+- **Answer: ✅ B**
+- **Explanation**: `dynamic_cast` uses Runtime Type Information (RTTI) to safely cast a base pointer down to a derived type. It verifies the validity of the cast at runtime.
+
+#### Q71. What does the `final` keyword accomplish when applied to a method in Java?
+- A) It prevents the class from being instantiated
+- B) It prevents the method from being overridden by subclasses
+- C) It makes the method run in a separate thread
+- D) It makes the method static
+- **Answer: ✅ B**
+- **Explanation**: In Java, marking a method as `final` forbids subclasses from overriding its definition, protecting core class logic.
+
+#### Q72. Which of the following is true about Java interfaces?
+- A) They can contain instance fields
+- B) They can contain constructors
+- C) A class can implement multiple interfaces but extend only one class
+- D) They support virtual base class inheritance
+- **Answer: ✅ C**
+- **Explanation**: Java disallows multiple class inheritance to prevent the Diamond problem. It permits classes to implement multiple interfaces, which contain no instance fields or state.
+
+#### Q73. In C++, how is a "friend" function utilized?
+- A) It is a member function that can be accessed without an object
+- B) It is a non-member function granted access to the private and protected members of a class
+- C) It is used to copy classes
+- D) It is a function that can only be called from main
+- **Answer: ✅ B**
+- **Explanation**: Declaring a function as a `friend` of a class allows that function to access all private and protected members of the class, bypass public access limits.
+
+#### Q74. In Java, what is the output of overriding a static method?
+- A) Dynamic polymorphism at runtime
+- B) Compile-time error
+- C) Method Hiding; the method called is determined by the reference type at compile-time
+- D) The program throws a NullPointerException
+- **Answer: ✅ C**
+- **Explanation**: Java static methods cannot be overridden. Defining a static method with the same signature in a subclass hides the parent version. The resolution is static, based on the reference type.
+
+#### Q75. What is the difference between Method Overloading and Method Overriding?
+- A) Overloading is runtime polymorphism; Overriding is compile-time polymorphism
+- B) Overloading occurs within the same class with different parameters; Overriding occurs in child classes with the same signature
+- C) Overloading requires the virtual keyword
+- D) Overriding does not require inheritance
+- **Answer: ✅ B**
+- **Explanation**: Method overloading (compile-time) defines functions with the same name but different parameter list signatures. Overriding (runtime) redefines a parent method in a subclass using the exact same signature.
+
+---
+
+## 🔷 Topic 5: Parameter Passing & Memory Binding
+
+#### Q76. In C++, what happens when a parameter is passed by reference?
+- A) A copy of the object is created on the stack
+- B) An alias for the argument is created, allowing direct modification without pointer dereferencing
+- C) A constant pointer is created
+- D) The parameter is allocated on the heap
+- **Answer: ✅ B**
+- **Explanation**: Reference parameters pass an alias of the caller's variable. Any modification to the parameter directly alters the caller's variable without copies.
+
+#### Q77. What is the output of the following C++ code snippet?
+```cpp
+void swap(int &x, int &y) {
+    int temp = x;
+    x = y;
+    y = temp;
+}
+int main() {
+    int a = 5, b = 10;
+    swap(a, b);
+    cout << a << "," << b;
+}
+```
+- A) 5,10
+- B) 10,5
+- C) 5,5
+- D) Compiler Error
+- **Answer: ✅ B**
+- **Explanation**: Because parameters are passed by reference (`int &x, int &y`), changes made inside `swap` exchange the actual values of `a` and `b`.
+
+#### Q78. In Java, how are objects passed to methods?
+- A) Pass-by-value, where the value passed is the copy of the object reference
+- B) Pass-by-reference
+- C) Pass-by-address
+- D) Pass-by-name
+- **Answer: ✅ A**
+- **Explanation**: Java is strictly **pass-by-value**. For objects, the value passed is a copy of the reference pointer. This means you can modify object fields, but you cannot change the caller's reference to point to a new object.
+
+#### Q79. What is the output of the following Java program?
+```java
+class Test {
+    int value = 10;
+}
+public class Main {
+    static void modify(Test t) {
+        t.value = 20;
+        t = new Test();
+        t.value = 30;
+    }
+    public static void main(String[] args) {
+        Test obj = new Test();
+        modify(obj);
+        System.out.println(obj.value);
+    }
+}
+```
+- A) 10
+- B) 20
+- C) 30
+- D) Compiler Error
+- **Answer: ✅ B**
+- **Explanation**: `obj`'s reference copy is passed. `t.value = 20` modifies the original object. Reassigning `t = new Test()` changes the local copy of the reference to point to a new object, leaving the caller's reference `obj` pointing to the original object (whose value is now 20).
+
+#### Q80. What is "Late Binding" (Dynamic Binding)?
+- A) Resolving variables to register addresses during compilation
+- B) Binding function calls to their definitions at runtime based on the object type
+- C) Linking external library binary files
+- D) Loading classes dynamically
+- **Answer: ✅ B**
+- **Explanation**: Late binding occurs at runtime. The JVM or CPU inspects the concrete object and uses a Vtable lookup to route the function call to the correct overridden method.
+
+#### Q81. Which cast in C++ is used to perform low-level, unsafe pointer conversions (like casting an `int*` to a `char*`)?
+- A) `static_cast`
+- B) `dynamic_cast`
+- C) `reinterpret_cast`
+- D) `const_cast`
+- **Answer: ✅ C**
+- **Explanation**: `reinterpret_cast` instructs the compiler to treat a binary pattern as another type without safety checks. Used for low-level system programming.
+
+#### Q82. In C++, which cast must be used to remove the `const` qualifier from a variable?
+- A) `static_cast`
+- B) `const_cast`
+- C) `reinterpret_cast`
+- D) `dynamic_cast`
+- **Answer: ✅ B**
+- **Explanation**: `const_cast` is the only cast in C++ designed to add or remove `const` (or `volatile`) attributes from a variable.
+
+#### Q83. What is static binding resolved by?
+- A) The linker at runtime
+- B) The compiler at compile-time
+- C) The virtual tables
+- D) The operating system loader
+- **Answer: ✅ B**
+- **Explanation**: Static binding maps calls based on static declarations at compile time, eliminating runtime lookup overhead.
+
+#### Q84. What is a "pure OOP" language constraint?
+- A) Supports primitive data types directly
+- B) Every component must be defined within a class, and all values are objects
+- C) Does not support inheritance
+- D) Must contain static methods only
+- **Answer: ✅ B**
+- **Explanation**: In pure OOP, primitives are absent (all values are objects) and all execution is class-scoped. Java is not pure OOP because it supports primitive types (`int`, `char`, etc.) for performance.
+
+#### Q85. In C++, can you overload member functions based only on their return type?
+- A) Yes, always
+- B) No, overloading requires different parameter lists. Return types alone are not part of the function signature
+- C) Only if the return type is virtual
+- D) Only in classes
+- **Answer: ✅ B**
+- **Explanation**: C++ overload resolution is based on function name and parameter types. The return type is not checked during resolution, making overloading by return type alone a compiler error.
+
+---
+
+## 🔷 Topic 6: Memory Handling & Garbage Collection
+
+#### Q86. What is the difference between `new` and `malloc` in C++?
+- A) `new` is a function, `malloc` is an operator
+- B) `new` allocates memory and calls constructors; `malloc` only allocates raw byte memory
+- C) `malloc` returns a typed pointer
+- D) `new` requires the size of memory in bytes
+- **Answer: ✅ B**
+- **Explanation**: `new` is an operator that allocates heap memory and initializes constructors. `malloc` is a standard C function that allocates a raw block of bytes, returning a `void*` pointer.
+
+#### Q87. What happens if you allocate memory with `new[]` but release it with `delete` (without brackets)?
+- A) Safe deallocation
+- B) Undefined behavior, which can cause memory leaks or heap corruption because individual destructors for array elements are not called
+- C) Immediate compile error
+- D) The stack overflows
+- **Answer: ✅ B**
+- **Explanation**: Arrays allocated with `new[]` must be released with `delete[]`. Using `delete` skips destructors for all elements beyond the first, leading to memory leaks and heap table corruption.
+
+#### Q88. What is the role of the JVM garbage collector?
+- A) Defragmenting the hard drive
+- B) Automatically identifying and reclaiming heap memory occupied by unreachable objects
+- C) Compiling bytecode
+- D) Catching exceptions
+- **Answer: ✅ B**
+- **Explanation**: The GC automatically frees memory occupied by objects that have no active references, preventing manual memory leaks.
+
+#### Q89. In JVM Generational Garbage Collection, where are new objects allocated?
+- A) Old Generation
+- B) Eden Space
+- C) Survivor Space S0/S1
+- D) Method Area
+- **Answer: ✅ B**
+- **Explanation**: All newly instantiated objects are allocated in the Eden space of the Young Generation.
+
+#### Q90. What is a Minor GC in the JVM?
+- A) Cleaning the entire heap
+- B) Scanning and reclaiming memory in the Young Generation (Eden and Survivor spaces)
+- C) Deleting static variables
+- D) Compiling code
+- **Answer: ✅ B**
+- **Explanation**: Minor GC is a fast garbage collection process that cleans only the Young Generation, promoting surviving objects to Survivor spaces.
+
+#### Q91. When is an object promoted to the Old (Tenured) Generation in the JVM?
+- A) Immediately after instantiation
+- B) When it survives a specific number of Minor GC cycles (exceeds age threshold)
+- C) When it is larger than 1 MB
+- D) When the program terminates
+- **Answer: ✅ B**
+- **Explanation**: Objects that survive multiple Minor GC sweeps increment their age counter. When it exceeds the age threshold (default 15), they are moved to the Old Generation.
+
+#### Q92. What are "GC Roots" in reachability analysis?
+- A) Objects that have been deleted
+- B) Active references that are immediately accessible (like local stack variables, active thread references, static variables) from which all references are traced
+- C) The root directory of the JVM
+- D) Constructors
+- **Answer: ✅ B**
+- **Explanation**: Reachability analysis starts at GC Roots. If an object cannot be reached by traversing references starting from any GC Root, it is declared dead and swept.
+
+#### Q93. What is the "Stop-the-World" phase in garbage collection?
+- A) The program crashes
+- B) The JVM halts all application execution threads while GC processes reclaim memory
+- C) Network packets are dropped
+- D) The OS halts
+- **Answer: ✅ B**
+- **Explanation**: Stop-the-world pauses all active application threads to prevent the application from modifying the object reference graph while GC is sorting memory.
+
+#### Q94. What is a memory leak in Java?
+- A) A physical RAM failure
+- B) Objects that are no longer needed by the program but remain reachable via active reference chains, preventing GC from reclaiming them
+- C) A stack overflow error
+- D) Modifying private fields
+- **Answer: ✅ B**
+- **Explanation**: Even with GC, if a program maintains references to unused objects (e.g. in static lists), the GC cannot delete them, resulting in a memory leak.
+
+#### Q95. Which of the following is NOT a GC Root?
+- A) Local variables in the active stack frame
+- B) Static variables inside loaded classes
+- C) An object on the heap that has no references pointing to it
+- D) Active thread instances
+- **Answer: ✅ C**
+- **Explanation**: Unreferenced heap objects are targets for sweep collection, not starting roots.
+
+---
+
+## 🔷 Topic 7: Advanced Coding Mechanics & Exceptions
+
+#### Q96. In C++, what is the purpose of the `copy constructor`?
+- A) To copy a class definition to another file
+- B) To initialize a new object as a copy of an existing object of the same class
+- C) To delete duplicate objects
+- D) To print object fields
+- **Answer: ✅ B**
+- **Explanation**: A copy constructor is declared as `ClassName(const ClassName &src)`. It initializes an object using the values of another object of the same class.
+
+#### Q97. What is the difference between a Shallow Copy and a Deep Copy?
+- A) Shallow copy copies all data including heap pointers; Deep copy allocates new heap space and copies the actual pointed-to values
+- B) Deep copy is faster
+- C) Shallow copy is illegal in C++
+- D) There is no difference
+- **Answer: ✅ A**
+- **Explanation**: A shallow copy duplicates pointer addresses, meaning both objects share the same heap resources (causing double free crashes on destruction). A deep copy allocates new memory blocks and copies the actual values, ensuring isolation.
+
+#### Q98. What is the rule of three in C++?
+- A) Keep code under three functions
+- B) If a class defines a destructor, it should also define a copy constructor and copy assignment operator to manage resources safely
+- C) Classes must contain at most three member variables
+- D) Compile with three optimization flags
+- **Answer: ✅ B**
+- **Explanation**: If a class manages dynamic resources, defining a custom destructor implies you also need to manage copying behavior (copy constructor and assignment operator) to prevent shallow copy issues.
+
+#### Q99. In Java, what is the difference between Checked and Unchecked Exceptions?
+- A) Checked exceptions are checked by the programmer; Unchecked are checked by the compiler
+- B) Checked exceptions are verified at compile-time (must be declared/caught); Unchecked are verified at runtime (descend from RuntimeException)
+- C) Checked exceptions do not cause program termination
+- D) Unchecked exceptions cannot be caught
+- **Answer: ✅ B**
+- **Explanation**: Checked exceptions (e.g., `IOException`) must be handled using try-catch blocks or declared in the method signature using `throws`. Unchecked exceptions (e.g., `NullPointerException`) do not have this restriction.
+
+#### Q100. In Java, does the `finally` block always execute?
+- A) Yes, except in cases of JVM crash or calling `System.exit(0)`
+- B) Only if an exception occurs
+- C) Only if no exception occurs
+- D) No, it must be called manually
+- **Answer: ✅ A**
+- **Explanation**: The `finally` block is guaranteed to run after try-catch statements, ensuring resources (e.g., database connections, file streams) are closed even if an exception is thrown.
+
+#### Q101. What is the output of the following C++ code snippet?
+```cpp
+class A {
+public:
+    A() { cout << "A"; }
+    ~A() { cout << "~A"; }
+};
+class B : public A {
+public:
+    B() { cout << "B"; }
+    ~B() { cout << "~B"; }
+};
+int main() {
+    B obj;
+}
+```
+- A) AB~B~A
+- B) BA~A~B
+- C) AB~A~B
+- D) Compiler Error
+- **Answer: ✅ A**
+- **Explanation**: Constructing a child class object calls constructors from parent to child (A then B). Destructors run in reverse order, from child to parent (~B then ~A). Thus, output is `AB~B~A`.
+
+#### Q102. In Java, the `finalize()` method is:
+- A) Called manually to release heap memory
+- B) Deprecated, but historically called by the Garbage Collector before reclaiming an object's memory
+- C) A constructor modifier
+- D) Used to lock classes
+- **Answer: ✅ B**
+- **Explanation**: The `finalize()` method is called by the GC before deleting an object. Because its execution is non-deterministic and can cause resource leaks, it is deprecated in modern Java.
+
+#### Q103. What does the `finally` block solve?
+- A) Speeds up compilation
+- B) Ensures cleanup code runs regardless of exceptions
+- C) Catches all unchecked exceptions
+- D) Compiles native code
+- **Answer: ✅ B**
+- **Explanation**: `finally` guarantees resource release (like closing file handles) even if control flows out of the method due to exceptions or return statements.
+
+#### Q104. In C++, can you catch an integer value in exception handling?
+- A) No, you can only catch classes inheriting from `std::exception`
+- B) Yes, you can throw and catch any data type in C++ (e.g., `throw 404;`)
+- C) Only in template classes
+- D) Only using dynamic cast
+- **Answer: ✅ B**
+- **Explanation**: Unlike Java, where you can only throw objects that inherit from `Throwable`, C++ allows throwing and catching any primitive or user-defined type (e.g., `throw 10;`, `throw "Error";`).
+
+#### Q105. What is the memory area in the JVM where class structures, method data, and static fields are stored?
+- A) Stack
+- B) Heap
+- C) Method Area
+- D) PC Register
+- **Answer: ✅ C**
+- **Explanation**: The Method Area (historically PermGen, now Metaspace) stores class-level data, constants, static variables, and method codes.

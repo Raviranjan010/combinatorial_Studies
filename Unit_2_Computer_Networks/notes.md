@@ -14,6 +14,8 @@
 6. [IP Addressing, Subnetting Workbook & Supernetting](#6-ip-addressing--subnetting-workbook)
 7. [Routing & Switching Algorithms](#7-routing--switching-algorithms)
 8. [Key Protocols Handshakes, Congestion Control & TCP States](#8-key-protocols-handshakes--operations)
+9. [Key Protocols: SMTP, POP/IMAP, and DHCP](#9-key-protocols-smtp-popimap-and-dhcp)
+10. [Common Pitfalls & Mistakes to Avoid](#10-common-pitfalls--mistakes-to-avoid)
 
 ---
 
@@ -880,3 +882,113 @@ The TCP protocol operates as a Finite State Machine (FSM). Below are the primary
 | **LAST-ACK** | Both | Sent its own final `FIN` after being in CLOSE-WAIT, waiting for final `ACK`. |
 | **TIME-WAIT** | Both | Waiting for twice the Maximum Segment Lifetime (2MSL) to ensure the remote peer received the final `ACK`. |
 | **CLOSED** | Both | No connection state; end of lifecycle. |
+
+---
+
+## 9. Key Protocols: SMTP, POP/IMAP, and DHCP
+
+### 📧 9.1 Email Protocols: SMTP, POP3, and IMAP
+
+Email communication uses different protocols for sending and receiving messages.
+
+```
+   Sender's MUA (Client) ─────[ SMTP (Port 25/587) ]─────► Sender's MTA (Mail Server)
+                                                                 │
+                                                       [ SMTP (Port 25) ]
+                                                                 │
+                                                                 ▼
+   Receiver's MUA (Client) ◄──[ POP3 (110/995) or ]────── Receiver's MTA (Mail Server)
+                              [ IMAP (143/993)   ]
+```
+
+#### A) SMTP (Simple Mail Transfer Protocol)
+*   **Purpose:** A push protocol used to **send** email from a client to a server, or relay mail between servers.
+*   **Layer:** Application Layer (TCP port 25 for server-to-server relay; port 587 or 465 for client-to-server submission).
+*   **Working:** Text-based command/response protocol. 
+*   **Example Telnet Session (Sending Mail):**
+    ```smtp
+    HELO mail.example.com
+    250-mail.example.com Hello client.example.com
+    MAIL FROM:<alice@example.com>
+    250 2.1.0 OK
+    RCPT TO:<bob@example.com>
+    250 2.1.5 OK
+    DATA
+    354 Start mail input; end with <CRLF>.<CRLF>
+    Subject: Test Email
+    Hello Bob, this is a test.
+    .
+    250 2.0.0 OK: queued as 12345
+    QUIT
+    221 2.0.0 Bye
+    ```
+
+#### B) POP3 (Post Office Protocol version 3)
+*   **Purpose:** A pull protocol used to **retrieve** emails from a mail server to a local client.
+*   **Layer:** Application Layer (TCP port 110; encrypted port 995).
+*   **Working:** Downloads emails to the local device and, by default, **deletes them from the server**. 
+*   **Key limitation:** No synchronization across multiple devices. If you download email on your phone, you cannot read it on your laptop.
+
+#### C) IMAP (Internet Message Access Protocol)
+*   **Purpose:** A pull protocol used to **retrieve and manage** emails on a mail server.
+*   **Layer:** Application Layer (TCP port 143; encrypted port 993).
+*   **Working:** Syncs email metadata and headers. Emails **remain on the mail server**; local clients view a cached copy.
+*   **Key advantage:** Full synchronization across multiple devices. Changes (marking read, organizing into folders) reflect everywhere.
+
+---
+
+### 🌐 9.2 DHCP (Dynamic Host Configuration Protocol)
+
+*   **Purpose:** Automatically assigns network parameters (IP address, Subnet Mask, Default Gateway, DNS Servers) to client devices.
+*   **Layer:** Application Layer (uses UDP ports 67 for servers and 68 for clients).
+
+#### The DORA Working Process (Step-by-Step)
+When a device connects to a network, it obtains an IP via four steps:
+
+```
+  DHCP Client (Port 68)                               DHCP Server (Port 67)
+       │                                                       │
+       ├─────────────── 1. DISCOVER (Broadcast) ──────────────►│ (Find server)
+       │                                                       │
+       ◄─────────────── 2. OFFER (Unicast/Broadcast) ──────────┤ (IP proposed)
+       │                                                       │
+       ├─────────────── 3. REQUEST (Broadcast) ───────────────►│ (Accept proposal)
+       │                                                       │
+       ◄─────────────── 4. ACKNOWLEDGE (Unicast/Broadcast) ────┤ (Lease finalized)
+       │                                                       │
+```
+
+1.  **Discover (D):** Client broadcasts a `DHCPDISCOVER` packet on the local subnet (`255.255.255.255`) to find any available DHCP server.
+2.  **Offer (O):** The server replies with a `DHCPOFFER` packet containing an available IP address, subnet mask, lease duration, and gateway IP.
+3.  **Request (R):** The client broadcasts a `DHCPREQUEST` packet acknowledging and accepting the offered IP address. It broadcasts this so other DHCP servers know their offers were declined.
+4.  **Acknowledge (A):** The server replies with a `DHCPACK` packet, finalizing the lease and confirming parameters. The client can now use the IP.
+
+---
+
+## 10. Common Pitfalls & Mistakes to Avoid
+
+> [!WARNING]
+> ### 1. MAC Address vs. IP Address
+> *   **The Mistake:** Confusing their roles and scope.
+> *   **The Reality:** 
+>     - **MAC Address (Layer 2):** Physical address burned into the NIC. Used for hop-to-hop communication within the same local broadcast domain. It changes at every router hop.
+>     - **IP Address (Layer 3):** Logical address. Used for end-to-end routing across networks. It remains unchanged from source to destination (except during NAT).
+
+> [!WARNING]
+> ### 2. POP3 vs. IMAP
+> *   **The Mistake:** Thinking POP3 keeps mail synced across multiple devices.
+> *   **The Reality:** POP3 pulls mail from the server and deletes it. To access emails on multiple devices, IMAP is required, as it leaves mail on the server.
+
+> [!WARNING]
+> ### 3. Subnet Mask vs. Wildcard Mask
+> *   **The Mistake:** Confusing their values in routing and ACL configurations.
+> *   **The Reality:** 
+>     - **Subnet Mask:** Continuous binary `1`s followed by `0`s (e.g., `255.255.255.0`). Defines the network/subnet portion.
+>     - **Wildcard Mask:** The bitwise NOT of a subnet mask (e.g., `0.0.0.255`). Used in Cisco ACLs and OSPF configurations to match IP address ranges where `0` means "match exactly" and `1` means "ignore".
+
+> [!WARNING]
+> ### 4. Nyquist vs. Shannon Capacity Limits
+> *   **The Mistake:** Applying Shannon to noise-free channels, or Nyquist to noisy channels.
+> *   **The Reality:**
+>     - **Nyquist Formula:** Assumes a **noiseless** channel. Capacity $C = 2B \log_2 M$ (where $B$ is bandwidth and $M$ is signal levels).
+>     - **Shannon Formula:** Assumes a **noisy** channel. Capacity $C = B \log_2(1 + SNR)$ (where $SNR$ is signal-to-noise ratio). You cannot exceed Shannon's capacity limit regardless of how many signal levels you use!
