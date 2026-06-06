@@ -925,6 +925,7 @@ for (int i = 1; i <= n; i = i * 2) {
 - **Answer: ✅ A**
 - **Explanation**: The bad character rule shifts the pattern to align the mismatched character in the text with its rightmost occurrence in the pattern, enabling large shifts.
 
+
 #### Q105. What is the time complexity of the Floyd-Warshall all-pairs shortest path algorithm?
 - A) $O(V \cdot E \log V)$
 - B) $O(V^3)$
