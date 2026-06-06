@@ -1949,7 +1949,19 @@ Using Non-Preemptive SJF, what is the completion time of P2?
 
 ---
 
-**Q122.** If a Resource Allocation Graph (RAG) contains a cycle and resources have only a single instance:
+**Q122.** In Banker's Algorithm, Need is calculated as:
+
+- A) Max + Allocation
+- B) Max − Allocation
+- C) Allocation − Available
+- D) Max − Available
+
+✅ **Answer: B**
+> **Need = Max − Allocation**. Need[i] tells how many more resources process i might request beyond what it already holds.
+
+---
+
+**Q123.** If a Resource Allocation Graph (RAG) contains a cycle and resources have only a single instance:
 
 - A) Deadlock might exist
 - B) Deadlock definitely exists
@@ -1961,7 +1973,7 @@ Using Non-Preemptive SJF, what is the completion time of P2?
 
 ---
 
-**Q123.** What is the main difference between Deadlock Prevention and Deadlock Avoidance?
+**Q124.** What is the main difference between Deadlock Prevention and Deadlock Avoidance?
 
 - A) Prevention is dynamic; Avoidance is static
 - B) Prevention breaks one of the Coffman conditions; Avoidance uses resource request checks (safe state tracking)
@@ -1973,7 +1985,7 @@ Using Non-Preemptive SJF, what is the completion time of P2?
 
 ---
 
-**Q124.** Deadlock Detection differs from Deadlock Avoidance because:
+**Q125.** Deadlock Detection differs from Deadlock Avoidance because:
 
 - A) Detection prevents the system from entering unsafe states
 - B) Detection allows deadlock to occur and periodically checks the system state to recover
@@ -1985,7 +1997,19 @@ Using Non-Preemptive SJF, what is the completion time of P2?
 
 ---
 
-**Q125.** Which of the following is a standard method for Deadlock Recovery?
+**Q126.** The "Ostrich Algorithm" for deadlock handling means:
+
+- A) Detect deadlock immediately and recover
+- B) Prevent deadlock by breaking a Coffman condition
+- C) Ignore the possibility of deadlock (like an ostrich burying its head)
+- D) Avoid deadlock using banker's algorithm
+
+✅ **Answer: C**
+> **Ostrich Algorithm**: ignore deadlock entirely, hoping it won't occur. Used by most practical OSes (Windows, Linux) because deadlocks are rare and the overhead of prevention/avoidance is high.
+
+---
+
+**Q127.** Which of the following is a standard method for Deadlock Recovery?
 
 - A) Compaction
 - B) Process termination and Resource preemption
@@ -1994,3 +2018,16 @@ Using Non-Preemptive SJF, what is the completion time of P2?
 
 ✅ **Answer: B**
 > **Deadlock Recovery** is achieved by terminating deadlocked processes (either all of them or one-by-one until the cycle breaks) or by preempting resources from processes and rolling them back.
+
+---
+
+**Q128.** Deadlock Recovery by aborting processes means:
+
+- A) Suspend all processes and restart the OS
+- B) Terminate one or more deadlocked processes to break the circular wait and release resources
+- C) Increase the memory allocation
+- D) Move processes to a different CPU
+
+✅ **Answer: B**
+> **Deadlock Recovery**: abort deadlocked processes (either all at once or one by one) until the deadlock cycle is broken. Resources are released and other processes can proceed.
+
