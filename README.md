@@ -21,63 +21,63 @@ Below is the complete curriculum mapping. Click on any link to navigate to notes
 
 ### 🐧 Unit I: Operating System Basics
 *   **Syllabus**: Foundations, OS Types, Memory Management, Processor Scheduling, Synchronization & IPC.
-*   **Theory Notes**: [Unit 1 Notes](file:///Users/rajsumit/Downloads/combinatorial_Studies/Unit_1_Operating_Systems/notes.md)
-*   **Revision Sheet**: [Unit 1 Cheat Sheet](file:///Users/rajsumit/Downloads/combinatorial_Studies/Unit_1_Operating_Systems/revision_cheat_sheet.md)
-*   **Practice Questions**: [Unit 1 MCQ Bank](file:///Users/rajsumit/Downloads/combinatorial_Studies/Unit_1_Operating_Systems/practice_mcqs.md)
-*   **Lab Practicals**: [Unit 1 Lab Manual](file:///Users/rajsumit/Downloads/combinatorial_Studies/Unit_1_Operating_Systems/lab_practicals.md) (Linux, Shell scripting, System calls, Pthreads)
+*   **Theory Notes**: [Unit 1 Notes](Unit_1_Operating_Systems/notes.md)
+*   **Revision Sheet**: [Unit 1 Cheat Sheet](Unit_1_Operating_Systems/revision_cheat_sheet.md)
+*   **Practice Questions**: [Unit 1 MCQ Bank](Unit_1_Operating_Systems/practice_mcqs.md)
+*   **Lab Practicals**: [Unit 1 Lab Manual](Unit_1_Operating_Systems/lab_practicals.md) (Linux, Shell scripting, System calls, Pthreads)
 
 ### 🔌 Unit II: Computer Networking Basics
 *   **Syllabus**: Network Topologies, Transmission Media, OSI & TCP/IP models, Subnetting & Routing, Key Protocols (HTTP, SMTP, POP/IMAP, FTP, DNS, DHCP).
-*   **Theory Notes**: [Unit 2 Notes](file:///Users/rajsumit/Downloads/combinatorial_Studies/Unit_2_Computer_Networks/notes.md)
-*   **Revision Sheet**: [Unit 2 Cheat Sheet](file:///Users/rajsumit/Downloads/combinatorial_Studies/Unit_2_Computer_Networks/revision_cheat_sheet.md)
-*   **Practice Questions**: [Unit 2 MCQ Bank](file:///Users/rajsumit/Downloads/combinatorial_Studies/Unit_2_Computer_Networks/practice_mcqs.md)
-*   **Lab Practicals**: [Unit 2 Lab Manual](file:///Users/rajsumit/Downloads/combinatorial_Studies/Unit_2_Computer_Networks/lab_practicals.md) (Subnetting Workbook)
+*   **Theory Notes**: [Unit 2 Notes](Unit_2_Computer_Networks/notes.md)
+*   **Revision Sheet**: [Unit 2 Cheat Sheet](Unit_2_Computer_Networks/revision_cheat_sheet.md)
+*   **Practice Questions**: [Unit 2 MCQ Bank](Unit_2_Computer_Networks/practice_mcqs.md)
+*   **Lab Practicals**: [Unit 2 Lab Manual](Unit_2_Computer_Networks/lab_practicals.md) (Subnetting Workbook)
 
 ### 🗄️ Unit III: Database Management Systems (DBMS)
 *   **Syllabus**: RDBMS, Tables/Fields/Records, SQL commands, Keys & integrity, Normalization, Transactions & Concurrency.
-*   **Theory Notes**: [Unit 3 Notes](file:///Users/rajsumit/Downloads/combinatorial_Studies/Unit_3_DBMS/notes.md)
-*   **Revision Sheet**: [Unit 3 Cheat Sheet](file:///Users/rajsumit/Downloads/combinatorial_Studies/Unit_3_DBMS/revision_cheat_sheet.md)
-*   **Practice Questions**: [Unit 3 MCQ Bank](file:///Users/rajsumit/Downloads/combinatorial_Studies/Unit_3_DBMS/practice_mcqs.md)
-*   **Lab Practicals**: [Unit 3 Lab Manual](file:///Users/rajsumit/Downloads/combinatorial_Studies/Unit_3_DBMS/lab_practicals.md) (SQL commands, PL/SQL Procedures/Functions/Triggers)
+*   **Theory Notes**: [Unit 3 Notes](Unit_3_DBMS/notes.md)
+*   **Revision Sheet**: [Unit 3 Cheat Sheet](Unit_3_DBMS/revision_cheat_sheet.md)
+*   **Practice Questions**: [Unit 3 MCQ Bank](Unit_3_DBMS/practice_mcqs.md)
+*   **Lab Practicals**: [Unit 3 Lab Manual](Unit_3_DBMS/lab_practicals.md) (SQL commands, PL/SQL Procedures/Functions/Triggers)
 
 ### ☕ Unit IV: Fundamentals of Programming Languages
 *   **Syllabus**: C/C++/Java overview, Pointers & Storage classes, OOP principles, Parameter passing & binding, Memory handling in OOP.
-*   **Theory Notes**: [Unit 4 Notes](file:///Users/rajsumit/Downloads/combinatorial_Studies/Unit_4_Programming_Languages/notes.md)
-*   **Revision Sheet**: [Unit 4 Cheat Sheet](file:///Users/rajsumit/Downloads/combinatorial_Studies/Unit_4_Programming_Languages/revision_cheat_sheet.md)
-*   **Practice Questions**: [Unit 4 MCQ Bank](file:///Users/rajsumit/Downloads/combinatorial_Studies/Unit_4_Programming_Languages/practice_mcqs.md)
+*   **Theory Notes**: [Unit 4 Notes](Unit_4_Programming_Languages/notes.md)
+*   **Revision Sheet**: [Unit 4 Cheat Sheet](Unit_4_Programming_Languages/revision_cheat_sheet.md)
+*   **Practice Questions**: [Unit 4 MCQ Bank](Unit_4_Programming_Languages/practice_mcqs.md)
 
 ### 📈 Unit V: Data Structures
 *   **Syllabus**: Arrays, Linked Lists, Stacks & Queues, Trees, Graphs, Hashing, Heaps.
-*   **Theory Notes**: [Unit 5 Notes](file:///Users/rajsumit/Downloads/combinatorial_Studies/Unit_5_Data_Structures/notes.md)
-*   **Revision Sheet**: [Unit 5 Cheat Sheet](file:///Users/rajsumit/Downloads/combinatorial_Studies/Unit_5_Data_Structures/revision_cheat_sheet.md)
-*   **Practice Questions**: [Unit 5 MCQ Bank](file:///Users/rajsumit/Downloads/combinatorial_Studies/Unit_5_Data_Structures/practice_mcqs.md)
-*   **Lab Practicals**: [Unit 5 Lab Manual](file:///Users/rajsumit/Downloads/combinatorial_Studies/Unit_5_Data_Structures/lab_practicals.md) (Linked Lists, Stack/Queue array code, BST traversal code)
+*   **Theory Notes**: [Unit 5 Notes](Unit_5_Data_Structures/notes.md)
+*   **Revision Sheet**: [Unit 5 Cheat Sheet](Unit_5_Data_Structures/revision_cheat_sheet.md)
+*   **Practice Questions**: [Unit 5 MCQ Bank](Unit_5_Data_Structures/practice_mcqs.md)
+*   **Lab Practicals**: [Unit 5 Lab Manual](Unit_5_Data_Structures/lab_practicals.md) (Linked Lists, Stack/Queue array code, BST traversal code)
 
 ### ⚙️ Unit VI: Algorithms
 *   **Syllabus**: Run-time analysis & growths, Big-O, Recursion & Backtracking, Dynamic Programming, Greedy Algorithms.
-*   **Theory Notes**: [Unit 6 Notes](file:///Users/rajsumit/Downloads/combinatorial_Studies/Unit_6_Algorithms/notes.md)
-*   **Revision Sheet**: [Unit 6 Cheat Sheet](file:///Users/rajsumit/Downloads/combinatorial_Studies/Unit_6_Algorithms/revision_cheat_sheet.md)
-*   **Practice Questions**: [Unit 6 MCQ Bank](file:///Users/rajsumit/Downloads/combinatorial_Studies/Unit_6_Algorithms/practice_mcqs.md)
+*   **Theory Notes**: [Unit 6 Notes](Unit_6_Algorithms/notes.md)
+*   **Revision Sheet**: [Unit 6 Cheat Sheet](Unit_6_Algorithms/revision_cheat_sheet.md)
+*   **Practice Questions**: [Unit 6 MCQ Bank](Unit_6_Algorithms/practice_mcqs.md)
 
 ### 🤝 Unit VII: Interview Preparation Kit
 *   **Syllabus**: Resume building, Communication, Whiteboard coding, Behavioral questions (STAR method), Service IT company prep.
-*   **Theory Notes**: [Unit 7 Notes](file:///Users/rajsumit/Downloads/combinatorial_Studies/Unit_7_Interview_Prep/notes.md)
-*   **Revision Sheet**: [Unit 7 Cheat Sheet](file:///Users/rajsumit/Downloads/combinatorial_Studies/Unit_7_Interview_Prep/revision_cheat_sheet.md)
-*   **Practice Questions**: [Unit 7 MCQ Bank](file:///Users/rajsumit/Downloads/combinatorial_Studies/Unit_7_Interview_Prep/practice_mcqs.md)
+*   **Theory Notes**: [Unit 7 Notes](Unit_7_Interview_Prep/notes.md)
+*   **Revision Sheet**: [Unit 7 Cheat Sheet](Unit_7_Interview_Prep/revision_cheat_sheet.md)
+*   **Practice Questions**: [Unit 7 MCQ Bank](Unit_7_Interview_Prep/practice_mcqs.md)
 
 ---
 
 ## 🛠️ Practicals & Labs Mapping
-*   **Practical 1**: Linux commands $\to$ [Unit 1 Lab Manual](file:///Users/rajsumit/Downloads/combinatorial_Studies/Unit_1_Operating_Systems/lab_practicals.md#1-linux-commands)
-*   **Practical 2**: Shell scripting $\to$ [Unit 1 Lab Manual](file:///Users/rajsumit/Downloads/combinatorial_Studies/Unit_1_Operating_Systems/lab_practicals.md#2-shell-programming)
-*   **Practical 3**: File/Process system calls $\to$ [Unit 1 Lab Manual](file:///Users/rajsumit/Downloads/combinatorial_Studies/Unit_1_Operating_Systems/lab_practicals.md#3-system-calls)
-*   **Practical 4**: Pthread multithreading $\to$ [Unit 1 Lab Manual](file:///Users/rajsumit/Downloads/combinatorial_Studies/Unit_1_Operating_Systems/lab_practicals.md#4-multithreading)
-*   **Practical 5**: SQL DDL/DML/TCL commands $\to$ [Unit 3 Lab Manual](file:///Users/rajsumit/Downloads/combinatorial_Studies/Unit_3_DBMS/lab_practicals.md#1-sql-commands)
-*   **Practical 6**: PL/SQL Procedures, Functions, & Triggers $\to$ [Unit 3 Lab Manual](file:///Users/rajsumit/Downloads/combinatorial_Studies/Unit_3_DBMS/lab_practicals.md#2-plsql-programming)
-*   **Practical 7**: Subnetting calculations $\to$ [Unit 2 Lab Manual](file:///Users/rajsumit/Downloads/combinatorial_Studies/Unit_2_Computer_Networks/lab_practicals.md)
-*   **Practical 8**: Arrays & Linked Lists $\to$ [Unit 5 Lab Manual](file:///Users/rajsumit/Downloads/combinatorial_Studies/Unit_5_Data_Structures/lab_practicals.md#1-singly-linked-list)
-*   **Practical 9**: Stack & Queue array-based code $\to$ [Unit 5 Lab Manual](file:///Users/rajsumit/Downloads/combinatorial_Studies/Unit_5_Data_Structures/lab_practicals.md#2-stack--queue-array-based)
-*   **Practical 10**: BST node operations & traversals $\to$ [Unit 5 Lab Manual](file:///Users/rajsumit/Downloads/combinatorial_Studies/Unit_5_Data_Structures/lab_practicals.md#3-binary-search-tree-bst)
+*   **Practical 1**: Linux commands $\to$ [Unit 1 Lab Manual](Unit_1_Operating_Systems/lab_practicals.md#1-linux-commands)
+*   **Practical 2**: Shell scripting $\to$ [Unit 1 Lab Manual](Unit_1_Operating_Systems/lab_practicals.md#2-shell-programming)
+*   **Practical 3**: File/Process system calls $\to$ [Unit 1 Lab Manual](Unit_1_Operating_Systems/lab_practicals.md#3-system-calls)
+*   **Practical 4**: Pthread multithreading $\to$ [Unit 1 Lab Manual](Unit_1_Operating_Systems/lab_practicals.md#4-multithreading)
+*   **Practical 5**: SQL DDL/DML/TCL commands $\to$ [Unit 3 Lab Manual](Unit_3_DBMS/lab_practicals.md#1-sql-commands)
+*   **Practical 6**: PL/SQL Procedures, Functions, & Triggers $\to$ [Unit 3 Lab Manual](Unit_3_DBMS/lab_practicals.md#2-plsql-programming)
+*   **Practical 7**: Subnetting calculations $\to$ [Unit 2 Lab Manual](Unit_2_Computer_Networks/lab_practicals.md)
+*   **Practical 8**: Arrays & Linked Lists $\to$ [Unit 5 Lab Manual](Unit_5_Data_Structures/lab_practicals.md#1-singly-linked-list)
+*   **Practical 9**: Stack & Queue array-based code $\to$ [Unit 5 Lab Manual](Unit_5_Data_Structures/lab_practicals.md#2-stack--queue-array-based)
+*   **Practical 10**: BST node operations & traversals $\to$ [Unit 5 Lab Manual](Unit_5_Data_Structures/lab_practicals.md#3-binary-search-tree-bst)
 
 ---
 
