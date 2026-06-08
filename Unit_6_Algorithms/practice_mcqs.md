@@ -1,6 +1,6 @@
 # Unit VI: Algorithms - MCQ Bank
 
-Test your mastery of runtime analysis, recurrences, sorting benchmarks, Dynamic Programming, and Greedy strategies with these 50 solved, high-probability Multiple Choice Questions.
+Test your mastery of runtime analysis, recurrences, sorting benchmarks, Dynamic Programming, and Greedy strategies with these 130 solved, high-probability Multiple Choice Questions.
 
 ---
 
@@ -933,3 +933,378 @@ for (int i = 1; i <= n; i = i * 2) {
 - D) $O(V \cdot E)$
 - **Answer: ✅ B**
 - **Explanation**: Floyd-Warshall uses three nested loops over the vertices $V$ to compute shortest paths between all pairs of vertices in $O(V^3)$ time.
+
+---
+
+## 🔷 Topic 9: Advanced Exam-Style Challenges
+
+#### Q106. In the formal definition of Big-O notation, to prove that $3N^2 + 5N = O(N^2)$, which pair of positive constants $c$ and $n_0$ satisfies the condition $3N^2 + 5N \le c \cdot N^2$ for all $N \ge n_0$?
+- A) $c = 3, n_0 = 1$
+- B) $c = 5, n_0 = 3$
+- C) $c = 8, n_0 = 1$
+- D) $c = 2, n_0 = 5$
+- **Answer: ✅ C**
+- **Explanation**: According to the definition of $O(g(N))$, we must find positive constants $c$ and $n_0$ such that $f(N) \le c \cdot g(N)$ for all $N \ge n_0$.
+  Here, $f(N) = 3N^2 + 5N$ and $g(N) = N^2$.
+  If we choose $c = 8$:
+  $$3N^2 + 5N \le 8N^2 \implies 5N \le 5N^2 \implies 1 \le N$$
+  This holds true for all $N \ge 1$. Hence, the pair $(c = 8, n_0 = 1)$ is mathematically valid. Option A is invalid because $3N^2 + 5N \le 3N^2 \implies 5N \le 0$, which is false for positive $N$.
+
+#### Q107. Let $f(N)$ and $g(N)$ be asymptotically positive functions. Which of the following statements is mathematically FALSE?
+- A) $f(N) = O(g(N)) \implies g(N) = \Omega(f(N))$
+- B) $f(N) = \Theta(g(N)) \implies f(N) = O(g(N))$ and $f(N) = \Omega(g(N))$
+- C) $f(N) = O(g(N)) \implies 2^{f(N)} = O(2^{g(N)})$
+- D) $f(N) = o(g(N)) \implies \lim_{N \to \infty} \frac{f(N)}{g(N)} = 0$
+- **Answer: ✅ C**
+- **Explanation**: Asymptotic notation does not automatically preserve exponentiation. Consider $f(N) = 2N$ and $g(N) = N$. Clearly, $2N = O(N)$ (with $c=2$). However:
+  $$2^{f(N)} = 2^{2N} = 4^N \quad \text{and} \quad 2^{g(N)} = 2^N$$
+  Since $\lim_{N \to \infty} \frac{4^N}{2^N} = \lim_{N \to \infty} 2^N = \infty$, it is false that $4^N = O(2^N)$. Thus, $2^{f(N)} = O(2^{g(N)})$ does not follow.
+
+#### Q108. What is the time complexity of the following code snippet?
+```cpp
+int count = 0;
+for (int i = 2; i <= n; i = i * i) {
+    for (int j = 1; j <= n; j = j * 2) {
+        count++;
+    }
+}
+```
+- A) $O(N \log N)$
+- B) $O(\log N \log \log N)$
+- C) $O(\log^2 N)$
+- D) $O(\log \log N \log N)$
+- **Answer: ✅ D**
+- **Explanation**: Let's analyze the loops independently:
+  1. The outer loop variable $i$ starts at $2$ and square-steps: $i = 2, 4, 16, 256, \dots, 2^{2^k}$. The loop terminates when $2^{2^k} > N \implies 2^k > \log_2 N \implies k > \log_2(\log_2 N)$. Thus, the outer loop runs $O(\log \log N)$ times.
+  2. The inner loop variable $j$ doubles at each step from $1$ to $N$, which runs exactly $O(\log N)$ times.
+  Since the inner loop runs $O(\log N)$ times for every iteration of the outer loop, the total time complexity is $O(\log \log N \cdot \log N)$.
+
+#### Q109. What is the time complexity of the following loop structure?
+```cpp
+int value = 0;
+for (int i = 1; i <= n; i++) {
+    for (int j = 1; j * j <= i; j++) {
+        value++;
+    }
+}
+```
+- A) $O(N \log N)$
+- B) $O(N \sqrt{N})$
+- C) $O(N)$
+- D) $O(N^2)$
+- **Answer: ✅ B**
+- **Explanation**: The outer loop runs $N$ times. For a given value of $i$, the inner loop variable $j$ runs as long as $j^2 \le i \implies j \le \sqrt{i}$.
+  The total number of operations is:
+  $$\sum_{i=1}^{N} \sqrt{i} \approx \int_{1}^{N} x^{1/2} dx = \left[ \frac{2}{3} x^{3/2} \right]_1^N = \Theta(N^{3/2}) = O(N\sqrt{N})$$
+  Hence, the complexity is $O(N\sqrt{N})$.
+
+#### Q110. Which of the following is the correct solution for the recurrence relation $T(N) = T(\sqrt{N}) + \Theta(1)$?
+- A) $T(N) = \Theta(\log N)$
+- B) $T(N) = \Theta(\log \log N)$
+- C) $T(N) = \Theta(\sqrt{N})$
+- D) $T(N) = \Theta(1)$
+- **Answer: ✅ B**
+- **Explanation**: To solve $T(N) = T(N^{1/2}) + c$, we use a change of variables. Let $N = 2^k \implies k = \log_2 N$.
+  Let $S(k) = T(2^k)$.
+  Then:
+  $$S(k) = T(2^{k/2}) + c = S(k/2) + c$$
+  This is the standard recurrence for Binary Search on $k$, which yields:
+  $$S(k) = \Theta(\log k)$$
+  Substituting back $k = \log_2 N$, we get:
+  $$T(N) = \Theta(\log \log N)$$
+
+#### Q111. Solve the recurrence relation $T(N) = 4T(N/2) + N^2 \log N$:
+- A) $T(N) = \Theta(N^2 \log N)$
+- B) $T(N) = \Theta(N^2 \log^2 N)$
+- C) $T(N) = \Theta(N^2)$
+- D) $T(N) = \Theta(N^3)$
+- **Answer: ✅ B**
+- **Explanation**: Using the Master Theorem Case 2 Extension:
+  Here, $a = 4, b = 2 \implies N^{\log_b a} = N^{\log_2 4} = N^2$.
+  The driving function is $f(N) = N^2 \log^1 N$, which is in the form $\Theta(N^{\log_b a} \log^k N)$ for $k = 1$.
+  According to Case 2 extension, if $f(N) = \Theta(N^{\log_b a} \log^k N)$ with $k \ge 0$, then the solution is:
+  $$T(N) = \Theta(N^{\log_b a} \log^{k+1} N) = \Theta(N^2 \log^2 N)$$
+
+#### Q112. Consider the recurrence relation $T(N) = T(N/3) + T(2N/3) + N$. What is the asymptotic behavior of $T(N)$?
+- A) $T(N) = \Theta(N)$
+- B) $T(N) = \Theta(N^2)$
+- C) $T(N) = \Theta(N \log N)$
+- D) $T(N) = \Theta(2^N)$
+- **Answer: ✅ C**
+- **Explanation**: The Master Theorem cannot be applied because the subproblems are unbalanced. We can use the recursion tree method:
+  - At level 0 (root): Work is $N$.
+  - At level 1: Work is $\frac{N}{3} + \frac{2N}{3} = N$.
+  - At level 2: Work is $\frac{N}{9} + \frac{2N}{9} + \frac{2N}{9} + \frac{4N}{9} = N$.
+  At each level $i$ of the tree, the sum of work is exactly $N$.
+  - The shortest path to a leaf goes through the left branch: $N \to N/3 \to N/9 \to \dots$, having a depth of $\log_3 N$.
+  - The longest path goes through the right branch: $N \to 2N/3 \to 4N/9 \to \dots$, having a depth of $\log_{3/2} N$.
+  Since every level does $N$ work and the tree depth is bounded between $\log_3 N$ and $\log_{3/2} N$, the total work is bounded by:
+  $$N \log_3 N \le T(N) \le N \log_{3/2} N \implies T(N) = \Theta(N \log N)$$
+
+#### Q113. In the space-optimized Dynamic Programming solution for the 0/1 Knapsack problem using a 1D array `dp[w]`, why must the inner loop for capacity `w` run backward from capacity `W` down to item weight `w_i`?
+- A) To optimize cache locality
+- B) Running forward would result in using the same item multiple times (solving Fractional Knapsack instead)
+- C) Running forward would result in using the same item multiple times (solving Unbounded Knapsack instead)
+- D) It avoids accessing negative indices
+- **Answer: ✅ C**
+- **Explanation**: In the 1D DP update:
+  `dp[w] = max(dp[w], dp[w - w_i] + v_i)`
+  We need `dp[w - w_i]` to represent the optimal value *before* considering the current item $i$ (i.e. from the previous row $i-1$).
+  If the loop ran forward, `dp[w - w_i]` would already have been updated in the current pass and would contain the current item $i$. This would allow the item to be selected multiple times, which solves the **Unbounded Knapsack** problem instead of the **0/1 Knapsack** problem (where each item is limited to at most one selection). By running the loop backward, we guarantee that `dp[w - w_i]` is accessed before it is updated, ensuring it represents the $i-1$ state.
+
+#### Q114. Trace the Dynamic Programming grid to find the length of the Longest Common Subsequence (LCS) between strings $X = \text{"ALGORITHM"}$ and $Y = \text{"LOGARITHM"}$. What is the length?
+- A) 6
+- B) 7
+- C) 8
+- D) 9
+- **Answer: ✅ B**
+- **Explanation**: Let's find the matching characters in sequence:
+  We can align $X$ and $Y$ to extract the subsequence `L-G-R-I-T-H-M` (length 7):
+  - $X$: A **L** **G** O **R** I **T** **H** **M**
+  - $Y$: **L** O **G** A **R** I **T** **H** **M**
+  Let's list the positions of `L G R I T H M` in both:
+  - In $X$: `L` (idx 1), `G` (idx 2), `R` (idx 4), `I` (idx 5), `T` (idx 6), `H` (idx 7), `M` (idx 8)
+  - In $Y$: `L` (idx 0), `G` (idx 2), `R` (idx 4), `I` (idx 5), `T` (idx 6), `H` (idx 7), `M` (idx 8)
+  Wait, let's verify indices. In $X$, the characters are `A`(0), `L`(1), `G`(2), `O`(3), `R`(4), `I`(5), `T`(6), `H`(7), `M`(8).
+  In $Y$, they are `L`(0), `O`(1), `G`(2), `A`(3), `R`(4), `I`(5), `T`(6), `H`(7), `M`(8).
+  The indices of matched characters in $X$ are 1, 2, 4, 5, 6, 7, 8 (strictly increasing).
+  The indices of matched characters in $Y$ are 0, 2, 4, 5, 6, 7, 8 (strictly increasing).
+  So `L G R I T H M` is indeed a valid common subsequence of length 7.
+  Is there any common subsequence of length 8? Let's check:
+  Characters of $X$ matching $Y$:
+  `L` (1), `O` (3), `G` (2) - indices in $X$ are not increasing, so we cannot match both `O` and `G` in this order.
+  `A` (0), `L` (1), `G` (2) - `A` in $Y$ is at idx 3. So if we match `A`, we cannot match `L`(0) or `G`(2) before it.
+  Therefore, the longest common subsequence length is exactly 7.
+
+#### Q115. In the Matrix Chain Multiplication problem, we are given three matrices with dimensions: $A_1$ is $10 \times 20$, $A_2$ is $20 \times 5$, and $A_3$ is $5 \times 30$. What is the minimum number of scalar multiplications required to compute $A_1 \times A_2 \times A_3$?
+- A) 4,000
+- B) 2,500
+- C) 1,750
+- D) 6,000
+- **Answer: ✅ B**
+- **Explanation**: We have two parenthesization options:
+  1. $(A_1 \times A_2) \times A_3$:
+     - Multiplications for $A_1 \times A_2$: $10 \times 20 \times 5 = 1,000$. The resulting matrix $A_{12}$ has dimensions $10 \times 5$.
+     - Multiplications for $A_{12} \times A_3$: $10 \times 5 \times 30 = 1,500$.
+     - Total: $1,000 + 1,500 = 2,500$ scalar multiplications.
+  2. $A_1 \times (A_2 \times A_3)$:
+     - Multiplications for $A_2 \times A_3$: $20 \times 5 \times 30 = 3,000$. The resulting matrix $A_{23}$ has dimensions $20 \times 30$.
+     - Multiplications for $A_1 \times A_{23}$: $10 \times 20 \times 30 = 6,000$.
+     - Total: $3,000 + 6,000 = 9,000$ scalar multiplications.
+  Comparing the two, the minimum multiplications required is $2,500$.
+
+#### Q116. A message contains characters with the following frequencies: `A: 0.40, B: 0.25, C: 0.15, D: 0.12, E: 0.08`. If we construct a Huffman code for this message, what is the expected (average) number of bits per character?
+- A) 2.00
+- B) 2.15
+- C) 2.20
+- D) 2.35
+- **Answer: ✅ B**
+- **Explanation**: Let's build the Huffman tree step-by-step:
+  1. Combine the two lowest frequencies: `E (0.08)` and `D (0.12)` $\implies$ Node `DE (0.20)`.
+  2. The active set is now: `C (0.15), DE (0.20), B (0.25), A (0.40)`.
+  3. Combine the two lowest: `C (0.15)` and `DE (0.20)` $\implies$ Node `CDE (0.35)`.
+  4. The active set is now: `B (0.25), CDE (0.35), A (0.40)`.
+  5. Combine the two lowest: `B (0.25)` and `CDE (0.35)` $\implies$ Node `BCDE (0.60)`.
+  6. The active set is now: `A (0.40), BCDE (0.60)`.
+  7. Combine the two: `A` and `BCDE` $\implies$ Root node `1.00`.
+  Now, let's trace the path lengths (number of bits) from the root:
+  - `A`: 1 bit (path length 1)
+  - `B`: 2 bits (path length 2, path: root $\to$ BCDE $\to$ B)
+  - `C`: 3 bits (path length 3, path: root $\to$ BCDE $\to$ CDE $\to$ C)
+  - `D`: 4 bits (path length 4, path: root $\to$ BCDE $\to$ CDE $\to$ DE $\to$ D)
+  - `E`: 4 bits (path length 4, path: root $\to$ BCDE $\to$ CDE $\to$ DE $\to$ E)
+  Let's calculate the expected length:
+  $$L_{\text{avg}} = (0.40 \times 1) + (0.25 \times 2) + (0.15 \times 3) + (0.12 \times 4) + (0.08 \times 4)$$
+  $$L_{\text{avg}} = 0.40 + 0.50 + 0.45 + 0.48 + 0.32 = 2.15 \text{ bits/character}$$
+
+#### Q117. What is the maximum possible height of a Huffman tree containing $N$ unique characters, and what conditions produce this height?
+- A) Height $O(\log N)$, produced when all character frequencies are equal
+- B) Height $O(N)$, produced when the character frequencies follow the Fibonacci sequence ($f_i = f_{i-1} + f_{i-2}$)
+- C) Height $O(\sqrt{N})$, produced when frequencies are prime numbers
+- D) Height $O(N)$, produced when all frequencies are equal
+- **Answer: ✅ B**
+- **Explanation**: A Huffman tree is highly unbalanced (linear or "skewed" like a vine, representing a maximum height of $N-1$) when the frequency of each character is greater than or equal to the sum of the frequencies of the two preceding characters. The Fibonacci sequence satisfies this condition ($F_n = F_{n-1} + F_{n-2}$). In this case, at each step of building the tree, the algorithm merges the newly formed parent node with the next single character, producing a tree of height $N-1$ (i.e., $O(N)$). Equal frequencies, on the other hand, produce a nearly balanced binary tree of height $O(\log N)$.
+
+#### Q118. Consider a directed graph with vertices $S$, $A$, and $B$. The edges are: $S \to A$ with weight 3, $S \to B$ with weight 4, and $B \to A$ with weight -2. If we run Dijkstra's algorithm starting from source $S$, what path distance does it find to vertex $A$, and why is this incorrect?
+- A) Distance 2; Dijkstra finds the correct path
+- B) Distance 3; Dijkstra incorrectly misses the path $S \to B \to A$ (actual distance 2) because it greedily processes and freezes vertex $A$ when it is extracted from the queue with distance 3
+- C) Distance 4; Dijkstra fails to process negative weights entirely
+- D) Distance 1; Dijkstra calculates incorrect values due to division by zero
+- **Answer: ✅ B**
+- **Explanation**: Let's trace Dijkstra's algorithm step-by-step:
+  1. Initialize distances: $dist[S] = 0$, $dist[A] = \infty$, $dist[B] = \infty$.
+  2. Extract the minimum distance vertex: $S$ is extracted.
+  3. Relax neighbors of $S$:
+     - $S \to A$: $dist[A]$ becomes $\min(\infty, 0 + 3) = 3$.
+     - $S \to B$: $dist[B]$ becomes $\min(\infty, 0 + 4) = 4$.
+  4. Extract the next minimum distance vertex: $A$ (distance 3) is extracted and marked as visited. Its distance is now frozen at 3.
+  5. Extract the next minimum distance vertex: $B$ (distance 4) is extracted.
+  6. Relax neighbors of $B$:
+     - $B \to A$: $dist[A]$ would become $\min(3, 4 + (-2)) = 2$. However, since $A$ has already been processed (visited), standard Dijkstra does not update its distance.
+  Thus, Dijkstra returns $dist[A] = 3$, missing the shorter path $S \to B \to A$ which has a cost of $2$. This illustrates why Dijkstra fails in the presence of negative edge weights.
+
+#### Q119. In the backtracking solution for the N-Queens problem on an $N \times N$ chessboard, how do we track if a square $(r, c)$ is threatened by a queen already placed at row $r'$ and column $c'$ on the diagonals?
+- A) A square is threatened if $r + c == r' + c'$ (major diagonal) or $r - c == r' - c'$ (minor diagonal)
+- B) A square is threatened if $r \cdot c == r' \cdot c'$
+- C) A square is threatened if $r + c'$ is prime
+- D) A square is threatened if $r' - r == c' - c$ (anti-diagonal) or $r' - r == c - c'$ (main diagonal)
+- **Answer: ✅ D**
+- **Explanation**: A queen at $(r', c')$ threatens any square $(r, c)$ on the same main diagonal (which runs top-left to bottom-right) and same anti-diagonal (top-right to bottom-left).
+  - For the **main diagonal**, the difference between row and column is constant: $r' - c' = r - c \implies r' - r = c' - c$.
+  - For the **anti-diagonal**, the sum of row and column is constant: $r' + c' = r + c \implies r' - r = c - c'$.
+  Using Boolean arrays indexed by $r - c + (N - 1)$ and $r + c$, we can check diagonal conflicts in $O(1)$ time.
+
+#### Q120. In the Graph Coloring problem, we use backtracking to find if a graph can be colored using $M$ colors. Which of the following represents a valid bounding/pruning condition that allows terminating a recursive branch early?
+- A) If the number of colors used so far is less than $M$
+- B) If the degree of the current vertex is less than the number of available colors
+- C) If the partial coloring of a vertex conflicts with the color of an adjacent, already colored vertex
+- D) If the graph contains a clique of size greater than $M$
+- **Answer: ✅ C**
+- **Explanation**: The core constraint of the Graph Coloring problem is that no two adjacent vertices share the same color. Therefore, if assigning color $C$ to vertex $V$ matches the color of any adjacent vertex that has already been colored, the constraint is violated. The backtracking algorithm prunes this branch immediately by backtracking, rather than proceeding to color the remaining vertices. Option D is a global property that can be used as a preprocessing check, but Option C is the active bounding/pruning condition used during the backtracking search.
+
+#### Q121. In a backtracking search to find all Hamiltonian Cycles in a complete graph $K_V$ with $V$ vertices, what is the maximum number of leaf nodes in the search tree before pruning?
+- A) $V^2$
+- B) $2^V$
+- C) $(V - 1)!$
+- D) $V!$
+- **Answer: ✅ C**
+- **Explanation**: A complete graph has a directed edge between every pair of vertices. To find all Hamiltonian cycles:
+  1. Fix the starting vertex (say, $v_0$).
+  2. For the next step, there are $V - 1$ choices of vertices to visit.
+  3. For the subsequent step, there are $V - 2$ choices.
+  4. Continuing this process, we get a permutation tree of height $V$.
+  The number of branches at the leaf level is $(V-1) \times (V-2) \times \dots \times 1 = (V-1)!$. This is the size of the unpruned search space.
+
+#### Q122. The mathematical proof that any comparison-based sorting algorithm requires at least $\Omega(N \log N)$ comparisons in the worst case relies on which mathematical approximation?
+- A) Euler's Formula
+- B) Taylor Series expansion of $\log(1 + x)$
+- C) Stirling's Approximation for $N!$
+- D) L'Hopital's Rule
+- **Answer: ✅ C**
+- **Explanation**: A comparison-based sorting algorithm has a binary decision tree where each node represents a comparison.
+  - To sort $N$ items, the tree must have at least $N!$ leaf nodes (one for each possible permutation of the input).
+  - A binary tree of height $H$ has at most $2^H$ leaves.
+  - Thus, $2^H \ge N! \implies H \ge \log_2(N!)$.
+  Using **Stirling's Approximation** for large $N$:
+  $$\ln(N!) \approx N \ln N - N$$
+  Substituting this into the inequality:
+  $$H \ge \log_2(N!) \approx N \log_2 N - N \log_2 e = \Omega(N \log N)$$
+  This establishes the lower bound of $\Omega(N \log N)$.
+
+#### Q123. Counting Sort is a stable, non-comparison sorting algorithm that runs in $O(N + K)$ time, where $K$ is the range of input values. How does it maintain stability during the final scatter phase?
+- A) By comparing elements directly from left to right
+- B) By iterating through the input array from right to left (backward) and placing elements in the output array using prefix-sum offsets, then decrementing the count
+- C) By using a temporary linked list for each bucket
+- D) By sorting the count array itself using insertion sort
+- **Answer: ✅ B**
+- **Explanation**: Counting Sort computes a histogram of element counts, then calculates prefix sums to determine the ending position of each element group.
+  To preserve stability (maintaining the relative order of duplicate elements):
+  - We scan the input array from **right to left (backward)**.
+  - For each element `arr[i]`, we lookup its position using the prefix sum of `arr[i]`, place it in the output array, and **decrement** the prefix sum.
+  - Because we scan backward, the last occurrence of a duplicate element in the input is placed at the highest available index in its range, and subsequent occurrences are placed at lower indices. This preserves their original relative order. Scanning forward without decrementing from the end would reverse the order, making it unstable.
+
+#### Q124. Radix Sort sorts $N$ numbers with values in the range $[0, M-1]$ by processing them digit-by-digit using Counting Sort as a stable sub-routine. If we represent the numbers in base $d$, what is the total time complexity?
+- A) $O(N \log N)$
+- B) $O\left( \log_d M \cdot (N + d) \right)$
+- C) $O(N \cdot M)$
+- D) $O(N + d)$
+- **Answer: ✅ B**
+- **Explanation**: Let's analyze the steps:
+  1. The number of digits of a number up to $M-1$ in base $d$ is $\lceil \log_d M \rceil$.
+  2. For each digit, we run Counting Sort. Since the base is $d$, the range of digit values is $[0, d-1]$. The time complexity of Counting Sort for $N$ elements in range $d$ is $O(N + d)$.
+  3. Multiplying the number of digits by the cost per digit gives the total runtime:
+     $$O\left( \log_d M \cdot (N + d) \right)$$
+  If $d = \Theta(N)$ and $M = N^c$, this becomes $O(c \cdot (N + N)) = O(N)$ linear time.
+
+#### Q125. In the Knuth-Morris-Pratt (KMP) string matching algorithm, construct the prefix function (LPS/$\pi$ array) for the pattern $P = \text{"ABACABA"}$. What is the resulting array?
+- A) $[0, 0, 1, 0, 1, 2, 3]$
+- B) $[0, 0, 1, 0, 1, 2, 1]$
+- C) $[0, 0, 1, 2, 3, 4, 5]$
+- D) $[0, 1, 0, 1, 2, 3, 2]$
+- **Answer: ✅ A**
+- **Explanation**: The LPS array stores the length of the longest proper prefix of $P[0..i]$ that is also a suffix of $P[0..i]$. Let's compute it index-by-index:
+  - $i=0$: `A` $\to$ proper prefix/suffix has length 0. `LPS[0] = 0`.
+  - $i=1$: `AB` $\to$ prefixes: `A`; suffixes: `B`. No match. `LPS[1] = 0`.
+  - $i=2$: `ABA` $\to$ prefix `A` matches suffix `A` (length 1). `LPS[2] = 1`.
+  - $i=3$: `ABAC` $\to$ no matching prefix/suffix. `LPS[3] = 0`.
+  - $i=4$: `ABACA` $\to$ prefix `A` matches suffix `A` (length 1). `LPS[4] = 1`.
+  - $i=5$: `ABACAB` $\to$ prefix `AB` matches suffix `AB` (length 2). `LPS[5] = 2`.
+  - $i=6$: `ABACABA` $\to$ prefix `ABA` matches suffix `ABA` (length 3). `LPS[6] = 3`.
+  Thus, the LPS array is `[0, 0, 1, 0, 1, 2, 3]`.
+
+#### Q126. Rabin-Karp calculates rolling hashes to find a pattern in a text. If we use a simple polynomial rolling hash:
+$$H(S[i..i+M-1]) = \left( \sum_{j=0}^{M-1} S[i+j] \cdot p^{M-1-j} \right) \pmod q$$
+What is the mathematical recurrence formula to calculate the hash of the next window $H(S[i+1..i+M])$ in $O(1)$ time?
+- A) $H_{\text{next}} = \left( (H_{\text{prev}} - S[i] \cdot p^{M-1}) \cdot p + S[i+M] \right) \pmod q$
+- B) $H_{\text{next}} = \left( H_{\text{prev}} \cdot p + S[i+M] - S[i] \right) \pmod q$
+- C) $H_{\text{next}} = \left( H_{\text{prev}} - S[i] + S[i+M] \cdot p^{M-1} \right) \pmod q$
+- D) $H_{\text{next}} = \left( (H_{\text{prev}} + S[i+M] \cdot p^M) / p \right) \pmod q$
+- **Answer: ✅ A**
+- **Explanation**: To slide the hash window by one character to the right:
+  1. Remove the high-order term corresponding to the leftmost character $S[i]$: subtract $S[i] \cdot p^{M-1}$.
+  2. Shift the remaining characters one position to the left (increase their powers of $p$ by multiplying by the base $p$).
+  3. Add the low-order term for the new incoming character $S[i+M]$ at the rightmost position (power $p^0 = 1$).
+  4. Perform modulo $q$ to prevent integer overflow.
+  This gives:
+  $$H_{\text{next}} = \left( (H_{\text{prev}} - S[i] \cdot p^{M-1}) \cdot p + S[i+M] \right) \pmod q$$
+
+#### Q127. In the Boyer-Moore string matching algorithm, let the pattern $P = \text{"NEEDLE"}$ and we are matching from right to left. Suppose we align $P$ against a text window and find a mismatch at index 4 of the pattern (character 'L') where the corresponding text character is 'A'. Using the Bad Character Rule, how many positions should we shift the pattern to the right? (Note: 'A' does not appear in $P$).
+- A) 1
+- B) 3
+- C) 5
+- D) 6
+- **Answer: ✅ C**
+- **Explanation**: The Bad Character Rule states that when a mismatch occurs at pattern index $i$ with text character $T[k]$:
+  - If the mismatched text character $T[k]$ does not exist in the pattern, we can shift the pattern completely past the mismatch.
+  - The shift distance is computed as:
+    $$\text{shift} = i - \text{last\_occurrence}(T[k], P)$$
+    Since 'A' does not appear anywhere in $P = \text{"NEEDLE"}$, its last occurrence index is $-1$.
+    The mismatch occurred at pattern index $i = 4$.
+    Therefore, the shift distance is:
+    $$\text{shift} = 4 - (-1) = 5 \text{ positions}$$
+    (Specifically, this shifts the start of the pattern past the mismatched character 'A').
+
+#### Q128. What is the worst-case number of character comparisons performed by the KMP algorithm when searching for a pattern of length $M$ in a text of length $N$ (excluding the preprocessing phase)?
+- A) $2N$
+- B) $N \cdot M$
+- C) $N + M$
+- D) $N^2$
+- **Answer: ✅ A**
+- **Explanation**: In KMP, although the pattern pointer can backtrack when a mismatch occurs, the text pointer *never* backtracks—it only increments forward.
+  - For each character in the text, we either match (advancing the text pointer) or mismatch (which backtracks the pattern pointer using the LPS array).
+  - Since we can backtrack at most as many times as we advance, and we advance the text pointer at most $N$ times, the total number of comparisons is bounded by $2N$ in the absolute worst case. This guarantees linear $O(N)$ comparisons, unlike the naive search which can take $O(N \cdot M)$ comparisons.
+
+#### Q129. When analyzing a dynamic array (like `std::vector` in C++ or `ArrayList` in Java), insertions take $O(1)$ time on average, but $O(N)$ when the array is full and must resize (doubling its capacity). Using the Potential Method of Amortized Analysis, what potential function $\Phi(D_i)$ proves that the amortized cost of an insertion is $O(1)$? (Let $size_i$ be the number of elements and $cap_i$ be the capacity at step $i$).
+- A) $\Phi(D_i) = cap_i - size_i$
+- B) $\Phi(D_i) = 2 \cdot size_i - cap_i$
+- C) $\Phi(D_i) = size_i^2$
+- D) $\Phi(D_i) = cap_i / 2$
+- **Answer: ✅ B**
+- **Explanation**: Let's check the potential function $\Phi(D_i) = 2 \cdot size_i - cap_i$:
+  - Immediately after a resize, the capacity is doubled, so $cap = 2 \cdot size \implies \Phi = 2 \cdot size - 2 \cdot size = 0$.
+  - When the array is completely full (just before resizing), $size = cap \implies \Phi = 2 \cdot size - size = size$.
+  Let's calculate the amortized cost $a_i = c_i + \Phi(D_i) - \Phi(D_{i-1})$:
+  1. **Case 1: Insertion without resizing** (actual cost $c_i = 1$):
+     - $size_i = size_{i-1} + 1$, and $cap_i = cap_{i-1}$.
+     - $\Delta \Phi = (2 \cdot size_i - cap_i) - (2 \cdot size_{i-1} - cap_{i-1}) = 2(size_i - size_{i-1}) = 2$.
+     - Amortized cost: $a_i = c_i + \Delta \Phi = 1 + 2 = 3$.
+  2. **Case 2: Insertion triggers resize** (actual cost $c_i = size_{i-1} + 1$, where copying takes $size_{i-1}$ steps):
+     - $size_i = size_{i-1} + 1$.
+     - $cap_i = 2 \cdot cap_{i-1} = 2 \cdot size_{i-1}$.
+     - $\Phi(D_{i-1}) = 2 \cdot size_{i-1} - cap_{i-1} = size_{i-1}$ (since capacity was full).
+     - $\Phi(D_i) = 2 \cdot size_i - cap_i = 2(size_{i-1} + 1) - 2 \cdot size_{i-1} = 2$.
+     - $\Delta \Phi = \Phi(D_i) - \Phi(D_{i-1}) = 2 - size_{i-1}$.
+     - Amortized cost: $a_i = c_i + \Delta \Phi = (size_{i-1} + 1) + (2 - size_{i-1}) = 3$.
+  In both cases, the amortized cost is a constant ($3$), which proves that insertion runs in amortized $O(1)$ time.
+
+#### Q130. Suppose there is a decision problem $X$. To prove that $X$ is NP-Complete, which two steps are mathematically required?
+- A) Show that $X$ is in P, and reduce $X$ to a known NP-Complete problem in polynomial time
+- B) Show that $X$ is in NP, and reduce $X$ to a known NP-Hard problem in polynomial time
+- C) Show that $X$ is in NP, and reduce a known NP-Complete problem to $X$ in polynomial time
+- D) Show that $X$ is in NP-Hard, and show that $X$ is in P
+- **Answer: ✅ C**
+- **Explanation**: By definition, a problem $X$ is NP-Complete if:
+  1. It is in the class NP ($X \in \text{NP}$), meaning a candidate solution can be verified in polynomial time.
+  2. It is NP-Hard, meaning it is at least as hard as any problem in NP. To prove this, we select a known NP-Complete problem $Y$ and show that $Y \le_P X$ (reduce $Y$ to $X$ in polynomial time). This proves that if we could solve $X$ in polynomial time, we could solve $Y$ (and by extension, any NP problem) in polynomial time.
+  Option A is incorrect because reducing $X \le_P Y$ only proves $X$ is no harder than $Y$, not that $X$ is NP-Hard.
+
