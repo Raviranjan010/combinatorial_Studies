@@ -16,6 +16,15 @@ Let a relation $R$ have $n$ attributes: $A_1, A_2, \dots, A_n$.
     $$\text{Super Keys} = \text{Super Keys from } K_1 + \text{Super Keys from } K_2 - \text{Super Keys from } (K_1 \cup K_2)$$
     $$\text{Super Keys} = 2^{n-|K_1|} + 2^{n-|K_2|} - 2^{n-|K_1 \cup K_2|}$$
 
+### Core Database Formulas
+*   **Degree**: Number of attributes (columns) in a relation: $\text{Degree} = |Attributes|$.
+*   **Cardinality**: Number of tuples (rows) currently in a relation: $\text{Cardinality} = |Tuples|$.
+*   **Cross Join Cardinality**: Total rows in a Cartesian Product: $\text{Rows}(R \times S) = |R| \times |S|$.
+*   **Selectivity**: Measures uniqueness of values in a column:
+    $$\text{Selectivity} = \frac{\text{Number of Unique Values}}{\text{Total Records}}$$
+*   **Disk Access Time**: Total mechanical delay in mechanical drives:
+    $$\text{Access Time} = \text{Seek Time} + \text{Rotational Latency} + \text{Transfer Time}$$
+
 ### ACID Property Subsystem Mapping
 *   **A**tomicity $\to$ Managed by the **Recovery Manager** (Undo Logs).
 *   **C**onsistency $\to$ Managed by the **Compiler & Runtime Constraints** (Integrity constraints).

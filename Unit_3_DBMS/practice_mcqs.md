@@ -1,1016 +1,1091 @@
-# Unit III: DBMS - MCQ Bank
+# Unit III: DBMS - Graded MCQ Bank
 
-Master database systems, SQL commands, normalization math, and transactions with these 105 solved, high-probability Multiple Choice Questions.
+This practice bank contains 130 high-probability Multiple Choice Questions (MCQs) graded by difficulty: **30 Easy**, **50 Medium**, and **50 Hard** questions. Use this bank to test your knowledge of SQL, normalization, index structures, transactions, recovery, and NoSQL systems.
 
 ---
 
-## 🔷 Topic 1: DBMS Architecture & Keys
+## 🟢 Part 1: Easy Level MCQs (1–30)
 
-#### Q1. Which layer of the Three-Schema architecture defines the physical file organization, data paths, and index storage?
-- A) Conceptual Level
-- B) External Level
-- C) Internal Level
-- D) Logical Level
+#### Q1. DBMS stands for:
+- A) Data Backup Management System
+- B) Database Management System
+- C) Data Management Server
+- D) Database Memory System
+- **Answer: ✅ B**
+- **Explanation**: A Database Management System (DBMS) is software designed to store, retrieve, update, and manage database records.
+
+#### Q2. A row in a table is called:
+- A) Attribute
+- B) Field
+- C) Tuple
+- D) Domain
 - **Answer: ✅ C**
-- **Explanation**: The internal (physical) level describes how the data is stored in memory and on disk.
+- **Explanation**: In relational database theory (Codd's rules), a table row is formally called a **tuple**.
 
-#### Q2. The ability to modify the conceptual schema without having to rewrite user applications or external views is called:
-- A) Physical Data Independence
-- B) Logical Data Independence
-- C) Database Redundancy
-- D) Multi-user Concurrency
-- **Answer: ✅ B**
-- **Explanation**: Logical data independence isolates the external views from conceptual changes. Physical data independence isolates conceptual schemas from physical storage modifications.
+#### Q3. A column in a table is called:
+- A) Attribute
+- B) Relation
+- C) Tuple
+- D) Schema
+- **Answer: ✅ A**
+- **Explanation**: A column represents a field of the record, formally referred to as an **attribute**.
 
-#### Q3. In a table named `Employees` with 5 columns and 100 rows, what is the degree and cardinality of the relation?
-- A) Degree = 100, Cardinality = 5
-- B) Degree = 5, Cardinality = 100
-- C) Degree = 5, Cardinality = 5
-- D) Degree = 100, Cardinality = 100
-- **Answer: ✅ B**
-- **Explanation**: Degree is the number of attributes (columns), which is 5. Cardinality is the number of tuples (rows), which is 100.
+#### Q4. SQL stands for:
+- A) Structured Query Language
+- B) Sequential Query Language
+- C) System Query Language
+- D) Server Query Language
+- **Answer: ✅ A**
+- **Explanation**: SQL (Structured Query Language) is the standard language used to interact with Relational Database Management Systems.
 
-#### Q4. A minimal super key is formally defined as:
-- A) Primary Key
-- B) Foreign Key
-- C) Candidate Key
+#### Q5. Which command retrieves data?
+- A) INSERT
+- B) UPDATE
+- C) DELETE
+- D) SELECT
+- **Answer: ✅ D**
+- **Explanation**: The `SELECT` command is a Data Query Language (DQL) command used to retrieve records from database tables.
+
+#### Q6. Which key uniquely identifies a record?
+- A) Foreign Key
+- B) Composite Key
+- C) Primary Key
 - D) Alternate Key
 - **Answer: ✅ C**
-- **Explanation**: A candidate key is a super key that has no proper subsets that are also super keys. It is the minimal set of attributes needed to uniquely identify a row.
+- **Explanation**: A **Primary Key** uniquely identifies each row in a table and cannot contain `NULL` values.
 
-#### Q5. Which of the following is true regarding Primary Keys and Foreign Keys?
-- A) Primary keys can be null, but foreign keys cannot
-- B) A table can have multiple primary keys but only one foreign key
-- C) Primary keys cannot contain null values, whereas foreign keys can contain null values
-- D) Foreign keys must reference the primary key of the same table
-- **Answer: ✅ C**
-- **Explanation**: Primary keys enforce entity integrity and cannot be null. Foreign keys enforce referential integrity and can contain null values unless explicitly declared `NOT NULL`.
-
-#### Q6. A relation has 4 attributes: $A, B, C, D$. The only candidate key is $A$. How many possible super keys exist?
-- A) 4
-- B) 8
-- C) 16
-- D) 2
+#### Q7. Which SQL clause filters rows?
+- A) GROUP BY
+- B) WHERE
+- C) ORDER BY
+- D) HAVING
 - **Answer: ✅ B**
-- **Explanation**: Since $A$ is the candidate key, any set of attributes containing $A$ is a super key. The remaining attributes are $B, C, D$ (3 attributes). The number of combinations is $2^3 = 8$.
+- **Explanation**: The `WHERE` clause is used to filter records before any groupings are made.
 
----
-
-## 🔷 Topic 2: SQL Commands & Joins
-
-#### Q7. Which SQL command belongs to the Data Definition Language (DDL)?
-- A) `UPDATE`
-- B) `GRANT`
-- C) `TRUNCATE`
-- D) `COMMIT`
-- **Answer: ✅ C**
-- **Explanation**: `TRUNCATE` defines/resets storage structures, making it DDL. `UPDATE` is DML, `GRANT` is DCL, and `COMMIT` is TCL.
-
-#### Q8. The difference between `DELETE` and `TRUNCATE` is:
-- A) `DELETE` removes the table structure, while `TRUNCATE` only removes rows
-- B) `TRUNCATE` is a DML command and can be rolled back
-- C) `DELETE` removes rows one-by-one and is logged, whereas `TRUNCATE` deallocates data pages and is faster
-- D) `DELETE` cannot use a `WHERE` clause
-- **Answer: ✅ C**
-- **Explanation**: `DELETE` is a logged, row-by-row DML command. `TRUNCATE` is a DDL command that clears all rows in bulk by deallocating data pages, bypassing individual row logging.
-
-#### Q9. Which clause is used to filter records after they have been grouped by an aggregate function?
-- A) `WHERE`
-- B) `HAVING`
-- C) `ORDER BY`
-- D) `SELECT`
-- **Answer: ✅ B**
-- **Explanation**: `WHERE` filters rows before grouping. `HAVING` filters group values computed by aggregate functions.
-
-#### Q10. Consider the query:
-`SELECT dept_name, ID, avg(salary) FROM instructor GROUP BY dept_name;`
-Why does this query return an error in SQL?
-- A) Average salary cannot be calculated
-- B) The column `ID` is selected but not included in the `GROUP BY` clause or an aggregate function
-- C) `dept_name` cannot be grouped
-- D) The `FROM` clause is invalid
-- **Answer: ✅ B**
-- **Explanation**: Any column present in the `SELECT` list must either be part of an aggregate function (e.g., `avg(salary)`) or appear in the `GROUP BY` clause. Since `ID` is neither, the database engine cannot determine how to display it.
-
-#### Q11. Which type of join returns all records from the left table and the matching records from the right table, filling unmatched right fields with `NULL`?
-- A) Inner Join
-- B) Full Outer Join
-- C) Left Outer Join
-- D) Cross Join
-- **Answer: ✅ C**
-- **Explanation**: A `LEFT OUTER JOIN` returns all records from the left table plus matching right-table records. Unmatched right-side fields return `NULL`.
-
----
-
-## 🔷 Topic 3: Database Normalization
-
-#### Q12. A relation is in First Normal Form (1NF) if:
-- A) It has no composite keys
-- B) All non-key columns depend on the primary key
-- C) All attribute values are atomic
-- D) It has no transitive dependencies
-- **Answer: ✅ C**
-- **Explanation**: 1NF requires that domains contain only atomic (indivisible) values, and no table column contains multi-valued attributes or repeating groups.
-
-#### Q13. Partial dependency in a relation occurs when:
-- A) A non-key attribute depends on another non-key attribute
-- B) A non-key attribute depends on only a part of a composite primary key
-- C) The primary key depends on a foreign key
-- D) The relation is in 3NF
-- **Answer: ✅ B**
-- **Explanation**: Partial dependencies occur when a non-prime attribute is functionally dependent on a subset of a candidate key. This is resolved by converting the relation to 2NF.
-
-#### Q14. Transitive dependency ($A \to B \to C$) is eliminated in which normal form?
-- A) 2NF
-- B) 3NF
-- C) BCNF
-- D) 4NF
-- **Answer: ✅ B**
-- **Explanation**: 3NF eliminates transitive dependencies (where a non-prime attribute determines another non-prime attribute).
-
-#### Q15. A relation $R(A, B, C)$ has functional dependencies $AB \to C$ and $C \to A$. The candidate keys are $\{A, B\}$ and $\{B, C\}$. In which normal form is $R$?
+#### Q8. Which normal form removes repeating groups?
 - A) 1NF
 - B) 2NF
 - C) 3NF
 - D) BCNF
-- **Answer: ✅ C**
-- **Explanation**: 
-  - For $AB \to C$: $AB$ is a super key. (Valid for BCNF and 3NF).
-  - For $C \to A$: $C$ is not a super key, but $A$ is a prime attribute (part of candidate key $\{A, B\}$).
-  - Since $C \to A$ does not have a super key on the left, it violates BCNF. However, because the right side ($A$) is prime, it satisfies the 3NF condition. Thus, the relation is in 3NF.
+- **Answer: ✅ A**
+- **Explanation**: First Normal Form (1NF) requires that all attribute values be atomic (no multi-valued cells or repeating groups).
 
-#### Q16. Which normal form does NOT guarantee dependency preservation?
-- A) 2NF
-- B) 3NF
-- C) BCNF
-- D) 1NF
+#### Q9. ACID property "A" stands for:
+- A) Accuracy
+- B) Atomicity
+- C) Access
+- D) Availability
+- **Answer: ✅ B**
+- **Explanation**: Atomicity ensures that all operations in a transaction execute successfully, or none do (All-or-Nothing).
+
+#### Q10. MongoDB is a:
+- A) Relational DB
+- B) Document DB
+- C) Graph DB
+- D) Key DB
+- **Answer: ✅ B**
+- **Explanation**: MongoDB is a popular NoSQL database that stores data in flexible, JSON-like BSON documents.
+
+#### Q11. Which command is used to add data into a table?
+- A) SELECT
+- B) INSERT
+- C) CREATE
+- D) ALTER
+- **Answer: ✅ B**
+- **Explanation**: The `INSERT` command is a DML command used to append new rows/records to a table.
+
+#### Q12. Which SQL command is used to remove all records but keep the table structure?
+- A) DROP
+- B) DELETE
+- C) TRUNCATE
+- D) REMOVE
 - **Answer: ✅ C**
-- **Explanation**: While BCNF is stricter and resolves redundancy anomalies better than 3NF, decomposing a relation into BCNF can sometimes prevent functional dependencies from being preserved.
+- **Explanation**: `TRUNCATE` is a DDL command that clears all records by deallocating data pages. It is faster than `DELETE` and cannot be filtered with `WHERE`.
+
+#### Q13. Which key creates a relationship between tables?
+- A) Primary Key
+- B) Alternate Key
+- C) Foreign Key
+- D) Candidate Key
+- **Answer: ✅ C**
+- **Explanation**: A **Foreign Key** in a table points to the primary key of another table, establishing a referential link between them.
+
+#### Q14. How many primary keys can a table have?
+- A) Many
+- B) Two
+- C) One
+- D) Zero
+- **Answer: ✅ C**
+- **Explanation**: A table can have **only one** primary key to uniquely identify records, although that primary key can be composite (contain multiple columns).
+
+#### Q15. Which SQL clause is used for sorting?
+- A) HAVING
+- B) ORDER BY
+- C) GROUP BY
+- D) WHERE
+- **Answer: ✅ B**
+- **Explanation**: The `ORDER BY` clause sorts query results in ascending (`ASC`) or descending (`DESC`) order.
+
+#### Q16. Which aggregate function counts rows?
+- A) SUM()
+- B) AVG()
+- C) COUNT()
+- D) MAX()
+- **Answer: ✅ C**
+- **Explanation**: The `COUNT()` function returns the number of rows that match specified criteria.
+
+#### Q17. Which aggregate function returns the highest value?
+- A) MAX()
+- B) MIN()
+- C) AVG()
+- D) COUNT()
+- **Answer: ✅ A**
+- **Explanation**: The `MAX()` function returns the maximum value in a set of values.
+
+#### Q18. A table is also called:
+- A) Tuple
+- B) Relation
+- C) Domain
+- D) Attribute
+- **Answer: ✅ B**
+- **Explanation**: In relational algebra, a table is formally referred to as a **relation**.
+
+#### Q19. Number of columns in a table is called:
+- A) Cardinality
+- B) Degree
+- C) Relation
+- D) Schema
+- **Answer: ✅ B**
+- **Explanation**: The number of columns/attributes in a table represents its **Degree**.
+
+#### Q20. Number of rows in a table is called:
+- A) Degree
+- B) Domain
+- C) Cardinality
+- D) Relation
+- **Answer: ✅ C**
+- **Explanation**: The total number of rows/records currently stored in a table is its **Cardinality**.
+
+#### Q21. Which join returns matching records only?
+- A) LEFT JOIN
+- B) RIGHT JOIN
+- C) FULL JOIN
+- D) INNER JOIN
+- **Answer: ✅ D**
+- **Explanation**: An `INNER JOIN` returns rows from both tables only when there is a matching key match in both tables.
+
+#### Q22. Which SQL statement creates a table?
+- A) INSERT
+- B) CREATE
+- C) UPDATE
+- D) SELECT
+- **Answer: ✅ B**
+- **Explanation**: The DDL command `CREATE TABLE` is used to establish a new table structure.
+
+#### Q23. Which language category contains the CREATE command?
+- A) DML
+- B) DCL
+- C) DDL
+- D) TCL
+- **Answer: ✅ C**
+- **Explanation**: `CREATE` is a Data Definition Language (DDL) command because it defines/modifies the database schema.
+
+#### Q24. Which language category contains the INSERT command?
+- A) DML
+- B) DDL
+- C) TCL
+- D) DCL
+- **Answer: ✅ A**
+- **Explanation**: `INSERT` modifies row values, categorizing it as a Data Manipulation Language (DML) command.
+
+#### Q25. Which property ensures committed data remains permanent?
+- A) Consistency
+- B) Isolation
+- C) Durability
+- D) Atomicity
+- **Answer: ✅ C**
+- **Explanation**: Durability guarantees that committed transaction changes are written to non-volatile storage and survive power failures or crashes.
+
+#### Q26. Redis is a:
+- A) Graph Database
+- B) Key-Value Database
+- C) Relational Database
+- D) Object Database
+- **Answer: ✅ B**
+- **Explanation**: Redis is an in-memory, open-source Key-Value store commonly used as a database, cache, and message broker.
+
+#### Q27. Which normal form removes transitive dependency?
+- A) 1NF
+- B) 2NF
+- C) 3NF
+- D) 4NF
+- **Answer: ✅ C**
+- **Explanation**: Third Normal Form (3NF) removes transitive functional dependencies (where a non-key attribute determines another non-key attribute).
+
+#### Q28. Which command permanently saves transaction changes?
+- A) ROLLBACK
+- B) COMMIT
+- C) SAVEPOINT
+- D) GRANT
+- **Answer: ✅ B**
+- **Explanation**: The `COMMIT` command signals the successful completion of a transaction and persists all changes to disk.
+
+#### Q29. Which command undoes uncommitted changes?
+- A) COMMIT
+- B) DELETE
+- C) ROLLBACK
+- D) DROP
+- **Answer: ✅ C**
+- **Explanation**: The `ROLLBACK` command reverts the database state back to the start of the transaction or to a defined savepoint.
+
+#### Q30. Which database type is best suited for relationship networks?
+- A) Document DB
+- B) Key-Value DB
+- C) Graph DB
+- D) Relational DB
+- **Answer: ✅ C**
+- **Explanation**: Graph databases (like Neo4j) store entities as nodes and relationships as edges, making them highly optimized for traversing complex networks.
 
 ---
 
-## 🔷 Topic 4: Transaction & Concurrency Control
+## 🟡 Part 2: Medium Level MCQs (1–50)
 
-#### Q17. The ACID property that ensures a transaction is processed in its entirety or not at all (All-or-Nothing) is:
+#### Q1. Which key is selected from candidate keys to uniquely identify records?
+- A) Foreign Key
+- B) Composite Key
+- C) Primary Key
+- D) Alternate Key
+- **Answer: ✅ C**
+- **Explanation**: A primary key is the candidate key officially chosen by the database architect to uniquely identify table rows.
+
+#### Q2. A candidate key not chosen as primary key is called:
+- A) Composite Key
+- B) Alternate Key
+- C) Foreign Key
+- D) Super Key
+- **Answer: ✅ B**
+- **Explanation**: Alternate keys are candidate keys that were not selected to serve as the primary key.
+
+#### Q3. Which join returns all records from the left table and matching records from the right table?
+- A) INNER JOIN
+- B) RIGHT JOIN
+- C) LEFT JOIN
+- D) FULL JOIN
+- **Answer: ✅ C**
+- **Explanation**: A `LEFT JOIN` (or LEFT OUTER JOIN) returns all records from the left table, filling unmatched right columns with `NULL`.
+
+#### Q4. Which SQL clause is used with aggregate functions?
+- A) WHERE
+- B) GROUP BY
+- C) ORDER BY
+- D) ALTER
+- **Answer: ✅ B**
+- **Explanation**: The `GROUP BY` clause divides table rows into groups to perform computations (like count, sum, average) on each group.
+
+#### Q5. Which SQL clause filters grouped records?
+- A) WHERE
+- B) HAVING
+- C) ORDER BY
+- D) DISTINCT
+- **Answer: ✅ B**
+- **Explanation**: `HAVING` filters group records computed by aggregate functions. `WHERE` filters individual rows *before* grouping occurs.
+
+#### Q6. Which command modifies table structure?
+- A) UPDATE
+- B) ALTER
+- C) INSERT
+- D) SELECT
+- **Answer: ✅ B**
+- **Explanation**: The `ALTER` (e.g., `ALTER TABLE`) command is a DDL command used to add, modify, or drop columns in a table.
+
+#### Q7. Which of the following is not an aggregate function?
+- A) AVG()
+- B) COUNT()
+- C) MAX()
+- D) DISTINCT
+- **Answer: ✅ D**
+- **Explanation**: `DISTINCT` is a keyword used to filter out duplicate rows. `AVG`, `COUNT`, and `MAX` are aggregate mathematical functions.
+
+#### Q8. A super key may contain:
+- A) Only one attribute
+- B) Extra attributes beyond uniqueness
+- C) No attribute
+- D) Foreign key only
+- **Answer: ✅ B**
+- **Explanation**: A super key is any set of attributes that uniquely identifies a row. It can contain extra attributes that are not strictly necessary for uniqueness.
+
+#### Q9. Which normal form removes partial dependency?
+- A) 1NF
+- B) 2NF
+- C) 3NF
+- D) BCNF
+- **Answer: ✅ B**
+- **Explanation**: Second Normal Form (2NF) requires a relation to be in 1NF and have no partial dependencies (no non-key attribute can depend on a subset of a composite primary key).
+
+#### Q10. BCNF is stricter than:
+- A) 1NF
+- B) 2NF
+- C) 3NF
+- D) 4NF
+- **Answer: ✅ C**
+- **Explanation**: BCNF (Boyce-Codd Normal Form) is a stricter version of 3NF. It eliminates the 3NF exception that allows the right-hand side of an FD to be a prime attribute.
+
+#### Q11. Which transaction state comes immediately after the Active state?
+- A) Aborted
+- B) Failed
+- C) Partially Committed
+- D) Committed
+- **Answer: ✅ C**
+- **Explanation**: After executing the last statement, a transaction enters the "Partially Committed" state, where changes are written to memory buffers but not yet committed to non-volatile disk.
+
+#### Q12. Which ACID property prevents interference among transactions?
 - A) Consistency
 - B) Isolation
 - C) Atomicity
 - D) Durability
+- **Answer: ✅ B**
+- **Explanation**: Isolation guarantees that concurrent transaction executions run independently without viewing intermediate uncommitted data.
+
+#### Q13. Which concurrency problem occurs when uncommitted data is read?
+- A) Lost Update
+- B) Phantom Read
+- C) Dirty Read
+- D) Deadlock
 - **Answer: ✅ C**
-- **Explanation**: Atomicity guarantees that if any part of a transaction fails, the entire transaction is rolled back.
+- **Explanation**: A dirty read (Write-Read conflict) occurs when transaction $T_1$ reads data written by $T_2$ that has not yet committed. If $T_2$ aborts, $T_1$ has read invalid data.
 
-#### Q18. Which database component is responsible for enforcing the Isolation property?
-- A) Recovery Manager
-- B) Concurrency Control Manager
-- C) Buffer Manager
-- D) File Manager
+#### Q14. Deadlock occurs when:
+- A) Database crashes
+- B) Transactions wait indefinitely for each other
+- C) Table is deleted
+- D) Index is corrupted
 - **Answer: ✅ B**
-- **Explanation**: The Concurrency Control Manager uses locking, timestamping, or validation to ensure concurrent transactions execute in isolation without interfering with one another.
+- **Explanation**: Deadlock is a state where two or more transactions are blocked waiting for locks held by each other, forming a dependency cycle.
 
-#### Q19. A transaction has completed its final programming statement but its changes are only saved in RAM buffers and not yet committed to disk. What state is this transaction in?
-- A) Active
-- B) Committed
-- C) Partially Committed
-- D) Failed
+#### Q15. The result of a CROSS JOIN is:
+- A) Matching rows only
+- B) Cartesian Product
+- C) Union
+- D) Intersection
+- **Answer: ✅ B**
+- **Explanation**: A `CROSS JOIN` pairs every row from the first table with every row from the second table, representing the Cartesian Product.
+
+#### Q16. If table A has 5 rows and table B has 4 rows, a CROSS JOIN returns:
+- A) 5
+- B) 9
+- C) 20
+- D) 25
 - **Answer: ✅ C**
-- **Explanation**: The transaction enters the "Partially Committed" state after executing its last write statement. It transition to "Committed" only after the log records are written to non-volatile disk.
+- **Explanation**: Cartesian product row count $= |A| \times |B| = 5 \times 4 = 20$.
 
-#### Q20. If a precedence graph built from a concurrent schedule contains a cycle, what does this indicate?
-- A) The schedule has a deadlock
-- B) The schedule is not conflict-serializable
-- C) The schedule is view-serializable
-- D) The transaction will commit successfully
+#### Q17. An index primarily improves:
+- A) Storage Space
+- B) Query Performance
+- C) Security
+- D) Backup
 - **Answer: ✅ B**
-- **Explanation**: A precedence graph (serialization graph) has a cycle if and only if the schedule is not conflict-serializable.
+- **Explanation**: Indexes trade storage space and write performance to dramatically speed up data retrieval querying times.
 
-#### Q21. The Two-Phase Locking (2PL) protocol ensures:
-- A) Deadlock-free transactions
-- B) Conflict-serializable schedules
-- C) Durability
-- D) High database performance
-- **Answer: ✅ B**
-- **Explanation**: 2PL guarantees that any execution schedule is conflict-serializable. However, it does not prevent deadlocks.
-
-#### Q22. In Two-Phase Locking (2PL), a transaction can acquire locks but cannot release any during the:
-- A) Shrinking Phase
-- B) Growing Phase
-- C) Commit Phase
-- D) Active Phase
-- **Answer: ✅ B**
-- **Explanation**: In the Growing Phase, a transaction may obtain locks but is forbidden from releasing any. In the Shrinking Phase, locks can only be released.
-
----
-
-## 🔷 Topic 5: NoSQL & Big Data
-
-#### Q23. What does the term NoSQL stand for?
-- A) No Structured Query Language
-- B) Not Only SQL
-- C) Network Object SQL
-- D) Non-relational SQL
-- **Answer: ✅ B**
-- **Explanation**: NoSQL stands for "Not Only SQL," highlighting databases that extend beyond traditional relational models.
-
-#### Q24. Which of the following is a Document-based NoSQL database?
-- A) Redis
-- B) MongoDB
-- C) Neo4j
-- D) Cassandra
-- **Answer: ✅ B**
-- **Explanation**: MongoDB stores data as JSON-like documents. Redis is Key-Value, Neo4j is Graph, and Cassandra is Column-Family.
-
-#### Q25. According to the CAP Theorem, a distributed database system can guarantee at most which properties concurrently?
-- A) Consistency and Availability only
-- B) Consistency, Availability, and Partition Tolerance
-- C) Any two of: Consistency, Availability, and Partition Tolerance
-- D) Partition Tolerance only
-- **Answer: ✅ C**
-- **Explanation**: The CAP theorem states that a distributed system can guarantee at most two of the three properties: Consistency, Availability, and Partition Tolerance.
-
-#### Q26. NoSQL databases prioritize which set of properties over traditional ACID?
-- A) BASE (Basically Available, Soft State, Eventual Consistency)
-- B) SOAP
-- C) RAID
-- D) FIFO
-- **Answer: ✅ A**
-- **Explanation**: NoSQL databases trade strict ACID consistency for BASE (Basically Available, Soft State, Eventual Consistency) to scale horizontally.
-
----
-
-## 🔷 Topic 6: General Database Review
-
-#### Q27. What is metadata?
-- A) Large aggregated data arrays
-- B) Data describing other data (logical schema, table descriptions, etc.)
-- C) Backed up database files
-- D) Private encryption keys
-- **Answer: ✅ B**
-- **Explanation**: Metadata is data that describes database structure (e.g., table schemas, column types, stored in the data dictionary).
-
-#### Q28. Which index structure is best optimized for handling SQL range queries (e.g., `WHERE age BETWEEN 20 AND 30`)?
-- A) Hash Index
-- B) B+ Tree Index
-- C) Bitmap Index
+#### Q18. Which index determines the physical order of data?
+- A) Secondary Index
+- B) Clustered Index
+- C) Hash Index
 - D) Dense Index
 - **Answer: ✅ B**
-- **Explanation**: B+ Trees keep all actual data pointers in leaf nodes linked sequentially, making range traversals extremely fast. Hash indexes are optimized for exact match lookups (`=`) but slow for range scans.
+- **Explanation**: A clustered index sorts and stores data rows physically on disk according to the index key columns.
 
-#### Q29. How many clustered indexes can be created on a single table?
-- A) 1
-- B) Unlimited
-- C) 5
-- D) None
-- **Answer: ✅ A**
-- **Explanation**: A clustered index determines the physical order of data rows on disk. Since data can only be sorted one way, a table can have only one clustered index.
-
-#### Q30. Relational Algebra is a __________ query language, whereas SQL is a __________ query language.
-- A) Declarative, Procedural
-- B) Procedural, Declarative
-- C) Compiler, Interpreter
-- D) Logical, Physical
-- **Answer: ✅ B**
-- **Explanation**: Relational Algebra is procedural (defines the step-by-step operations to fetch data). SQL is declarative (defines *what* data to retrieve, leaving the execution steps to the query optimizer).
-
-#### Q31. In SQL, the default constraint that ensures a foreign key references a valid primary key is:
-- A) Domain Integrity
-- B) Referential Integrity
-- C) Entity Integrity
-- D) User-defined Integrity
-- **Answer: ✅ B**
-- **Explanation**: Referential integrity prevents orphan rows by ensuring child foreign keys point to valid parent primary keys.
-
-#### Q32. What is the Cartesian Product ($\times$) of a relation $R$ with 3 rows and a relation $S$ with 4 rows?
-- A) 7 rows
-- B) 12 rows
-- C) 1 row
-- D) 0 rows
-- **Answer: ✅ B**
-- **Explanation**: The Cartesian product generates all possible row pairings: $\text{Rows} = |R| \times |S| = 3 \times 4 = 12$.
-
-#### Q33. Which SQL command rollback transaction checkpoints?
-- A) `COMMIT`
-- B) `ROLLBACK`
-- C) `SAVEPOINT`
-- D) `REVOKE`
-- **Answer: ✅ B**
-- **Explanation**: `ROLLBACK` reverts modifications made by a transaction, either to the start or to a defined `SAVEPOINT`.
-
-#### Q34. What is the oldest database model?
-- A) Relational Model
-- B) Network Model
-- C) Hierarchical Model
-- D) Object-Oriented Model
+#### Q19. Which SQL command removes both table structure and data?
+- A) DELETE
+- B) TRUNCATE
+- C) DROP
+- D) UPDATE
 - **Answer: ✅ C**
-- **Explanation**: The Hierarchical model (organizing data in tree-like parent-child parent structures) is the oldest database model.
+- **Explanation**: The `DROP TABLE` command completely deletes the table data, indexes, and schema from the database catalog.
 
-#### Q35. A lossy join decomposition is one where:
-- A) Data is deleted during normalization
-- B) Joining decomposed tables yields extra spurious tuples that were not in the original relation
-- C) The primary key is deleted
-- D) Columns are renamed
+#### Q20. Which SQL statement grants user permissions?
+- A) REVOKE
+- B) GRANT
+- C) COMMIT
+- D) SAVEPOINT
 - **Answer: ✅ B**
-- **Explanation**: "Lossy" does not mean data loss. It means information is lost because joining the decomposed relations creates extra spurious tuples, corrupting the original data structure.
+- **Explanation**: `GRANT` is a DCL command used to assign security privileges and access permissions to database users.
 
-#### Q36. In DBMS, the buffer manager acts to:
-- A) Parse incoming SQL text
-- B) Cache pages read from disk in main memory to speed up access times
-- C) Lock transactions
-- D) Format tables
+#### Q21. Which NoSQL database is column-family based?
+- A) MongoDB
+- B) Redis
+- C) Cassandra
+- D) Neo4j
+- **Answer: ✅ C**
+- **Explanation**: Apache Cassandra is a highly scalable, distributed Column-Family (Wide-Column) store.
+
+#### Q22. Which NoSQL database stores JSON-like documents?
+- A) Redis
+- B) Neo4j
+- C) MongoDB
+- D) HBase
+- **Answer: ✅ C**
+- **Explanation**: MongoDB is a document store that saves data in BSON format, which is binary JSON.
+
+#### Q23. Replication mainly improves:
+- A) Query Syntax
+- B) Availability
+- C) Degree
+- D) Cardinality
 - **Answer: ✅ B**
-- **Explanation**: The buffer manager manages cache memory, fetching database pages into RAM and choosing which ones to swap out when RAM is full.
+- **Explanation**: By maintaining copies of data across multiple physical servers, replication ensures that the system remains available even if a node crashes.
 
-#### Q37. In functional dependency notation, if $X \to Y$ and $Y \to Z$, then $X \to Z$ is derived using:
+#### Q24. Horizontal partitioning of data is called:
+- A) Replication
+- B) Clustering
+- C) Sharding
+- D) Fragmentation
+- **Answer: ✅ C**
+- **Explanation**: Sharding partitions a table horizontally, storing subsets of rows across separate database servers to scale load.
+
+#### Q25. Which Big Data characteristic refers to the speed of data generation?
+- A) Variety
+- B) Value
+- C) Volume
+- D) Velocity
+- **Answer: ✅ D**
+- **Explanation**: Velocity is the speed at which new data is generated, collected, and processed.
+
+#### Q26. Which SQL function returns the average value?
+- A) COUNT()
+- B) SUM()
+- C) AVG()
+- D) MAX()
+- **Answer: ✅ C**
+- **Explanation**: The aggregate function `AVG()` returns the mathematical mean of numerical column values.
+
+#### Q27. Which clause removes duplicate rows from query results?
+- A) GROUP BY
+- B) DISTINCT
+- C) HAVING
+- D) UNIQUE
+- **Answer: ✅ B**
+- **Explanation**: Adding `DISTINCT` right after `SELECT` filters out duplicate rows from the final query result set.
+
+#### Q28. Which operator is used for pattern matching in SQL?
+- A) IN
+- B) BETWEEN
+- C) LIKE
+- D) EXISTS
+- **Answer: ✅ C**
+- **Explanation**: The `LIKE` operator is used inside the `WHERE` clause to perform string pattern matching using wildcards.
+
+#### Q29. Which wildcard represents multiple characters in SQL?
+- A) _
+- B) *
+- C) %
+- D) #
+- **Answer: ✅ C**
+- **Explanation**: In standard SQL, the percent sign (`%`) matches zero, one, or multiple characters.
+
+#### Q30. Which wildcard represents exactly one character?
+- A) %
+- B) _
+- C) *
+- D) ?
+- **Answer: ✅ B**
+- **Explanation**: The underscore (`_`) wildcard matches exactly one character in SQL pattern matching.
+
+#### Q31. Which command removes specific rows from a table?
+- A) DROP
+- B) DELETE
+- C) TRUNCATE
+- D) ALTER
+- **Answer: ✅ B**
+- **Explanation**: `DELETE` is a DML command that removes rows matching a specified `WHERE` condition.
+
+#### Q32. Which JOIN returns all records from both tables?
+- A) INNER JOIN
+- B) LEFT JOIN
+- C) RIGHT JOIN
+- D) FULL OUTER JOIN
+- **Answer: ✅ D**
+- **Explanation**: A `FULL OUTER JOIN` returns all records from both left and right tables, mapping unmatched columns to `NULL`.
+
+#### Q33. Which key can uniquely identify a row but is not necessarily selected as the primary key?
+- A) Candidate Key
+- B) Foreign Key
+- C) Composite Key
+- D) Surrogate Key
+- **Answer: ✅ A**
+- **Explanation**: A Candidate Key is any minimal super key that uniquely identifies records. One is selected as the Primary Key; the rest are Alternate Keys.
+
+#### Q34. A table with 8 columns and 200 rows has:
+- A) Degree = 200, Cardinality = 8
+- B) Degree = 8, Cardinality = 200
+- B) Degree = 8, Cardinality = 200
+- D) Degree = 8, Cardinality = 25
+- **Answer: ✅ B**
+- **Explanation**: Degree is columns (8), Cardinality is rows (200).
+
+#### Q35. Which dependency causes violation of 3NF?
+- A) Functional Dependency
+- B) Partial Dependency
+- C) Transitive Dependency
+- D) Multivalued Dependency
+- **Answer: ✅ C**
+- **Explanation**: Transitive dependencies (where non-key attribute $A \to B \to C$) are prohibited in 3NF.
+
+#### Q36. Which normal form ensures every determinant is a candidate key?
+- A) 2NF
+- B) 3NF
+- C) BCNF
+- D) 4NF
+- **Answer: ✅ C**
+- **Explanation**: A relation is in BCNF (Boyce-Codd Normal Form) if for every functional dependency $X \to Y$, the determinant $X$ is a super key.
+
+#### Q37. Which transaction state indicates successful completion?
+- A) Active
+- B) Failed
+- C) Aborted
+- D) Committed
+- **Answer: ✅ D**
+- **Explanation**: A transaction enters the "Committed" state after successfully saving all updates to non-volatile disk.
+
+#### Q38. Which command creates a point to which a transaction can roll back?
+- A) GRANT
+- B) SAVEPOINT
+- C) COMMIT
+- D) REVOKE
+- **Answer: ✅ B**
+- **Explanation**: `SAVEPOINT` creates sub-transaction markers that allow partial rollbacks.
+
+#### Q39. Which ACID property ensures all constraints remain valid?
+- A) Consistency
+- B) Isolation
+- C) Durability
+- D) Atomicity
+- **Answer: ✅ A**
+- **Explanation**: Consistency ensures database transactions transition the database from one valid state to another, maintaining all schema constraints.
+
+#### Q40. Which issue occurs when one transaction overwrites another transaction's update?
+- A) Dirty Read
+- B) Phantom Read
+- C) Lost Update
+- D) Deadlock
+- **Answer: ✅ C**
+- **Explanation**: A lost update occurs when transaction $T_2$ overwrites updates made by uncommitted transaction $T_1$ (Write-Write conflict).
+
+#### Q41. Which indexing technique stores an index entry for every search key value?
+- A) Sparse Index
+- B) Dense Index
+- C) Clustered Index
+- D) Composite Index
+- **Answer: ✅ B**
+- **Explanation**: A dense index maintains a index entry mapping for every record key value in the table file.
+
+#### Q42. Which indexing technique contains entries for only some search key values?
+- A) Dense Index
+- B) Sparse Index
+- C) Secondary Index
+- D) Unique Index
+- **Answer: ✅ B**
+- **Explanation**: A sparse index stores pointer mappings for only select keys (usually representing blocks/pages of data).
+
+#### Q43. Which NoSQL database is best suited for social network relationships?
+- A) MongoDB
+- B) Cassandra
+- C) Redis
+- D) Neo4j
+- **Answer: ✅ D**
+- **Explanation**: Graph databases like Neo4j use node-edge properties that are highly optimized for searching network paths.
+
+#### Q44. Which Big Data characteristic refers to different forms of data?
+- A) Velocity
+- B) Value
+- C) Variety
+- D) Veracity
+- **Answer: ✅ C**
+- **Explanation**: Variety represents the diverse formats of Big Data (structured, semi-structured, and unstructured data).
+
+#### Q45. Which Big Data characteristic refers to the trustworthiness of data?
+- A) Variety
+- B) Veracity
+- C) Volume
+- D) Velocity
+- **Answer: ✅ B**
+- **Explanation**: Veracity refers to the quality, cleanliness, and accuracy of data.
+
+#### Q46. Which architecture keeps one main database and several replica databases?
+- A) Sharding
+- B) Peer-to-Peer
+- C) Master-Slave Replication
+- D) Federation
+- **Answer: ✅ C**
+- **Explanation**: In Master-Slave replication, one master handles writes and distributes updates to slaves which handle reads.
+
+#### Q47. Query optimization mainly aims to:
+- A) Increase redundancy
+- B) Reduce execution cost
+- C) Increase storage
+- D) Increase normalization
+- **Answer: ✅ B**
+- **Explanation**: Optimization processes select query execution paths that minimize hardware cost (Disk I/O, CPU, RAM).
+
+#### Q48. Which SQL subquery returns TRUE if at least one row exists?
+- A) ALL
+- B) ANY
+- C) EXISTS
+- D) UNIQUE
+- **Answer: ✅ C**
+- **Explanation**: The `EXISTS` operator returns true if the nested subquery returns one or more matching rows.
+
+#### Q49. Which operation combines rows from two tables based on related columns?
+- A) UNION
+- B) JOIN
+- C) INTERSECT
+- D) DIFFERENCE
+- **Answer: ✅ B**
+- **Explanation**: A `JOIN` combines column fields from multiple tables using matching key values.
+
+#### Q50. Which SQL operator checks membership in a set?
+- A) LIKE
+- B) BETWEEN
+- C) IN
+- D) EXISTS
+- **Answer: ✅ C**
+- **Explanation**: The `IN` operator filters rows matching values listed in a specified set or returned by a subquery.
+
+---
+
+## 🔴 Part 3: Hard Level MCQs (1–50)
+
+#### Q1. A relation $R(A, B, C)$ has functional dependencies $A \to B$ and $B \to C$. Then $A \to C$ is derived using:
 - A) Reflexivity Rule
 - B) Augmentation Rule
 - C) Transitivity Rule
 - D) Decomposition Rule
 - **Answer: ✅ C**
-- **Explanation**: This is the Transitivity Rule, one of Armstrong's axioms.
+- **Explanation**: According to Armstrong's transitivity rule, if $A \to B$ and $B \to C$ hold, then $A \to C$ must hold.
 
-#### Q38. A composite key is:
-- A) A key containing encrypted columns
-- B) A primary or candidate key that consists of more than one attribute
-- C) A key that references multiple tables
-- D) An alternate key
-- **Answer: ✅ B**
-- **Explanation**: A composite key is a key made up of multiple columns.
-
-#### Q39. What is a transaction schedule?
-- A) A chronologically ordered sequence of operations from concurrent transactions
-- B) A list of daily backups
-- C) The priority queue of the CPU scheduler
-- D) The physical disk block layout
-- **Answer: ✅ A**
-- **Explanation**: A schedule represents the execution order of operations (reads, writes, commits, rollbacks) from concurrent transactions.
-
-#### Q40. Which lock type allows multiple transactions to read a database row simultaneously but prevents updates?
-- A) Exclusive Lock (X)
-- B) Shared Lock (S)
-- C) Intent Lock (I)
-- D) Binary Lock
-- **Answer: ✅ B**
-- **Explanation**: Shared locks (S) allow multiple read operations. Exclusive locks (X) grant write access to a single transaction, blocking all others.
-
-#### Q41. In database recovery, the Write-Ahead Logging (WAL) protocol states:
-- A) Writes to the database can happen before log entries are written
-- B) Log records representing a database modification must be written to disk before the actual database page is updated on disk
-- C) Logging is done only at transaction commit
-- D) Logs are written to RAM only
-- **Answer: ✅ B**
-- **Explanation**: WAL ensures that log entries are saved to non-volatile disk before dirty database pages are written. This guarantees the system can recover from crashes mid-write.
-
-#### Q42. The process of viewing a data cube across a single fixed attribute value is called:
-- A) Dicing
-- B) Pivoting
-- C) Slicing
-- D) Drill-down
-- **Answer: ✅ C**
-- **Explanation**: Slicing selects a single dimension from a data cube, producing a sub-cube.
-
-#### Q43. What does SQL stand for?
-- A) Standard Query Language
-- B) Sequential Query Language
-- C) Structured Query Language
-- D) System Query Language
-- **Answer: ✅ C**
-- **Explanation**: SQL stands for Structured Query Language.
-
-#### Q44. A table has functional dependencies $A \to B$ and $C \to D$. If we decompose it into $R_1(A, B)$ and $R_2(C, D)$, this decomposition is:
-- A) Dependency Preserving
-- B) Lossy
-- C) Invalid
-- D) Non-dependency preserving
-- **Answer: ✅ A**
-- **Explanation**: Since all original functional dependencies ($A \to B$ and $C \to D$) can be checked within their respective relations ($R_1$ and $R_2$), the decomposition is dependency preserving.
-
-#### Q45. Which normal form is adequate for most standard commercial database designs?
+#### Q2. Which normal form specifically removes transitive dependencies?
 - A) 1NF
-- B) 3NF
-- C) 5NF
+- B) 2NF
+- C) 3NF
+- D) BCNF
+- **Answer: ✅ C**
+- **Explanation**: 3NF prohibits transitive dependencies (where a non-prime attribute determines another non-prime attribute).
+
+#### Q3. A relation is in BCNF if:
+- A) Every non-key attribute depends on the primary key
+- B) Every determinant is a candidate key
+- C) No multivalued dependency exists
+- D) No partial dependency exists
+- **Answer: ✅ B**
+- **Explanation**: In BCNF, for every non-trivial functional dependency $X \to Y$, the left-side determinant $X$ must be a super key.
+
+#### Q4. For a relation $R(A, B, C, D)$ with FD: $(A, B) \to C$. Attribute $C$ depends on only $A$. This violates:
+- A) 1NF
+- B) 2NF
+- C) 3NF
 - D) BCNF
 - **Answer: ✅ B**
-- **Explanation**: 3NF is widely considered a balanced target for business databases because it eliminates most anomalies while guaranteeing dependency preservation.
+- **Explanation**: If $C$ depends on $A$ (a subset of composite key $\{A, B\}$), this represents a **partial dependency**, violating 2NF.
 
-#### Q46. What does a database catalog contain?
-- A) The raw table rows
-- B) Schema metadata and index mappings
-- C) Transaction logs
-- D) SQL execution scripts
+#### Q5. If a transaction has committed successfully, which operation cannot undo it?
+- A) SAVEPOINT
+- B) ROLLBACK
+- C) DELETE
+- D) UPDATE
 - **Answer: ✅ B**
-- **Explanation**: The catalog (data dictionary) stores metadata describing the database's schema, structure, tables, and views.
+- **Explanation**: A transaction's `COMMIT` is permanent (durable). You cannot run `ROLLBACK` to undo it; you can only execute new compensating transactions (`UPDATE` or `DELETE`).
 
-#### Q47. The commit command ensures which ACID property?
-- A) Isolation
+#### Q6. Which concurrency control technique locks data items during transaction execution?
+- A) Timestamp Ordering
+- B) Lock-Based Protocol
+- C) Validation Protocol
+- D) Hashing
+- **Answer: ✅ B**
+- **Explanation**: Lock-based protocols enforce isolation by forcing transactions to acquire read/write locks before editing records.
+
+#### Q7. Two-phase locking (2PL) guarantees:
+- A) Durability
 - B) Consistency
-- C) Durability
+- C) Conflict Serializability
 - D) Atomicity
 - **Answer: ✅ C**
-- **Explanation**: `COMMIT` writes transaction log records to disk, making changes permanent (durable) and immune to crashes.
+- **Explanation**: 2PL guarantees that any concurrent execution schedule is conflict-serializable (cycle-free precedence graph).
 
-#### Q48. In PL/SQL, a database trigger is:
-- A) A manual query script
-- B) A stored procedure that executes automatically in response to DDL/DML events
-- C) A type of table index
-- D) A transaction lock
+#### Q8. The schedule equivalent to serial execution is called:
+- A) Recoverable Schedule
+- B) Serializable Schedule
+- C) Cascading Schedule
+- D) Deadlock Schedule
 - **Answer: ✅ B**
-- **Explanation**: A trigger is a block of code that is automatically executed (fired) by the database engine in response to events like `INSERT`, `UPDATE`, or `DELETE`.
+- **Explanation**: A schedule is serializable if its net database state effect is identical to running transactions sequentially.
 
-#### Q49. Which of the following is NOT an aggregate function in SQL?
-- A) `COUNT()`
-- B) `AVG()`
-- C) `SUM()`
-- D) `SELECT()`
+#### Q9. Which ACID property is most directly maintained by locking mechanisms?
+- A) Atomicity
+- B) Isolation
+- C) Durability
+- D) Consistency
+- **Answer: ✅ B**
+- **Explanation**: Locking mechanisms isolate executing transactions, preventing them from interfering with each other.
+
+#### Q10. In a B+ Tree, actual records are stored in:
+- A) Root Node
+- B) Internal Nodes
+- C) Leaf Nodes
+- D) Parent Nodes
+- **Answer: ✅ C**
+- **Explanation**: Unlike B-Trees, B+ Trees store all actual record data pointers exclusively in the leaf nodes.
+
+#### Q11. Which index structure is most commonly used in DBMS?
+- A) Linked List
+- B) Stack
+- C) Queue
+- D) B+ Tree
 - **Answer: ✅ D**
-- **Explanation**: `SELECT` is a core query keyword. Aggregate functions compute single values over columns, such as `COUNT()`, `AVG()`, and `SUM()`.
+- **Explanation**: B+ Trees support highly efficient key searches ($O(\log N)$) and block-based sequential range scans.
 
-#### Q50. If $X \to Y$ holds in a relation, we can say:
-- A) Y uniquely determines X
-- B) X uniquely determines Y
-- C) X and Y are candidate keys
-- D) Y is a prime attribute
+#### Q12. A clustered index allows:
+- A) Multiple physical orderings
+- B) One physical ordering of records
+- C) No ordering
+- D) Random ordering only
 - **Answer: ✅ B**
-- **Explanation**: $X \to Y$ is a functional dependency, stating that attribute $X$ uniquely determines the value of attribute $Y$.
+- **Explanation**: A clustered index sorts table rows physically on disk, meaning only one clustered index can exist per table.
 
----
+#### Q13. Suppose Table A has 100 rows and Table B has 50 rows. A CROSS JOIN returns:
+- A) 100
+- B) 500
+- C) 5000
+- D) 150
+- **Answer: ✅ C**
+- **Explanation**: Total rows $= |A| \times |B| = 100 \times 50 = 5000$.
 
-## 🔷 Topic 7: Expanded Problem Bank (Integrity, Normalization & Transactions)
+#### Q14. Which SQL clause is executed first logically?
+- A) SELECT
+- B) ORDER BY
+- C) FROM
+- D) HAVING
+- **Answer: ✅ C**
+- **Explanation**: The DBMS must first fetch the table source (`FROM`), then filter rows (`WHERE`), group them (`GROUP BY`), filter groups (`HAVING`), select columns (`SELECT`), and finally sort (`ORDER BY`).
 
-#### Q51. Consider a relation schema $R(A, B, C, D, E, F)$ with $n = 6$ attributes. Let the only Candidate Key of $R$ be $\{A\}$. How many possible Super Keys can be formed for this relation?
-- A) 6
-- B) 32
-- C) 64
-- D) 16
+#### Q15. Which SQL clause is executed after GROUP BY?
+- A) SELECT
+- B) HAVING
+- C) FROM
+- D) WHERE
+- **Answer: ✅ B**
+- **Explanation**: Logically, the `HAVING` clause filters the aggregated groups right after the `GROUP BY` clause evaluates.
+
+#### Q16. Which join is used to find unmatched rows between tables?
+- A) INNER JOIN
+- B) LEFT/RIGHT OUTER JOIN
+- C) CROSS JOIN
+- D) SELF JOIN
+- **Answer: ✅ B**
+- **Explanation**: Outer Joins keep unmatched rows, filling missing columns with `NULL`, which allows identifying unmatched keys.
+
+#### Q17. The CAP theorem states that distributed systems can guarantee at most:
+- A) One property
+- B) Two properties simultaneously
+- C) All three properties
+- D) Four properties
+- **Answer: ✅ B**
+- **Explanation**: CAP theorem states that distributed databases can guarantee at most two of: Consistency, Availability, and Partition Tolerance.
+
+#### Q18. CAP theorem properties are:
+- A) Consistency, Availability, Partition Tolerance
+- B) Consistency, Atomicity, Performance
+- C) Availability, Atomicity, Durability
+- D) Consistency, Parallelism, Throughput
+- **Answer: ✅ A**
+- **Explanation**: CAP stands for Consistency, Availability, and Partition Tolerance.
+
+#### Q19. The BASE model is commonly associated with:
+- A) SQL Databases
+- B) NoSQL Databases
+- C) File Systems
+- D) Data Warehouses
+- **Answer: ✅ B**
+- **Explanation**: NoSQL databases prioritize horizontal scaling by trading strict ACID consistency for the flexible BASE model.
+
+#### Q20. Which NoSQL database category stores data as nodes and edges?
+- A) Column Family
+- B) Document
+- C) Graph
+- D) Key-Value
+- **Answer: ✅ C**
+- **Explanation**: Graph databases represent relationships directly as node and edge entities.
+
+#### Q21. Horizontal scaling means:
+- A) Increasing RAM on one server
+- B) Increasing CPU on one server
+- C) Adding more servers
+- D) Increasing cache only
+- **Answer: ✅ C**
+- **Explanation**: Horizontal scaling (scaling out) involves adding more machine nodes to a database cluster. Scaling up hardware on a single node is vertical scaling.
+
+#### Q22. Sharding primarily improves:
+- A) Availability
+- B) Scalability
+- C) Security
+- D) Consistency
+- **Answer: ✅ B**
+- **Explanation**: Sharding distributes tables across nodes, allowing writes and storage capacity to scale horizontally.
+
+#### Q23. Replication primarily improves:
+- A) Availability
+- B) Cardinality
+- C) Degree
+- D) Normalization
+- **Answer: ✅ A**
+- **Explanation**: Replication maintains backup copies of database shards to guarantee uptime (Availability) during node failures.
+
+#### Q24. A deadlock occurs when:
+- A) One transaction aborts
+- B) Multiple transactions permanently wait for resources held by each other
+- C) Database is normalized
+- D) Table is indexed
+- **Answer: ✅ B**
+- **Explanation**: Deadlock represents a cyclic wait condition among transactions requesting locked resources.
+
+#### Q25. Which recovery technique uses transaction logs?
+- A) Checkpointing only
+- B) Logging and Recovery Management
+- C) Indexing
+- D) Hashing
+- **Answer: ✅ B**
+- **Explanation**: Log-based recovery mechanisms parse transaction log records (REDO/UNDO) to restore database consistency after crashes.
+
+#### Q26. Let relation $R(A, B, C, D, E)$ have functional dependencies $A \to BC$, $CD \to E$, $B \to D$, and $E \to A$. What is the attribute closure of $\{B, C\}$, denoted as $\{B, C\}^+$?
+- A) $\{B, C, D\}$
+- B) $\{A, B, C, D, E\}$
+- C) $\{B, C\}$
+- D) $\{B, C, D, E\}$
 - **Answer: ✅ B**
 - **Explanation**:
-  - A super key must contain the candidate key $\{A\}$.
-  - The remaining $n - 1 = 5$ attributes ($B, C, D, E, F$) can either be included or excluded from the super key.
-  - Number of Super Keys = $2^{n-k} = 2^{6-1} = 2^5 = 32$.
+  - Start with closure $X^{(0)} = \{B, C\}$.
+  - Apply $B \to D \implies X^{(1)} = \{B, C, D\}$.
+  - Apply $CD \to E$ (since both $C, D$ are in the set) $\implies X^{(2)} = \{B, C, D, E\}$.
+  - Apply $E \to A \implies X^{(3)} = \{A, B, C, D, E\}$.
+  - Therefore, $\{B, C\}^+ = \{A, B, C, D, E\}$.
 
-#### Q52. Let a relation schema $R(A, B, C, D)$ have $n = 4$ attributes. If the Candidate Keys are $\{A\}$ and $\{B\}$, what is the total number of Super Keys?
-- A) 16
-- B) 12
-- C) 8
-- D) 4
-- **Answer: ✅ B**
+#### Q27. Let a relation schema $R(A, B, C, D, E)$ contain $n=5$ attributes. If the Candidate Keys of $R$ are $\{A, B\}$ and $\{C, D\}$, what is the total number of possible Super Keys?
+- A) 12
+- B) 16
+- C) 14
+- D) 10
+- **Answer: ✅ C**
 - **Explanation**:
   - Using the Principle of Inclusion-Exclusion (PIE):
-  - Super keys containing $\{A\}$ = $2^{4-1} = 2^3 = 8$.
-  - Super keys containing $\{B\}$ = $2^{4-1} = 2^3 = 8$.
-  - Super keys containing both $\{A, B\}$ (the intersection) = $2^{4-2} = 2^2 = 4$.
-  - Total Super Keys = $8 + 8 - 4 = 12$.
+  - Super keys containing $\{A, B\}$ (size 2): $2^{5-2} = 2^3 = 8$.
+  - Super keys containing $\{C, D\}$ (size 2): $2^{5-2} = 2^3 = 8$.
+  - Super keys containing both (the union $\{A, B, C, D\}$ has size 4): $2^{5-4} = 2^1 = 2$.
+  - Total Super Keys = $8 + 8 - 2 = 14$.
 
-#### Q53. For relation schema $R(A, B, C, D, E)$ with Candidate Keys $\{AB\}$ and $\{C\}$, what is the total number of Super Keys?
-- A) 20
-- B) 16
-- C) 18
-- D) 24
-- **Answer: ✅ C**
-- **Explanation**:
-  - Super keys containing $\{AB\}$ (size 2) = $2^{5-2} = 2^3 = 8$.
-  - Super keys containing $\{C\}$ (size 1) = $2^{5-1} = 2^4 = 16$.
-  - Super keys containing both $\{AB\}$ and $\{C\}$ (the union $\{A, B, C\}$ has size 3) = $2^{5-3} = 2^2 = 4$.
-  - Total Super Keys = $8 + 16 - 4 = 20$. Let's recalculate:
-  - Wait, $8 + 16 - 4 = 20$. Thus, Option A is the correct answer. Let's fix option text or select A. Option A is 20. Correct answer: ✅ A.
-
-#### Q54. In RDBMS, which integrity constraint is violated if a user attempts to set a Primary Key column to `NULL`?
-- A) Referential Integrity
-- B) Entity Integrity
-- C) Domain Integrity
-- D) User-Defined Integrity
-- **Answer: ✅ B**
-- **Explanation**:
-  - Entity Integrity states that no primary key attribute can be null. This ensures that every row in the relation can be uniquely identified.
-
-#### Q55. Suppose relation $R(A, B, C)$ has foreign key $B$ referencing the primary key of another table. What referential integrity option will automatically delete corresponding child rows in $R$ when the parent row is deleted?
-- A) `ON DELETE RESTRICT`
-- B) `ON DELETE SET NULL`
-- C) `ON DELETE CASCADE`
-- D) `ON DELETE NO ACTION`
-- **Answer: ✅ C**
-- **Explanation**:
-  - `ON DELETE CASCADE` automatically propagates deletions from the referenced table down to the referencing table.
-
-#### Q56. Consider a relation $R(A, B, C, D, E)$ with the functional dependencies:
-$A \to B$, $BC \to D$, $E \to C$.
-What is the attribute closure of $\{A, E\}$, denoted as $\{A, E\}^+$?
-- A) $\{A, B, E\}$
-- B) $\{A, B, C, E\}$
-- C) $\{A, B, C, D, E\}$
-- D) $\{A, B, D, E\}$
-- **Answer: ✅ C**
-- **Explanation**:
-  - Start with closure $X^{(0)} = \{A, E\}$.
-  - Apply $A \to B \implies X^{(1)} = \{A, B, E\}$.
-  - Apply $E \to C \implies X^{(2)} = \{A, B, C, E\}$.
-  - Apply $BC \to D$ (since both $B, C$ are in closure) $\implies X^{(3)} = \{A, B, C, D, E\}$.
-  - Therefore, $\{A, E\}^+ = \{A, B, C, D, E\}$.
-
-#### Q57. Let $R(A, B, C, D, E)$ have the functional dependencies:
-$A \to B$, $B \to C$, $C \to D$, $D \to E$.
-Identify the Candidate Key of this relation.
-- A) $\{A\}$
-- B) $\{B\}$
-- C) $\{A, B\}$
-- D) $\{E\}$
+#### Q28. Decomposing relation $R(A, B, C, D)$ with functional dependencies $A \to B, B \to C, C \to D$ into $R_1(A, B)$, $R_2(B, C)$, and $R_3(C, D)$ is:
+- A) Lossless and dependency-preserving
+- B) Lossy and dependency-preserving
+- C) Lossless and non-dependency-preserving
+- D) Lossy and non-dependency-preserving
 - **Answer: ✅ A**
 - **Explanation**:
-  - Computing the closure of $\{A\}$:
-  - $A^+ = \{A\} \to \{A, B\} \to \{A, B, C\} \to \{A, B, C, D\} \to \{A, B, C, D, E\}$.
-  - Since $A^+$ contains all attributes of $R$ and no proper subset of $\{A\}$ can do so, $\{A\}$ is the Candidate Key.
+  - **Lossless Check:** Joining $R_1(A, B)$ and $R_2(B, C)$ on common attribute $B$ is lossless since $B \to C$ holds, yielding $R_{12}(A, B, C)$. Joining $R_{12}$ with $R_3(C, D)$ on $C$ is lossless since $C \to D$ holds. The join is lossless.
+  - **Dependency Preservation:** $A \to B$ can be checked in $R_1$, $B \to C$ in $R_2$, and $C \to D$ in $R_3$. All dependencies are preserved.
 
-#### Q58. In database normalization, a relation $R$ is in Second Normal Form (2NF) if and only if it is in 1NF and:
-- A) It has no transitive dependencies.
-- B) Every non-prime attribute is fully functionally dependent on every candidate key (no partial dependencies).
-- C) For every functional dependency $X \to Y$, $X$ is a super key.
-- D) It contains no composite keys.
-- **Answer: ✅ B**
-- **Explanation**:
-  - 2NF forbids partial dependencies, meaning a non-key attribute cannot depend on only a part of a composite primary key. If all candidate keys are simple (consist of a single attribute), the relation is automatically in 2NF.
-
-#### Q59. A relation $R(A, B, C, D)$ has functional dependencies $A \to B$ and $B \to C$. In which normal form is $R$, assuming $\{A, D\}$ is the primary key?
-- A) 1NF
-- B) 2NF
-- C) 3NF
-- D) BCNF
-- **Answer: ✅ A**
-- **Explanation**:
-  - The primary key is $\{A, D\}$.
-  - The dependency $A \to B$ is a partial dependency because a non-prime attribute ($B$) depends on a part ($A$) of the composite primary key $\{A, D\}$.
-  - Because a partial dependency exists, it violates 2NF. Therefore, the relation is only in 1NF.
-
-#### Q60. A relation $R(A, B, C, D)$ has primary key $A$ and functional dependencies $A \to B$, $B \to C$, and $C \to D$. What is the highest normal form of $R$?
-- A) 1NF
-- B) 2NF
-- C) 3NF
-- D) BCNF
-- **Answer: ✅ B**
-- **Explanation**:
-  - Candidate Key is $\{A\}$. Since the key is simple, there are no partial dependencies, so it is in 2NF.
-  - However, we have $A \to B$ and $B \to C \implies A \to C$ (transitive dependency where non-key $B$ determines non-key $C$).
-  - Similarly, $B \to C \to D \implies B \to D$ is transitive.
-  - Since transitive dependencies exist, it violates 3NF. Thus, the highest normal form is 2NF.
-
-#### Q61. A relation $R(A, B, C, D)$ has candidate keys $\{A\}$ and $\{B\}$. The functional dependencies are $A \to C$, $B \to D$, and $C \to A$. What is the highest normal form of $R$?
-- A) 2NF
-- B) 3NF
-- C) BCNF
-- D) 1NF
-- **Answer: ✅ B**
-- **Explanation**:
-  - Candidate keys are $\{A\}$ and $\{B\}$, so prime attributes are $A, B$. Non-prime attributes are $C, D$.
-  - For $A \to C$: Left side $A$ is a super key. (Valid for BCNF).
-  - For $B \to D$: Left side $B$ is a super key. (Valid for BCNF).
-  - For $C \to A$: Left side $C$ is not a super key (so violates BCNF). However, the right side $A$ is prime, which satisfies 3NF.
-  - Therefore, the relation is in 3NF.
-
-#### Q62. Which of the following conditions guarantees that a decomposition of relation $R$ into $R_1$ and $R_2$ is a lossless-join decomposition?
-- A) $R_1 \cap R_2 = \emptyset$
-- B) $(R_1 \cap R_2) \to (R_1 - R_2)$ or $(R_1 \cap R_2) \to (R_2 - R_1)$
-- C) $R_1 \cup R_2 = R$ and $R_1 \cap R_2 = \emptyset$
-- D) All candidate keys are preserved in $R_1$.
-- **Answer: ✅ B**
-- **Explanation**:
-  - For a decomposition to be lossless, the common attributes ($R_1 \cap R_2$) must functionally determine all unique attributes of at least one of the decomposed relations. That is, the common attributes must act as a super key in $R_1$ or $R_2$.
-
-#### Q63. Decomposing $R(A, B, C)$ with FD $A \to B$ into $R_1(A, B)$ and $R_2(A, C)$ is:
-- A) Lossy and dependency preserving.
-- B) Lossless and dependency preserving.
-- C) Lossless and non-dependency preserving.
-- D) Lossy and non-dependency preserving.
-- **Answer: ✅ B**
-- **Explanation**:
-  - **Lossless check**: $R_1 \cap R_2 = \{A\}$. The unique attributes of $R_1$ are $\{B\}$. Since $A \to B$ holds, the common attribute $A$ determines $R_1 - R_2$, making the join lossless.
-  - **Dependency preservation**: The original FD $A \to B$ can be verified directly on $R_1(A, B)$, so it is preserved.
-
-#### Q64. When a transaction $T_1$ reads a value modified by transaction $T_2$ before $T_2$ commits, and then $T_2$ aborts, which concurrency anomaly has occurred?
-- A) Non-repeatable read
-- B) Phantom read
-- C) Dirty read
-- D) Lost update
+#### Q29. Consider the concurrent schedule $S: R_1(A), R_2(A), W_1(A), W_2(A), C_1, C_2$. Construct the precedence graph. Is the schedule conflict serializable?
+- A) Yes, equivalent to serial order $T_1 \to T_2$
+- B) Yes, equivalent to serial order $T_2 \to T_1$
+- C) No, it is not conflict serializable
+- D) Yes, it is view serializable but not conflict serializable
 - **Answer: ✅ C**
 - **Explanation**:
-  - Reading uncommitted data that is later rolled back is a classic "Dirty Read" (Write-Read conflict).
+  - Conflict 1: $R_2(A) \to W_1(A)$ in different transactions creates edge $T_2 \to T_1$.
+  - Conflict 2: $W_1(A) \to W_2(A)$ in different transactions creates edge $T_1 \to T_2$.
+  - The precedence graph contains a cycle ($T_1 \leftrightarrow T_2$), making the schedule **not** conflict serializable.
 
-#### Q65. Transaction $T_1$ reads a data item $X$. Later, Transaction $T_2$ updates $X$ to a new value and commits. When $T_1$ reads $X$ again, it sees the updated value. This concurrency anomaly is called:
-- A) Dirty read
-- B) Lost update
-- C) Non-repeatable read
-- D) Phantom read
-- **Answer: ✅ C**
+#### Q30. Which of the following locking protocols guarantees conflict serializability and is also completely free from cascading rollbacks?
+- A) Basic Two-Phase Locking (2PL)
+- B) Strict Two-Phase Locking (Strict 2PL)
+- C) Conservative Two-Phase Locking
+- D) All of the above
+- **Answer: ✅ B**
 - **Explanation**:
-  - A non-repeatable read (Read-Write conflict) occurs when a transaction reads the same row twice and gets different values because another transaction modified it in between.
+  Strict 2PL prevents cascading rollbacks by requiring that all exclusive (write) locks be held until commit/abort, ensuring that no other transaction can read uncommitted dirty modifications.
 
-#### Q66. What is the difference between a Non-repeatable read and a Phantom read?
-- A) Non-repeatable read involves updating/deleting an existing row, whereas Phantom read involves inserting new rows that match a query criteria.
-- B) Non-repeatable read is a Write-Read conflict, while Phantom read is a Write-Write conflict.
-- C) Non-repeatable read violates Atomicity, while Phantom read violates Durability.
-- D) They are identical terms.
+#### Q31. Suppose a database disk block size is 4096 bytes. A search key is 12 bytes long, and a child block pointer is 8 bytes long. In a B+ Tree, what is the maximum order $p$ (number of pointers) of an internal node?
+- A) 204
+- B) 205
+- C) 341
+- D) 512
+- **Answer: ✅ B**
+- **Explanation**:
+  - An internal node of order $p$ contains $p$ block pointers and $p-1$ keys.
+  - Formula: $p \times 8 + (p - 1) \times 12 \le 4096$
+  - $8p + 12p - 12 \le 4096 \implies 20p \le 4108 \implies p \le 205.4$.
+  - Thus, the maximum order $p$ is 205.
+
+#### Q32. Under the Timestamp Ordering protocol, what does Thomas' Write Rule allow?
+- A) Reads from uncommitted transactions.
+- B) Overwriting obsolete write operations by younger transactions without aborting the older transaction.
+- C) Deferring all write operations until commit.
+- D) Automatic deadlock resolution using locks.
+- **Answer: ✅ B**
+- **Explanation**:
+  Thomas' Write Rule states that if $T$ issues `Write(X)` and $TS(T) < \text{Write-TS}(X)$, the write is ignored (treated as obsolete) because it is overwritten by a younger transaction anyway. This avoids unnecessary aborts.
+
+#### Q33. Which of the following relational algebra expressions is equivalent to the SQL query:
+`SELECT name FROM Student WHERE dept = 'CS' AND GPA > 3.5;`
+- A) $\pi_{name}(\sigma_{dept = 'CS'}(\sigma_{GPA > 3.5}(Student)))$
+- B) $\sigma_{name}(\pi_{dept = 'CS' \land GPA > 3.5}(Student))$
+- C) $\pi_{name}(\sigma_{dept = 'CS' \lor GPA > 3.5}(Student))$
+- D) $\sigma_{name}(\sigma_{dept = 'CS'}(Student)) \times \sigma_{name}(\sigma_{GPA > 3.5}(Student))$
 - **Answer: ✅ A**
 - **Explanation**:
-  - Non-repeatable reads concern changes to individual data cells (updates/deletions).
-  - Phantom reads concern the dynamic growth/shrinkage of query results (inserts) over sets of rows.
+  - Nested selections $\sigma_{dept = 'CS'}(\sigma_{GPA > 3.5}(Student))$ filter rows matching both conditions (logical AND).
+  - The projection $\pi_{name}$ restricts the final output to the `name` column.
 
-#### Q67. Which isolation level provides the highest degree of transaction isolation, preventing all three anomalies (Dirty read, Non-repeatable read, and Phantom read)?
-- A) Read Committed
-- B) Read Uncommitted
-- C) Repeatable Read
-- D) Serializable
+#### Q34. Consider the concurrent schedule $S: W_1(A), R_2(A), W_2(B), C_2, A_1$ (where $A_1$ is the abort of $T_1$). What happens to transaction $T_2$?
+- A) $T_2$ is unaffected because it committed.
+- B) $T_2$ must be rolled back, causing an unrecoverable schedule error because it read uncommitted data and committed before the writer committed/aborted.
+- C) $T_2$ is committed, and $T_1$ will restore $A$ to its old value, creating a data inconsistency.
+- D) The DBMS will reject $T_1$'s abort command.
+- **Answer: ✅ B**
+- **Explanation**:
+  - $T_2$ read uncommitted data written by $T_1$ ($R_2(A)$). Since $T_2$ committed ($C_2$) *before* $T_1$ aborted ($A_1$), the schedule is **unrecoverable**.
+  - In theory, $T_2$ must be rolled back, but since it committed, this violates durability. The recovery manager must prevent such schedules.
+
+#### Q35. Shared (S) and Exclusive (X) lock request compatibility is defined by which relationship?
+- A) S is compatible with S, S is compatible with X
+- B) S is compatible with S, S is incompatible with X, X is incompatible with X
+- C) S is incompatible with S, X is compatible with X
+- D) All lock combinations are compatible
+- **Answer: ✅ B**
+- **Explanation**:
+  - Shared locks are compatible (multiple reads allowed).
+  - Exclusive locks are incompatible with other locks (only one writer, blocking all readers/writers).
+
+#### Q36. Which of the following statements is true regarding View Serializability?
+- A) Every view serializable schedule is also conflict serializable.
+- B) Every conflict serializable schedule is also view serializable.
+- C) Conflict serializability and view serializability are completely identical.
+- D) View serializability can be tested in polynomial time ($O(N^2)$).
+- **Answer: ✅ B**
+- **Explanation**:
+  Conflict serializability is a stricter, polynomial-time checkable subset of View Serializability. Thus, all conflict-serializable schedules are view-serializable, but not vice versa.
+
+#### Q37. In a B+ Tree index, when a leaf node of maximum capacity $M$ overflows during insertion, what is the standard split procedure?
+- A) The node splits, and the middle key is copied to the parent node while remaining in the leaf node.
+- B) The node splits, and the middle key is moved (deleted from leaf) to the parent node.
+- C) The overflow key is stored in a separate overflow block linked via pointers.
+- D) The entire tree is rebuilt.
+- **Answer: ✅ A**
+- **Explanation**:
+  In a B+ Tree, leaf nodes must contain all search key values. Thus, when split, the split boundary key is **copied** (duplicated) to the parent to act as a search guide, while still residing in the leaf.
+
+#### Q40. Let table Employee have 10,000 blocks and a clustered B+ tree index on ID. A search query `SELECT * FROM Employee WHERE ID = 500;` is executed. What is the approximate number of disk block access reads needed?
+- A) 10,000 reads
+- B) 5,000 reads
+- C) $\log_2(10,000) \approx 14$ reads
+- D) $\log_B(10,000) \approx 3$ to $4$ reads (where $B$ is B+ tree fan-out)
 - **Answer: ✅ D**
 - **Explanation**:
-  - The standard SQL isolation levels are:
-    1. Read Uncommitted: Allows all anomalies.
-    2. Read Committed: Prevents Dirty reads.
-    3. Repeatable Read: Prevents Dirty and Non-repeatable reads.
-    4. Serializable: Prevents all anomalies.
+  A B+ tree has a high fan-out (e.g., $B \ge 100$). The height of a tree with 10,000 leaves is $\approx 3$ levels. Finding the record requires reading only 3 to 4 blocks from disk. A linear scan would take 10,000 reads.
 
-#### Q68. Consider the concurrent schedule:
-$S: R_1(X), W_2(X), W_1(X), C_1, C_2$
-Which conflicting operations exist in this schedule?
-- A) Only $R_1(X)$ and $W_2(X)$
-- B) $R_1(X)$ and $W_2(X)$, and $W_2(X)$ and $W_1(X)$
-- C) Only $W_2(X)$ and $W_1(X)$
-- D) There are no conflicts because they commit.
+#### Q41. In query optimization heuristics, why is "Push Selection ($\sigma$) Down" considered a major optimization?
+- A) It removes columns from the query result early.
+- B) It reduces the number of tuples in intermediate relations, making subsequent operations (like Joins) run much faster on smaller datasets.
+- C) It automatically creates indexes on the tables.
+- D) It bypasses lock acquisition.
 - **Answer: ✅ B**
 - **Explanation**:
-  - Conflicting operations are those in different transactions accessing the same item, where at least one is a write.
-  - Conflict 1: $R_1(X)$ and $W_2(X)$ (Read-Write conflict).
-  - Conflict 2: $W_2(X)$ and $W_1(X)$ (Write-Write conflict).
+  Applying selection ($\sigma$) early filters out irrelevant rows, significantly reducing the size of intermediate relations before they are joined or sorted.
 
-#### Q69. Using the schedule from the previous question ($S: R_1(X), W_2(X), W_1(X), C_1, C_2$), construct the precedence graph. Is the schedule conflict serializable?
-- A) Yes, equivalent to $T_1 \to T_2$
-- B) Yes, equivalent to $T_2 \to T_1$
-- C) No, because there is a cycle $T_1 \leftrightarrow T_2$
-- D) Yes, because it is serial.
+#### Q42. In a distributed database system, what are the two phases of the Two-Phase Commit (2PC) protocol?
+- A) Growing Phase and Shrinking Phase
+- B) Prepare Phase and Commit Phase
+- C) Lock Phase and Unlock Phase
+- D) Active Phase and Aborted Phase
+- **Answer: ✅ B**
+- **Explanation**:
+  2PC guarantees distributed atomicity:
+  1. Prepare Phase: Coordinator votes nodes to see if they can commit.
+  2. Commit Phase: If all vote yes, commit is executed; if any node votes no, abort is executed.
+
+#### Q43. A transaction schedule is defined as strict if:
+- A) Transactions hold all locks until commit.
+- B) It prevents dirty reads only.
+- C) No transaction can write to a data item until all transactions that previously wrote to it have committed or aborted.
+- D) It does not allow concurrent execution.
 - **Answer: ✅ C**
 - **Explanation**:
-  - Conflict 1: $R_1(X) \to W_2(X)$ creates edge $T_1 \to T_2$.
-  - Conflict 2: $W_2(X) \to W_1(X)$ creates edge $T_2 \to T_1$.
-  - The graph has a cycle ($T_1 \leftrightarrow T_2$), so it is **not** conflict serializable.
+  A schedule is strict if it prevents both dirty reads and dirty writes. This requires that if $T_1$ writes $X$, no other transaction can read or write $X$ until $T_1$ commits or aborts.
 
-#### Q70. For a schedule with transaction operations:
-$S: R_1(A), W_1(A), R_2(A), R_1(B), W_2(A), W_1(B), C_1, C_2$
-What is the precedence graph edge set?
-- A) $\{T_1 \to T_2\}$
-- B) $\{T_2 \to T_1\}$
-- C) $\{T_1 \to T_2, T_2 \to T_1\}$
-- D) $\emptyset$
-- **Answer: ✅ A**
+#### Q44. Which of the following is NOT a primary inference rule (Armstrong's Axiom)?
+- A) Reflexivity (If $Y \subseteq X$, then $X \to Y$)
+- B) Augmentation (If $X \to Y$, then $XZ \to YZ$)
+- C) Transitivity (If $X \to Y$ and $Y \to Z$, then $X \to Z$)
+- D) Pseudotransitivity (If $X \to Y$ and $WY \to Z$, then $WX \to Z$)
+- **Answer: ✅ D**
 - **Explanation**:
-  - $W_1(A) \to R_2(A)$ creates edge $T_1 \to T_2$.
-  - $R_2(A) \to W_2(A)$ is within the same transaction $T_2$ (not a conflict between different transactions).
-  - $W_1(A) \to W_2(A)$ creates edge $T_1 \to T_2$.
-  - All inter-transaction conflicts point from $T_1$ to $T_2$. No edges point from $T_2$ to $T_1$.
-  - The graph is acyclic, so the schedule is conflict serializable with equivalent serial order $T_1 \to T_2$.
+  The three primary Armstrong's axioms are Reflexivity, Augmentation, and Transitivity. Pseudotransitivity is a secondary rule derived from them.
 
-#### Q71. Under the standard Two-Phase Locking (2PL) protocol, what is the significance of the "Lock Point"?
-- A) The time when the first lock is released.
-- B) The point where the transaction acquires its final lock (marking the end of the growing phase).
-- C) The time when a deadlock is detected.
-- D) The point where the transaction commits.
+#### Q45. Suppose relation $R(A, B, C)$ has FDs $AB \to C$ and $C \to A$. Candidate keys are $\{A, B\}$ and $\{B, C\}$. Decomposing $R$ into BCNF results in $R_1(C, A)$ and $R_2(C, B)$. Which of the following is true?
+- A) The decomposition is lossy.
+- B) The dependency $AB \to C$ is lost because its attributes are split across tables.
+- C) Both dependencies are preserved.
+- D) The decomposition is in 3NF but not BCNF.
 - **Answer: ✅ B**
 - **Explanation**:
-  - The Lock Point is the moment a transaction has acquired all the locks it needs, right before it releases its first lock (transitioning from the growing to the shrinking phase).
+  - $R_1 \cap R_2 = \{C\}$. Since $C \to A$ holds in $R_1$, $C$ is a key of $R_1$, making the decomposition lossless.
+  - However, $AB \to C$ cannot be checked in either $R_1(C, A)$ or $R_2(C, B)$ independently. Thus, it is lost.
 
-#### Q72. How does Strict 2PL differ from Basic 2PL?
-- A) Strict 2PL does not allow exclusive locks.
-- B) Strict 2PL requires that all exclusive (write) locks be held until the transaction commits or aborts.
-- C) Strict 2PL prevents deadlocks completely.
-- D) Strict 2PL does not use a shrinking phase.
+#### Q46. Which of the following is true about Wound-Wait and Wait-Die deadlock prevention schemes?
+- A) Wound-Wait allows younger transactions to wound older ones.
+- B) Both protocols prevent deadlocks by ensuring transactions only wait in a single direction of age seniority.
+- C) Wait-Die is a preemptive scheme.
+- D) Both protocols suffer from starvation of older transactions.
 - **Answer: ✅ B**
 - **Explanation**:
-  - Strict 2PL requires that all exclusive locks obtained by a transaction be held until the transaction finishes (commit/abort). This prevents cascading rollbacks.
+  Both protocols prevent cycles by using timestamps to enforce a strict waiting order (old waits for young, or young waits for old). Wait-Die is non-preemptive (younger dies), while Wound-Wait is preemptive (older wounds younger).
 
-#### Q73. How does Rigorous 2PL differ from Strict 2PL?
-- A) Rigorous 2PL holds only shared locks until commit.
-- B) Rigorous 2PL requires that **all locks** (both shared and exclusive) be held until the transaction commits or aborts.
-- C) Rigorous 2PL is deadlock-free.
-- D) Rigorous 2PL is less restrictive.
-- **Answer: ✅ B**
-- **Explanation**:
-  - Rigorous 2PL requires all locks (both S and X) to be held until commit/abort. This enforces a strict serial execution ordering.
-
-#### Q74. The Write-Ahead Logging (WAL) protocol requires that log records be written to stable storage:
-- A) Simultaneously with the database page updates.
-- B) Before the transaction's modified data page is written to disk.
-- C) Only during system checkpoint intervals.
-- D) Right after the transaction commits.
-- **Answer: ✅ B**
-- **Explanation**:
-  - WAL guarantees that if a system crash occurs, the log contains the necessary old/new values on disk to perform UNDO or REDO operations.
-
-#### Q75. In log-based recovery with Deferred database modification (No-Undo/Redo strategy):
-- A) Modified data values are written to disk during the active state.
-- B) Changes are kept in buffer memory and written to disk only after commit, meaning we never need to perform UNDO.
-- C) Both UNDO and REDO are performed for all active transactions.
-- D) System checkpoints are disabled.
-- **Answer: ✅ B**
-- **Explanation**:
-  - Since deferred modifications do not write to the physical database on disk until after commit, an uncommitted transaction has made no changes to disk.
-  - Thus, if it fails, we do not need to UNDO anything. We only need to REDO committed transactions whose updates did not make it to disk.
-
-#### Q76. In log-based recovery with Immediate database modification (Undo/Redo strategy):
-- A) Database updates are deferred until checkpoints.
-- B) Modifications can be written to disk while the transaction is active, requiring both UNDO (for uncommitted transactions) and REDO (for committed ones).
-- C) No log is needed.
-- D) Only REDO is performed.
-- **Answer: ✅ B**
-- **Explanation**:
-  - Immediate updates can write modifications to disk immediately.
-  - If the database crashes, active uncommitted transactions must be rolled back using the log (UNDO). Committed transactions must be re-run (REDO).
-
-#### Q77. During recovery, the system scans the log and finds the following records:
+#### Q47. A system crashes. The recovery log contains:
 `<T1, Start>`, `<T1, Commit>`
 `<T2, Start>`
-`<Checkpoint [T1, T2]>`
+`<Checkpoint [T2]>`
 `<T3, Start>`
-`<T3, Commit>`
 `<System Crash>`
-Which transactions must be REDOed and which must be UNDOed?
-- A) REDO T1, T3; UNDO T2
-- B) REDO T3; UNDO T2 (Ignore T1)
-- C) REDO T3; UNDO T1, T2
-- D) REDO T1; UNDO T2, T3
+Which transactions must be REDOed and which must be UNDOed during recovery?
+- A) REDO T1, REDO T2, UNDO T3
+- B) UNDO T2, UNDO T3 (Ignore T1)
+- C) REDO T1, UNDO T2, UNDO T3
+- D) REDO T3, UNDO T2
 - **Answer: ✅ B**
 - **Explanation**:
-  - $T_1$ started and committed *before* the checkpoint. Its changes are already permanently on disk, so we do nothing.
-  - $T_2$ was active at the checkpoint, and there is no `<T2, Commit>` or `<T2, Abort>` before the crash. Thus, $T_2$ must be **UNDOed**.
-  - $T_3$ started after the checkpoint and committed before the crash. Thus, $T_3$ must be **REDOed**.
+  - $T_1$ committed before the checkpoint, so its changes are safe on disk.
+  - $T_2$ was active at checkpoint and never committed. It must be **UNDOed**.
+  - $T_3$ started after checkpoint and did not commit. It must be **UNDOed**.
 
-#### Q78. Which normal form is based on the concept of Multi-Valued Dependency (MVD)?
-- A) BCNF
-- B) 4NF
-- C) 5NF
-- D) 3NF
+#### Q48. If a database designer increases the index block size from 4KB to 16KB, what is the effect on the B+ Tree index?
+- A) Tree height increases, query time slows down.
+- B) Node fan-out increases, tree height decreases, reducing disk block reads.
+- C) Tree becomes unbalanced.
+- D) Storage overhead doubles.
 - **Answer: ✅ B**
 - **Explanation**:
-  - Fourth Normal Form (4NF) addresses multi-valued dependencies ($A \twoheadrightarrow B$), ensuring that independent 1-to-many relationships are not stored in the same relation.
+  A larger block size allows each node to store more keys and pointers (higher fan-out). This packs more structure per node, flattening the tree and reducing the number of disk accesses required to traverse to leaf nodes.
 
-#### Q79. Which normal form addresses Join Dependency, ensuring a relation cannot be reconstructed from several smaller relations?
-- A) BCNF
-- B) 4NF
-- C) 5NF (PJNF)
-- D) 3NF
+#### Q49. In cost-based query optimization, which cost factor dominates the estimation?
+- A) CPU instruction execution speed.
+- B) Memory access latency.
+- C) The number of disk page transfers (Disk I/O).
+- D) Network data transmission rate.
 - **Answer: ✅ C**
 - **Explanation**:
-  - Fifth Normal Form (5NF), also known as Project-Join Normal Form (PJNF), eliminates redundancies caused by join dependencies.
+  Disk access is several orders of magnitude slower than RAM or CPU execution. Therefore, the cost estimator focuses primarily on minimizing the number of disk block read/write operations (Disk I/O).
 
-#### Q80. In relational algebra, which operator acts to filter rows that meet a specific condition (horizontal partitioning)?
-- A) Projection ($\pi$)
-- B) Selection ($\sigma$)
-- C) Join ($\bowtie$)
-- D) Rename ($\rho$)
+#### Q50. Why are NoSQL databases easier to scale horizontally compared to relational databases?
+- A) NoSQL databases do not support strings.
+- B) NoSQL databases avoid joint-table operations and strict ACID transactions, allowing data to be partitioned (sharded) independently across servers without coordinate locks.
+- C) NoSQL databases run only in the cloud.
+- D) NoSQL databases use faster network protocols.
 - **Answer: ✅ B**
 - **Explanation**:
-  - Selection ($\sigma$) filters tuples based on predicates. Projection ($\pi$) filters columns (vertical partitioning).
-
-#### Q81. In SQL, what is the default behavior of the foreign key constraint if an referenced row in the parent table is deleted and no action is specified?
-- A) Cascade deletion.
-- B) Set foreign keys to NULL.
-- C) Restrict the deletion (raise an error).
-- D) Set foreign keys to default values.
-- **Answer: ✅ C**
-- **Explanation**:
-  - By default, databases enforce restrict actions, preventing deletes on a parent record if child records reference it.
-
-#### Q82. A database view is defined as:
-- A) A physical table stored in a separate database file.
-- B) A virtual table defined by a stored SQL query, computed dynamically when queried.
-- C) A database index structure.
-- D) A transaction log.
-- **Answer: ✅ B**
-- **Explanation**:
-  - A view is a virtual table containing no data itself. It acts as a saved query window over base tables.
-
-#### Q83. What is a "materialized view"?
-- A) A view that has no SQL definition.
-- B) A view whose query results are physically computed and stored on disk for faster performance.
-- C) A view that cannot be updated.
-- D) An index structure.
-- **Answer: ✅ B**
-- **Explanation**:
-  - Unlike standard views, materialized views persist query results physically to disk, updating them periodically.
-
-#### Q84. The "phantom read" anomaly is prevented at which SQL-92 isolation level?
-- A) Read Uncommitted
-- B) Read Committed
-- C) Repeatable Read
-- D) Serializable
-- **Answer: ✅ D**
-- **Explanation**:
-  - Serializable isolation locks indices or ranges (using range locks) to prevent new rows from being inserted into queried ranges.
-
-#### Q85. If a DBMS uses the "Wait-Die" scheme for deadlock prevention, what happens when an older transaction $T_{old}$ requests a lock held by a younger transaction $T_{young}$?
-- A) $T_{old}$ is aborted (dies).
-- B) $T_{old}$ is allowed to wait for the lock.
-- C) $T_{young}$ is aborted (killed).
-- D) Both transactions are aborted.
-- **Answer: ✅ B**
-- **Explanation**:
-  - In Wait-Die (non-preemptive):
-    - If older requests younger: older waits.
-    - If younger requests older: younger dies.
-
-#### Q86. If a DBMS uses the "Wound-Wait" scheme for deadlock prevention, what happens when an older transaction $T_{old}$ requests a lock held by a younger transaction $T_{young}$?
-- A) $T_{old}$ is aborted.
-- B) $T_{old}$ waits.
-- C) $T_{old}$ preempts ("wounds") $T_{young}$, forcing $T_{young}$ to abort and release the lock.
-- D) The database halts.
-- **Answer: ✅ C**
-- **Explanation**:
-  - In Wound-Wait (preemptive):
-    - If older requests younger: older wounds younger (forces abort).
-    - If younger requests older: younger waits.
-
-#### Q87. In a database transaction log, what does a `<Checkpoint>` entry optimize?
-- A) The size of indexes.
-- B) The speed of disk writes.
-- C) The recovery time by defining a limit past which log records do not need to be processed.
-- D) The query execution plan.
-- **Answer: ✅ C**
-- **Explanation**:
-  - Checkpoints ensure that all dirty buffers are written to disk.
-  - During recovery, transactions that committed before the checkpoint can be ignored, drastically speeding up system restarts.
-
-#### Q88. The SQL clause `GROUP BY` must appear:
-- A) Before the `WHERE` clause.
-- B) After the `WHERE` clause but before the `HAVING` clause.
-- C) At the very end of the query.
-- D) Before the `FROM` clause.
-- **Answer: ✅ B**
-- **Explanation**:
-  - The standard SQL execution order is: `FROM` $\to$ `WHERE` $\to$ `GROUP BY` $\to$ `HAVING` $\to$ `SELECT` $\to$ `ORDER BY`.
-
-#### Q89. Which SQL command is used to add a new column to an existing table?
-- A) `UPDATE TABLE ADD COLUMN`
-- B) `ALTER TABLE ADD`
-- C) `INSERT INTO TABLE`
-- D) `CREATE COLUMN`
-- **Answer: ✅ B**
-- **Explanation**:
-  - `ALTER TABLE table_name ADD column_name datatype;` is the standard DDL command to append columns.
-
-#### Q90. What is the difference between a natural join and an inner join?
-- A) Natural join is faster.
-- B) Natural join automatically joins tables based on all columns with matching names, eliminating duplicate columns.
-- C) Inner join does not use a join condition.
-- D) They are identical.
-- **Answer: ✅ B**
-- **Explanation**:
-  - Natural join implicitly matches columns with the same name across tables.
-  - Inner join requires an explicit join condition (e.g., `ON t1.id = t2.id`).
-
-#### Q91. In SQL, the query `SELECT * FROM Table WHERE name LIKE 'A_t%'` matches which string?
-- A) "At"
-- B) "Arthur"
-- C) "Actor"
-- D) "Altar"
-- **Answer: ✅ B**
-- **Explanation**:
-  - `_` matches exactly one character.
-  - `%` matches zero or more characters.
-  - "Arthur" has 'A', then 'r' (matches `_`), then 't' (matches `t`), then 'hur' (matches `%`).
-  - "Actor" has 'c' after 'A' but no 't' in the 3rd position.
-  - "Altar" has 'l' (matches `_`), 't' (matches `t`), then 'ar' (matches `%`). Wait, "Altar" matches too. But let's check: "Arthur": 'A' + 'r' + 't' + 'hur' = matches!
-  - Wait, "Altar" is also a match. Let's examine: "Arthur" is 'A' (1), 'r' (2), 't' (3), 'h' (4)...
-  - Let's check "Actor": 'A' (1), 'c' (2), 't' (3), 'o' (4), 'r' (5). This matches too!
-  - Let's look at "At": only 2 characters, so doesn't match `_t` (needs at least 3).
-  - Let's make sure the question is unambiguous: "Arthur" has 3rd character 't'. "Actor" has 3rd character 't'. "Altar" has 3rd character 't'.
-  - Let's change the pattern to something unique, like `'A_t%'` which matches "Arthur" (A, r, t, ...), "Actor" (A, c, t, ...), "Altar" (A, l, t, ...).
-  - Let's change the pattern to `'A_t_r'` which matches exactly "Actor".
-  - Pattern: `'A_t_r'` matches "Actor" (A, c, t, o, r).
-  - Correct answer: ✅ C (if pattern was `'A_t_r'`). Let's update the explanation.
-
-#### Q92. What is a "dirty write" (Write-Write conflict)?
-- A) A transaction overwrites a value that has been updated by an uncommitted transaction.
-- B) A transaction reads a value and writes it back.
-- C) A transaction aborts.
-- D) A transaction writes data without logging.
-- **Answer: ✅ A**
-- **Explanation**:
-  - A dirty write occurs when a transaction $T_1$ modifies a value, and $T_2$ overwrites that value *before* $T_1$ commits or aborts. This causes recovery problems and violates rollback safety.
-
-#### Q93. Which concurrency control protocol guarantees conflict serializability and is also completely free from deadlocks?
-- A) Two-Phase Locking (2PL)
-- B) Timestamp Ordering Protocol
-- C) Strict 2PL
-- D) Rigorous 2PL
-- **Answer: ✅ B**
-- **Explanation**:
-  - The Timestamp Ordering protocol decides execution order beforehand using transaction timestamps.
-  - If a conflict occurs, the violating transaction is aborted and restarted. Since transactions never wait for locks, **deadlocks are impossible**.
-
-#### Q94. In the Timestamp Ordering protocol, what happens if transaction $T$ issues a `Read(X)` and $TS(T) < \text{Write-TS}(X)$?
-- A) The read operation is allowed.
-- B) Transaction $T$ is aborted and rolled back.
-- C) Transaction $T$ waits.
-- D) Write-TS(X) is updated.
-- **Answer: ✅ B**
-- **Explanation**:
-  - If $TS(T) < \text{Write-TS}(X)$, it means a younger transaction has already written to $X$.
-  - Allowing $T$ to read $X$ would mean $T$ is reading a value from the "future" relative to its own starting time.
-  - Thus, $T$ is aborted and restarted with a new timestamp.
-
-#### Q95. If database recovery uses the "Steal" buffer policy:
-- A) The DBMS can write uncommitted blocks to disk to free up buffer space.
-- B) The DBMS cannot write uncommitted blocks to disk.
-- C) Transactions can steal locks from other transactions.
-- D) Data is read directly from memory.
-- **Answer: ✅ A**
-- **Explanation**:
-  - "Steal" allows the buffer manager to flush dirty pages of uncommitted transactions to disk. This requires the recovery system to support **UNDO** operations if those transactions abort.
-  - "No-Steal" prevents flushing uncommitted updates to disk.
-
-#### Q96. If database recovery uses the "Force" buffer policy:
-- A) All updates must be written to disk before the transaction commits.
-- B) Updates are kept in memory after commit.
-- C) Transactions are forced to abort.
-- D) Checkpoints are forced.
-- **Answer: ✅ A**
-- **Explanation**:
-  - "Force" requires all updates to be written to disk *before* commit completes. This eliminates the need for **REDO** operations during recovery but slows down normal commit processing.
-  - "No-Force" allows committed pages to remain in RAM buffers.
-
-#### Q97. The relational algebra operation $R - S$ (Set Difference) requires that:
-- A) $R$ and $S$ have different schemas.
-- B) $R$ and $S$ be union-compatible (same degree and matching attribute domains).
-- C) $R$ has more columns than $S$.
-- D) $S$ be a primary key table.
-- **Answer: ✅ B**
-- **Explanation**:
-  - Set operations (Union, Intersection, Set Difference) require relations to be union-compatible.
-
-#### Q98. Which SQL command removes all records from a table without deleting the table structure and cannot be rolled back in standard SQL?
-- A) `DELETE TABLE`
-- B) `DROP TABLE`
-- C) `TRUNCATE TABLE`
-- D) `REMOVE TABLE`
-- **Answer: ✅ C**
-- **Explanation**:
-  - `TRUNCATE TABLE` is a DDL command that resets the table by clearing all rows. It is faster than `DELETE` because it does not log individual row deletions and cannot be rolled back in standard implementations.
-
-#### Q99. In DBMS, a transaction is said to be in the "Aborted" state when:
-- A) It is active.
-- B) Its last statement has executed.
-- C) Its rollback is complete and the database has been restored to its pre-transaction state.
-- D) It enters the fail state.
-- **Answer: ✅ C**
-- **Explanation**:
-  - Once a transaction fails, it enters the "Failed" state.
-  - The database recovery engine rolls back its changes, and only after rollback is fully complete does the transaction transition to the "Aborted" state.
-
-#### Q100. How does a database trigger differ from a stored procedure?
-- A) A trigger is faster.
-- B) A stored procedure must be explicitly called by the application, whereas a trigger is executed implicitly by the database engine in response to table modifications.
-- C) A trigger is DDL, while a stored procedure is DML.
-- D) Triggers do not support variables.
-- **Answer: ✅ B**
-- **Explanation**:
-  - Stored procedures are called on-demand.
-  - Triggers are event-driven hooks that execute automatically.
-
-#### Q101. What is the primary function of the Database Administrator (DBA)?
-- A) Writing frontend user interface code.
-- B) Designing the physical schema, managing user permissions, and ensuring system performance and backups.
-- C) Developing SQL queries for reports.
-- D) Writing hardware device drivers.
-- **Answer: ✅ B**
-- **Explanation**:
-  - The DBA manages the database software, maintains security/access permissions, handles recovery/backups, and monitors performance.
-
-#### Q102. In a B+ Tree index of order $m$, each leaf node can contain at most how many data pointers?
-- A) $m$
-- B) $m - 1$
-- C) $\frac{m}{2}$
-- D) $2m$
-- **Answer: ✅ B**
-- **Explanation**:
-  - A node in a B+ Tree of order $m$ can contain at most $m - 1$ key search values and $m$ children/pointers.
-
-#### Q103. If a relation has FDs $A \to B$ and $B \to C$, which normal form does it violate if $\{A\}$ is the candidate key?
-- A) 1NF
-- B) 2NF
-- C) 3NF
-- D) It does not violate any normal form.
-- **Answer: ✅ C**
-- **Explanation**:
-  - Since $A$ is the candidate key, the relation has no partial dependencies, so it is in 2NF.
-  - However, $A \to B \to C$ is a transitive dependency ($A \to B$ and $B \to C$ where $B$ is not a super key). This violates 3NF.
-
-#### Q104. In SQL, what does the command `GRANT SELECT ON employees TO HR_role;` accomplish?
-- A) It allows `HR_role` to insert rows into `employees`.
-- B) It grants read permission (`SELECT`) on the `employees` table to the database role `HR_role`.
-- C) It creates a new table named `employees`.
-- D) It encrypts the `employees` table.
-- **Answer: ✅ B**
-- **Explanation**:
-  - `GRANT` is a DCL (Data Control Language) command used to assign security privileges to database users/roles.
-
-#### Q105. In database concurrency, cascading rollback occurs when:
-- A) A database deadlock forces multiple transactions to die.
-- B) The failure of a single transaction forces the rollback of multiple dependent transactions that read its uncommitted updates.
-- C) The log buffer fills up.
-- D) Multiple index files are updated.
-- **Answer: ✅ B**
-- **Explanation**:
-  - If transaction $T_1$ aborts, any transaction $T_2$ that read uncommitted data written by $T_1$ must also abort.
-  - This can trigger a chain reaction of aborts, known as a cascading rollback. It is prevented by using Strict 2PL.
+  Relational databases enforce strict ACID transactions across tables. Enforcing this across multiple servers requires complex distributed locks (like 2PC), which bottleneck horizontal scaling. NoSQL databases relax these constraints, allowing shards to scale independently.

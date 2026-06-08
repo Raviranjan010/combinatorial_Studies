@@ -17,7 +17,14 @@
 9. [Concurrency Anomalies (Dirty, Non-Repeatable & Phantom Reads)](#9-concurrency-anomalies-dirty-non-repeatable--phantom-reads)
 10. [Conflict Serializability & Precedence Graphs](#10-conflict-serializability--precedence-graphs)
 11. [Database Recovery Systems (WAL, Checkpoints & REDO/UNDO)](#11-database-recovery-systems-wal-checkpoints--redoundo)
-12. [Common Pitfalls & Mistakes to Avoid](#12-common-pitfalls--mistakes-to-avoid)
+12. [Indexing and Query Optimization](#12-indexing-and-query-optimization)
+13. [NoSQL Databases](#13-nosql-databases)
+14. [Big Data and Distributed Databases](#14-big-data-and-distributed-databases)
+15. [Current Trends in DBMS](#15-current-trends-in-dbms)
+16. [Important Formulas and Concepts](#16-important-formulas-and-concepts)
+17. [Frequently Asked Interview Questions](#17-frequently-asked-interview-questions)
+18. [Practice Worksheet & Exercises](#18-practice-worksheet--exercises)
+19. [Common Pitfalls & Mistakes to Avoid](#19-common-pitfalls--mistakes-to-avoid)
 
 ---
 

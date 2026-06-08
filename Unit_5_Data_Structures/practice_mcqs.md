@@ -1,6 +1,6 @@
 # Unit V: Data Structures - MCQ Bank
 
-Master Arrays, Linked Lists, Stacks, Queues, Trees, Graphs, Hashing, and Heaps with these 50 solved, high-probability Multiple Choice Questions.
+Master Arrays, Linked Lists, Stacks, Queues, Trees, Graphs, Hashing, Heaps, Tries, and Disjoint Sets with these 165 solved, high-probability Multiple Choice Questions.
 
 ---
 
@@ -931,3 +931,487 @@ Master Arrays, Linked Lists, Stacks, Queues, Trees, Graphs, Hashing, and Heaps w
 - D) All paths to leaves have equal length
 - **Answer: ✅ B**
 - **Explanation**: Complete binary trees fill levels top-to-bottom and left-to-right. This property allows them to be stored compactly in arrays without gaps.
+
+---
+
+## 🔷 Part 2: Mixed Exam Practice (60 MCQs)
+
+#### Q106. A data structure is:
+- A) Programming language
+- B) Way of organizing data
+- C) Operating System
+- D) Compiler
+- **Answer: ✅ B**
+- **Explanation**: A data structure is a systematic way of organizing, managing, and storing data in a computer so that it can be accessed and modified efficiently.
+
+#### Q107. Which of the following is a linear data structure?
+- A) Tree
+- B) Graph
+- C) Array
+- D) Heap
+- **Answer: ✅ C**
+- **Explanation**: Arrays store elements sequentially in contiguous memory blocks. Trees, graphs, and heaps are non-linear hierarchical or network structures.
+
+#### Q108. Which data structure stores data hierarchically?
+- A) Queue
+- B) Tree
+- C) Array
+- D) Stack
+- **Answer: ✅ B**
+- **Explanation**: A tree is a hierarchical, non-linear data structure consisting of nodes connected by edges, starting from a single root node.
+
+#### Q109. Which is a non-linear data structure?
+- A) Linked List
+- B) Queue
+- C) Graph
+- D) Array
+- **Answer: ✅ C**
+- **Explanation**: Graphs are non-linear because elements can be connected in arbitrary networks rather than sequentially (like arrays, lists, stacks, and queues).
+
+#### Q110. Which data structure provides LIFO access?
+- A) Queue
+- B) Stack
+- C) Array
+- D) Tree
+- **Answer: ✅ B**
+- **Explanation**: Stacks follow the LIFO (Last-In, First-Out) access principle where the last element inserted is the first one removed.
+
+#### Q111. Array elements are stored in:
+- A) Random locations
+- B) Contiguous memory locations
+- C) Heap memory only
+- D) Linked memory
+- **Answer: ✅ B**
+- **Explanation**: Arrays allocate contiguous (side-by-side) memory blocks, which enables direct index address calculations.
+
+#### Q112. Accessing the 10th element of an array requires:
+- A) $O(1)$
+- B) $O(\log N)$
+- C) $O(N)$
+- D) $O(N^2)$
+- **Answer: ✅ A**
+- **Explanation**: Contiguous memory allows the CPU to calculate the exact address of any index in $O(1)$ constant time.
+
+#### Q113. Which operation is costly in arrays?
+- A) Access
+- B) Traversal
+- C) Insertion at middle
+- D) Reading
+- **Answer: ✅ C**
+- **Explanation**: Inserting in the middle of an array requires shifting all subsequent elements forward to maintain contiguity, which takes $O(N)$ time.
+
+#### Q114. Linked Lists use:
+- A) Contiguous memory
+- B) Hashing
+- C) Pointers
+- D) Recursion
+- **Answer: ✅ C**
+- **Explanation**: Linked lists allocate memory dynamically and link non-contiguous nodes using address pointers.
+
+#### Q115. Which structure is best when frequent insertions and deletions are required?
+- A) Array
+- B) Linked List
+- C) Heap
+- D) Trie
+- **Answer: ✅ B**
+- **Explanation**: Linked lists insert/delete elements in $O(1)$ time by adjusting neighbor node pointers without shifting elements.
+
+#### Q116. In a singly linked list, each node contains:
+- A) Data only
+- B) Pointer only
+- C) Data and next pointer
+- D) Data and two pointers
+- **Answer: ✅ C**
+- **Explanation**: Singly linked list nodes contain a data field and a single reference pointer pointing to the next node.
+
+#### Q117. Random access is difficult in:
+- A) Array
+- B) Linked List
+- C) Matrix
+- D) String
+- **Answer: ✅ B**
+- **Explanation**: Since linked list nodes are scattered in memory, accessing a random node requires sequential traversal from the head node.
+
+#### Q118. Stack follows:
+- A) FIFO
+- B) LIFO
+- C) Priority Order
+- D) Random Order
+- **Answer: ✅ B**
+- **Explanation**: Stacks restrict all operations to the Top end, enforcing Last-In, First-Out (LIFO) access.
+
+#### Q119. Queue follows:
+- A) LIFO
+- B) FIFO
+- C) Circular Order
+- D) Sorted Order
+- **Answer: ✅ B**
+- **Explanation**: Queues insert at the rear and delete from the front, enforcing First-In, First-Out (FIFO) access.
+
+#### Q120. Which stack operation inserts an element?
+- A) Pop
+- B) Push
+- C) Peek
+- D) Front
+- **Answer: ✅ B**
+- **Explanation**: The `push(x)` operation inserts a new element `x` onto the top of the stack.
+
+#### Q121. Removing an element from a stack is called:
+- A) Delete
+- B) Pop
+- C) Push
+- D) Enqueue
+- **Answer: ✅ B**
+- **Explanation**: The `pop()` operation removes and returns the topmost element of the stack.
+
+#### Q122. Which data structure is used for recursion?
+- A) Queue
+- B) Graph
+- C) Stack
+- D) Tree
+- **Answer: ✅ C**
+- **Explanation**: The operating system manages nested recursive function calls using an activation record stack.
+
+#### Q123. Which operation returns the top element without removing it?
+- A) Pop
+- B) Push
+- C) Peek
+- D) Delete
+- **Answer: ✅ C**
+- **Explanation**: The `peek()` (or `top()`) operation inspects the top element without popping it off the stack.
+
+#### Q124. Insertion in a queue is called:
+- A) Push
+- B) Pop
+- C) Enqueue
+- D) Peek
+- **Answer: ✅ C**
+- **Explanation**: The `enqueue(x)` operation appends a new element `x` to the rear of the queue.
+
+#### Q125. Deletion in a queue is called:
+- A) Pop
+- B) Enqueue
+- C) Dequeue
+- D) Traverse
+- **Answer: ✅ C**
+- **Explanation**: The `dequeue()` operation removes and returns the element at the front of the queue.
+
+#### Q126. A tree with $N$ nodes has:
+- A) $N$ edges
+- B) $N+1$ edges
+- C) $N-1$ edges
+- D) $N^2$ edges
+- **Answer: ✅ C**
+- **Explanation**: A connected acyclic graph (tree) with $N$ nodes always contains exactly $N-1$ edges.
+
+#### Q127. Root -> Left -> Right is:
+- A) Inorder
+- B) Postorder
+- C) Preorder
+- D) Level Order
+- **Answer: ✅ C**
+- **Explanation**: Preorder tree traversal visits nodes in the sequence: Root, Left subtree, then Right subtree.
+
+#### Q128. Left -> Root -> Right is:
+- A) Preorder
+- B) Inorder
+- C) Postorder
+- D) DFS
+- **Answer: ✅ B**
+- **Explanation**: Inorder tree traversal visits nodes in the sequence: Left subtree, Root, then Right subtree.
+
+#### Q129. In a BST:
+- A) Left > Root
+- B) Right < Root
+- C) Left < Root < Right
+- D) Root always maximum
+- **Answer: ✅ C**
+- **Explanation**: Binary Search Trees (BSTs) enforce that all left child keys are smaller than the parent node, and all right child keys are larger.
+
+#### Q130. Which traversal of BST gives sorted output?
+- A) Preorder
+- B) Postorder
+- C) Inorder
+- D) Level Order
+- **Answer: ✅ C**
+- **Explanation**: Visually traversing a BST from left to right (Inorder traversal) visits keys in sorted, ascending order.
+
+#### Q131. BFS uses:
+- A) Stack
+- B) Queue
+- C) Heap
+- D) Array
+- **Answer: ✅ B**
+- **Explanation**: Breadth-First Search (BFS) processes nodes level-by-level using a FIFO queue.
+
+#### Q132. DFS uses:
+- A) Queue
+- B) Linked List
+- C) Stack
+- D) Heap
+- **Answer: ✅ C**
+- **Explanation**: Depth-First Search (DFS) explores paths as deep as possible before backtracking using a LIFO stack (or recursion stack).
+
+#### Q133. A graph consists of:
+- A) Vertices only
+- B) Edges only
+- C) Vertices and edges
+- D) Trees only
+- **Answer: ✅ C**
+- **Explanation**: A graph $G = (V, E)$ is mathematically defined by a set of vertices $V$ (nodes) connected by edges $E$ (links).
+
+#### Q134. Which structure is best for representing social networks?
+- A) Array
+- B) Graph
+- C) Queue
+- D) Stack
+- **Answer: ✅ B**
+- **Explanation**: Social networks represent entities (people) as vertices and their connections (friendships) as edges, which is modeled as a Graph.
+
+#### Q135. Complexity of BFS is:
+- A) $O(N^2)$
+- B) $O(\log N)$
+- C) $O(V+E)$
+- D) $O(1)$
+- **Answer: ✅ C**
+- **Explanation**: Breadth-First Search visits all vertices $V$ and scans neighbor lists to trace all edges $E$ once, running in $O(V+E)$ time.
+
+#### Q136. Hashing is mainly used for:
+- A) Sorting
+- B) Fast searching
+- C) Traversal
+- D) Recursion
+- **Answer: ✅ B**
+- **Explanation**: Hashing maps search keys directly to index slots using a hash function, enabling $O(1)$ average search times.
+
+#### Q137. A collision occurs when:
+- A) Table is empty
+- B) Search fails
+- C) Two keys map to same index
+- D) Table is full
+- **Answer: ✅ C**
+- **Explanation**: A collision happens when the hash function generates the identical index for two distinct keys: $h(K_1) = h(K_2)$ for $K_1 \neq K_2$.
+
+#### Q138. Which collision technique uses linked lists?
+- A) Linear Probing
+- B) Double Hashing
+- C) Chaining
+- D) Quadratic Probing
+- **Answer: ✅ C**
+- **Explanation**: Separate chaining resolves collisions by building a linked list at each index slot of the hash table.
+
+#### Q139. Which probing method suffers from primary clustering?
+- A) Chaining
+- B) Double Hashing
+- C) Linear Probing
+- D) Trie
+- **Answer: ✅ C**
+- **Explanation**: Linear probing scans slots sequentially, causing adjacent filled slots to cluster together and increasing search steps.
+
+#### Q140. Average search complexity in hashing:
+- A) $O(N^2)$
+- B) $O(\log N)$
+- C) $O(N)$
+- D) $O(1)$
+- **Answer: ✅ D**
+- **Explanation**: If values are distributed uniformly, hashing retrieves keys in $O(1)$ constant time on average.
+
+#### Q141. Load Factor is:
+- A) $N \times M$
+- B) $N + M$
+- C) $N / M$
+- D) $M / N$
+- **Answer: ✅ C**
+- **Explanation**: The load factor ($\alpha$) is the ratio of keys stored ($N$) to total hash table capacity ($M$): $\alpha = N/M$.
+
+#### Q142. Hash function commonly used:
+- A) $k + m$
+- B) $k \pmod m$
+- C) $k^2$
+- D) $\log(k)$
+- **Answer: ✅ B**
+- **Explanation**: Division hashing ($h(k) = k \pmod m$) is the simplest and most common hash function.
+
+#### Q143. Which collision technique generally gives best distribution?
+- A) Linear Probing
+- B) Chaining
+- C) Double Hashing
+- D) Queue
+- **Answer: ✅ C**
+- **Explanation**: Double hashing uses a second hash function to calculate custom step sizes, resolving primary and secondary clustering to distribute keys evenly.
+
+#### Q144. Heap is a:
+- A) Linked List
+- B) Complete Binary Tree
+- C) Graph
+- D) Queue
+- **Answer: ✅ B**
+- **Explanation**: A Binary Heap is a complete binary tree (filled top-to-bottom and left-to-right), allowing contiguous array storage.
+
+#### Q145. In Max Heap, root contains:
+- A) Smallest element
+- B) Median element
+- C) Largest element
+- D) Any element
+- **Answer: ✅ C**
+- **Explanation**: Max-heaps enforce that parents are $\ge$ children, placing the maximum value at the root node.
+
+#### Q146. In Min Heap, root contains:
+- A) Largest element
+- B) Smallest element
+- C) Random element
+- D) Average element
+- **Answer: ✅ B**
+- **Explanation**: Min-heaps enforce that parents are $\le$ children, placing the minimum value at the root node.
+
+#### Q147. Heap Sort complexity:
+- A) $O(N^2)$
+- B) $O(\log N)$
+- C) $O(N \log N)$
+- D) $O(N)$
+- **Answer: ✅ C**
+- **Explanation**: Heapsort performs $N$ extractions, taking $O(\log N)$ heapify time for each, which bounds sorting time to $O(N \log N)$ in all cases.
+
+#### Q148. Which operation restores heap property after insertion?
+- A) Heapify Down
+- B) Heapify Up
+- C) DFS
+- D) BFS
+- **Answer: ✅ B**
+- **Explanation**: Inserting places elements at the leaf. The node must bubble up the path to the root (Heapify Up) to restore parent constraints.
+
+#### Q149. Priority Queue is commonly implemented using:
+- A) Array
+- B) Stack
+- C) Heap
+- D) Graph
+- **Answer: ✅ C**
+- **Explanation**: Binary heaps insert and extract min/max elements in optimal $O(\log N)$ times, making them ideal for priority queue schedules.
+
+#### Q150. For node at index $i$, left child index is:
+- A) $i+1$
+- B) $2i$
+- C) $2i+1$
+- D) $2i+2$
+- **Answer: ✅ C**
+- **Explanation**: Under 0-indexed arrays, the left child of node $i$ is calculated using $2i + 1$.
+
+#### Q151. For node at index $i$, right child index is:
+- A) $2i+2$
+- B) $i+1$
+- C) $2i$
+- D) $i-1$
+- **Answer: ✅ A**
+- **Explanation**: Under 0-indexed arrays, the right child of node $i$ is calculated using $2i + 2$.
+
+#### Q152. Main operations of Disjoint Set are:
+- A) Push and Pop
+- B) Union and Find
+- C) Insert and Delete
+- D) BFS and DFS
+- **Answer: ✅ B**
+- **Explanation**: Disjoint sets partition elements and support `Union` (merge groups) and `Find` (determine group representative).
+
+#### Q153. Find operation returns:
+- A) Child node
+- B) Representative element
+- C) Leaf node
+- D) Edge
+- **Answer: ✅ B**
+- **Explanation**: `Find(x)` traverses pointers up to locate the root representative of the set containing `x`.
+
+#### Q154. Path Compression is used to:
+- A) Increase height
+- B) Reduce height
+- C) Delete nodes
+- D) Sort elements
+- **Answer: ✅ B**
+- **Explanation**: Path compression points traversed nodes directly to the root, flattening the tree height to speed up future searches.
+
+#### Q155. Union by Rank attaches:
+- A) Larger tree below smaller tree
+- B) Smaller tree below larger tree
+- C) Random tree
+- D) Equal tree only
+- **Answer: ✅ B**
+- **Explanation**: Union by Rank attaches the root of the shorter tree to the root of the taller tree to minimize height growth.
+
+#### Q156. Which algorithm heavily uses Disjoint Set?
+- A) DFS
+- B) BFS
+- C) Kruskal's Algorithm
+- D) Binary Search
+- **Answer: ✅ C**
+- **Explanation**: Kruskal's minimum spanning tree algorithm uses Disjoint Sets to check if adding a candidate edge creates a cycle in the spanning forest.
+
+#### Q157. Trie is also called:
+- A) Heap Tree
+- B) Prefix Tree
+- C) AVL Tree
+- D) Binary Tree
+- **Answer: ✅ B**
+- **Explanation**: Tries are called Prefix Trees because all descendant nodes share the string prefix character associated with their ancestor nodes.
+
+#### Q158. Trie is mainly used to store:
+- A) Graphs
+- B) Integers
+- C) Strings
+- D) Arrays
+- **Answer: ✅ C**
+- **Explanation**: Tries store and search keys representing text strings over a character alphabet.
+
+#### Q159. Search complexity in Trie depends on:
+- A) Number of words
+- B) Height of graph
+- C) Length of word
+- D) Number of nodes
+- **Answer: ✅ C**
+- **Explanation**: Searching a Trie requires traversing characters of the query string, running in $O(L)$ time where $L$ is the string length.
+
+#### Q160. Autocomplete systems commonly use:
+- A) Heap
+- B) Trie
+- C) Queue
+- D) Stack
+- **Answer: ✅ B**
+- **Explanation**: Autocomplete systems traverse character prefixes using Tries to locate matching vocabulary.
+
+#### Q161. AVL Tree is:
+- A) Queue
+- B) Stack
+- C) Self-balancing BST
+- D) Graph
+- **Answer: ✅ C**
+- **Explanation**: An AVL Tree is a height-balanced Binary Search Tree that enforces height differences between subtrees of at most $\pm 1$.
+
+#### Q162. B-Tree is commonly used in:
+- A) Networking
+- B) Databases
+- C) Graphics
+- D) Operating Systems
+- **Answer: ✅ B**
+- **Explanation**: Databases use balanced multi-way B-Trees to index tables because their high fan-out minimizes disk block reads.
+
+#### Q163. Best structure for fast random access:
+- A) Linked List
+- B) Queue
+- C) Array
+- D) Trie
+- **Answer: ✅ C**
+- **Explanation**: Contiguous memory slots allow arrays to access elements by index in $O(1)$ constant time.
+
+#### Q164. Best structure for connectivity checking:
+- A) Heap
+- B) Graph
+- C) Disjoint Set
+- D) Queue
+- **Answer: ✅ C**
+- **Explanation**: Disjoint Sets (Union-Find) check connection connectivity between sets of nodes in near-$O(1)$ time.
+
+#### Q165. Best structure for priority scheduling:
+- A) Linked List
+- B) Heap
+- C) Stack
+- D) Trie
+- **Answer: ✅ B**
+- **Explanation**: Heaps keep the root node key sorted in min/max priority order, making insertions and extractions highly efficient ($O(\log N)$).
