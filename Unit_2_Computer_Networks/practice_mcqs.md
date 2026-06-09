@@ -1041,3 +1041,51 @@ Master Unit 2 with these 105 solved, high-probability Multiple Choice Questions 
 - **Explanation**:
   - In Manchester encoding, there is always a mid-bit transition (e.g., high-to-low for `0`, low-to-high for `1`).
   - This guaranteed transition provides self-synchronization (the receiver can extract the clock signal from the data stream).
+
+#### Q106. Which of the following IP addresses can be used as both the source and destination IP of a packet?
+- A) `0.0.0.0`
+- B) `255.255.255.255`
+- C) `127.0.0.1`
+- D) `192.168.1.255`
+- **Answer: ✅ C**
+- **Explanation**:
+  - `127.0.0.1` is the IPv4 loopback address. It allows a host to send packets to itself for local diagnostics, acting as both the source and destination IP.
+
+#### Q107. In a token ring network, the transmission speed is $10^7$ bps and propagation speed is 200 meters/$\mu$s. A 1-bit delay in this network is equivalent to how many meters of cable?
+- A) 10 meters
+- B) 20 meters
+- C) 50 meters
+- D) 100 meters
+- **Answer: ✅ B**
+- **Explanation**:
+  - First, calculate the time required to transmit 1 bit: $T_b = \frac{1}{\text{Bandwidth}} = \frac{1}{10^7\text{ bps}} = 10^{-7}\text{ seconds} = 0.1\ \mu\text{s}$.
+  - Second, compute the propagation distance corresponding to this time: $\text{Distance} = \text{Propagation Speed} \times T_b = 200\text{ m/}\mu\text{s} \times 0.1\ \mu\text{s} = 20\text{ meters}$.
+
+#### Q108. Determine the maximum length of cable (in km) for data transmission at a rate of 500 Mbps in an Ethernet system where the computed frame transmission time is $20\ \mu\text{s}$ and signal speed is $2 \times 10^5$ km/s.
+- A) 1 km
+- B) 2 km
+- C) 4 km
+- D) 10 km
+- **Answer: ✅ B**
+- **Explanation**:
+  - Under collision detection (CSMA/CD) constraints, the round-trip propagation delay $2 \times T_p$ must be less than or equal to the frame transmission time $T_t$.
+  - Therefore, the maximum one-way propagation delay is $T_p = \frac{T_t}{2} = \frac{20\ \mu\text{s}}{2} = 10\ \mu\text{s}$.
+  - The maximum cable length is then: $\text{Length} = \text{Signal Speed} \times $T_p = 200,000\text{ km/s} \times 10 \times 10^{-6}\text{ s} = 2\text{ km}$.
+
+#### Q109. In the IPv4 addressing format, the number of networks allowed under Class C address is:
+- A) $2^{24}$
+- B) $2^{21}$
+- C) $2^{16}$
+- D) $2^{8}$
+- **Answer: ✅ B**
+- **Explanation**:
+  - Class C IP addresses use a fixed 3-bit prefix (`110`) in the first octet, leaving $24 - 3 = 21$ bits for the network component. Thus, the number of networks allowed is $2^{21}$.
+
+#### Q110. The transport layer protocols used for Real-time Multimedia, File Transfer, DNS, and Email respectively are:
+- A) TCP, UDP, TCP, UDP
+- B) UDP, TCP, UDP, TCP
+- C) UDP, UDP, TCP, TCP
+- D) TCP, TCP, UDP, UDP
+- **Answer: ✅ B**
+- **Explanation**:
+  - Real-time Multimedia and DNS prioritize speed and low overhead, so they use UDP. File Transfer (FTP) and Email (SMTP) require high reliability and error recovery, so they use TCP.

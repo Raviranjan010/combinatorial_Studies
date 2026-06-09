@@ -2031,3 +2031,51 @@ Using Non-Preemptive SJF, what is the completion time of P2?
 ✅ **Answer: B**
 > **Deadlock Recovery**: abort deadlocked processes (either all at once or one by one) until the deadlock cycle is broken. Resources are released and other processes can proceed.
 
+---
+
+**Q129.** Increasing the RAM of a computer typically improves performance because:
+
+- A) CPU speed increases
+- B) Fewer page faults occur
+- C) Disk transfer rate increases
+- D) Virtual memory size decreases
+
+✅ **Answer: B**
+> **Fewer page faults occur**: Larger physical memory space means the OS can fit more active pages concurrently, minimizing virtual memory page thrashing and disk read overheads.
+
+---
+
+**Q130.** Which of the following process scheduling algorithms may lead to starvation?
+
+- A) Round Robin
+- B) First-Come, First-Served (FCFS)
+- C) Shortest Job Next (SJN / SJF)
+- D) Multilevel Queue with Feedback (with aging)
+
+✅ **Answer: C**
+> **Shortest Job Next (SJN / SJF)**: SJN prioritizes processes with shorter execution bursts. A continuous arrival of short processes will trap longer processes at the back of the queue indefinitely.
+
+---
+
+**Q131.** In which of the four necessary conditions for deadlock do processes claim exclusive control of the resource they require?
+
+- A) Hold and Wait
+- B) Mutual Exclusion
+- C) No Preemption
+- D) Circular Wait
+
+✅ **Answer: B**
+> **Mutual Exclusion**: Mutual exclusion asserts that a resource can only be held by one process in a non-shareable mode at any given execution instance.
+
+---
+
+**Q132.** Which of the following need not necessarily be saved on a context switch between processes?
+
+- A) Program Counter
+- B) General-purpose registers
+- C) Translation Lookaside Buffer (TLB)
+- D) Process Control Block (PCB)
+
+✅ **Answer: C**
+> **Translation Lookaside Buffer (TLB)**: General-purpose registers and program counters store absolute active process states. The TLB caches address translations, which are simply invalidated/flushed when stepping into a completely new virtual address map.
+

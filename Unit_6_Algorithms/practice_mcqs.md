@@ -1308,3 +1308,121 @@ What is the mathematical recurrence formula to calculate the hash of the next wi
   2. It is NP-Hard, meaning it is at least as hard as any problem in NP. To prove this, we select a known NP-Complete problem $Y$ and show that $Y \le_P X$ (reduce $Y$ to $X$ in polynomial time). This proves that if we could solve $X$ in polynomial time, we could solve $Y$ (and by extension, any NP problem) in polynomial time.
   Option A is incorrect because reducing $X \le_P Y$ only proves $X$ is no harder than $Y$, not that $X$ is NP-Hard.
 
+#### Q131. The time complexity of the standard binary search algorithm operates as:
+- A) $O(n)$
+- B) $O(\log n)$
+- C) $O(n \log n)$
+- D) $O(1)$
+- **Answer: ✅ B**
+- **Explanation**: Binary search repeatedly halves the search space in each step, yielding a logarithmic time complexity of $O(\log n)$.
+
+#### Q132. If each and every vertex in graph $G$ has a degree at most 23, then $G$ can have a vertex coloring of:
+- A) 23
+- B) 24
+- C) 46
+- D) 12
+- **Answer: ✅ B**
+- **Explanation**: According to the vertex coloring bound theorem, any graph $G$ with maximum degree $\Delta$ can be colored with at most $\Delta + 1$ colors. Thus, $\text{Color Count} \le 23 + 1 = 24$.
+
+#### Q133. If $G$ represents a forest mapping with 54 vertices and 17 connected components, trace the total number of edges:
+- A) 71
+- B) 37
+- C) 54
+- D) 17
+- **Answer: ✅ B**
+- **Explanation**: For a forest, the relation between the number of vertices ($V$), connected components ($C$), and edges ($E$) is given by the formula: $\text{Edges} = V - C = 54 - 17 = 37$.
+
+#### Q134. The number of edges in a regular graph with degree 46 and 8 distinct vertices equals:
+- A) 368
+- B) 184
+- C) 92
+- D) 46
+- **Answer: ✅ B**
+- **Explanation**: Under the Handshaking Lemma, the sum of degrees of all vertices equals twice the number of edges: $\sum \text{deg}(v) = 2E \implies N \times R = 2E \implies \text{Edges} = \frac{8 \times 46}{2} = 184$.
+
+#### Q135. An algorithm which utilizes the past tracking results and directly leverages them to discover a new result is called:
+- A) Greedy Algorithm
+- B) Divide and Conquer Algorithm
+- C) Dynamic Programming Algorithm
+- D) Backtracking Algorithm
+- **Answer: ✅ C**
+- **Explanation**: Dynamic programming resolves problems by solving subproblems once and caching their results (memoization/tabulation) to build the global optimal solution.
+
+#### Q136. To sort a list with $n$ elements, the insertion sort begins execution at the _______ element slot context.
+- A) First
+- B) Second
+- C) Middle
+- D) Last
+- **Answer: ✅ B**
+- **Explanation**: Insertion sort considers the first element (index 0) to be a sorted sublist of size 1 and begins inserting the second element (index 1) into its sorted position.
+
+#### Q137. Trace the precise list obtained in the third execution pass of Selection Sort for arrays matching: [3, 5, 4, 1, 2]
+- A) [1, 2, 4, 3, 5]
+- B) [1, 2, 3, 4, 5]
+- C) [1, 5, 4, 3, 2]
+- D) [3, 4, 5, 1, 2]
+- **Answer: ✅ B**
+- **Explanation**: Selection sort repeatedly finds the minimum element from the unsorted portion and swaps it into its correct position:
+  - Pass 1: Find min (1), swap with 3 $\to$ [1, 5, 4, 3, 2]
+  - Pass 2: Find min in unsorted [5, 4, 3, 2] (which is 2), swap with 5 $\to$ [1, 2, 4, 3, 5]
+  - Pass 3: Find min in unsorted [4, 3, 5] (which is 3), swap with 4 $\to$ [1, 2, 3, 4, 5]
+
+#### Q138. The average/worst-case time complexity of the bubble sort algorithm operates as:
+- A) $O(n \log n)$
+- B) $O(n^2)$
+- C) $O(n)$
+- D) $O(2^n)$
+- **Answer: ✅ B**
+- **Explanation**: Bubble sort compares and swaps adjacent out-of-order elements in nested loops, running in $O(n^2)$ time in both average and worst cases.
+
+#### Q139. Time complexity of the Breadth-First Search (BFS) algorithm scales as:
+- A) $O(V^2)$
+- B) $O(V + E)$
+- C) $O(E \log V)$
+- D) $O(V \cdot E)$
+- **Answer: ✅ B**
+- **Explanation**: BFS visits all $V$ vertices and explores all $E$ edges once, yielding a time complexity of $O(V + E)$.
+
+#### Q140. The BFS traversal approach run directly over standard graph maps outputs a:
+- A) Tree structure
+- B) Stack configuration
+- C) Cycle path
+- D) Matrix representation
+- **Answer: ✅ A**
+- **Explanation**: BFS traversal starting from a source node yields a cycle-free spanning tree (BFS tree) representing the shortest path paths from the source.
+
+#### Q141. The maximum number of times the decrease-key operation is performed in Dijkstra's algorithm will be equal to:
+- A) Total number of vertices
+- B) Total number of edges
+- C) $V \log V$
+- D) $V^2$
+- **Answer: ✅ B**
+- **Explanation**: The decrease-key operation is triggered whenever we find a shorter path to a vertex. In the worst case, this relaxation check can occur once for every edge in the graph.
+
+#### Q142. What happens when the value of parameter $K$ settles at zero inside the Floyd-Warshall algorithm framework?
+- A) The algorithm terminates
+- B) Zero intermediate vertices are allowed
+- C) The algorithm starts from vertex 0
+- D) A negative cycle is detected
+- **Answer: ✅ B**
+- **Explanation**: In Floyd-Warshall, the recurrence tracks shortest paths using intermediate vertices from the set $\{1, \dots, K\}$. When $K=0$, zero intermediate vertices are allowed, meaning paths must consist of direct edges only.
+
+#### Q143. Given available coin denominations 1, 3, 4. If a greedy strategy picks the largest possible element denomination layer each turn, for which target sum will it resolve an OPTIMAL calculation profile?
+- A) 6
+- B) 10
+- C) 100
+- D) 15
+- **Answer: ✅ C**
+- **Explanation**:
+  - For 6, greedy picks 4, 1, 1 (3 coins); optimal is 3, 3 (2 coins).
+  - For 10, greedy picks 4, 4, 1, 1 (4 coins); optimal is 4, 3, 3 (3 coins).
+  - For 100, greedy picks twenty-five 4-value coins (25 coins), which matches the absolute optimal dynamic programming resolution.
+
+#### Q144. If a problem can be solved efficiently by combining optimal solutions to non-overlapping subproblems, the strategy is called:
+- A) Dynamic Programming
+- B) Divide and Conquer
+- C) Greedy Strategy
+- D) Backtracking
+- **Answer: ✅ B**
+- **Explanation**: Divide and Conquer splits problems into independent, non-overlapping subproblems (like Merge Sort). Overlapping subproblems are resolved using Dynamic Programming.
+

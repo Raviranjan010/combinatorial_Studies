@@ -246,6 +246,46 @@ This practice bank contains 130 high-probability Multiple Choice Questions (MCQs
 - **Answer: ✅ C**
 - **Explanation**: Graph databases (like Neo4j) store entities as nodes and relationships as edges, making them highly optimized for traversing complex networks.
 
+#### Q31. Which key constraint is required for the functioning of the foreign key in a relational database?
+- A) Unique key
+- B) Primary key
+- C) Candidate key
+- D) Super key
+- **Answer: ✅ B**
+- **Explanation**: Foreign keys assert relationship structures across tables by directly pointing to an explicitly mapped primary key index field in the source table.
+
+#### Q32. Given the basic ER and relational models, which of the following statements is incorrect?
+- A) An entity relation can have a composite primary key.
+- B) In a row of a relational table, an attribute can have more than one value.
+- C) A table can have multiple foreign keys.
+- D) Relational models represent data as relations (tables).
+- **Answer: ✅ B**
+- **Explanation**: A core condition of the 1st Normal Form (1NF) in standard table sets is that every row-attribute value domain context must be fully atomic (no multi-valued or repeating attributes).
+
+#### Q33. The DBMS acts as an interface between _______ and _______ of an enterprise class system.
+- A) Hardware and Operating System
+- B) Database Application and the Database
+- C) Web Server and the Client
+- D) Query Compiler and the Storage Engine
+- **Answer: ✅ B**
+- **Explanation**: The DBMS sits between user database applications and the physical stored database files, abstracting data access and management details.
+
+#### Q34. Which of the following commands is correct to delete the values in the relation "Teaches"?
+- A) DROP TABLE Teaches;
+- B) REMOVE TABLE Teaches;
+- C) DELETE FROM Teaches;
+- D) ALTER TABLE Teaches DROP VALUES;
+- **Answer: ✅ C**
+- **Explanation**: The `DELETE FROM table_name;` query flushes internal row records out while maintaining table properties. `DROP` destroys the table schema entirely.
+
+#### Q35. What happens if a piece of data is stored in two places in the database?
+- A) Query execution speed is doubled.
+- B) Storage space is wasted and changing data in one spot will cause data inconsistency.
+- C) ACID properties are automatically satisfied.
+- D) The database becomes read-only.
+- **Answer: ✅ B**
+- **Explanation**: Redundant data storage wastes disk space and introduces the risk of data inconsistency, where updates to one copy are not synchronized with the other.
+
 ---
 
 ## 🟡 Part 2: Medium Level MCQs (1–50)

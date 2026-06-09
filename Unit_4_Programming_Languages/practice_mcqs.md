@@ -1235,3 +1235,123 @@ int main() {
   - *C*: Pointers to methods are function pointers.
   - *D*: Unaligned pointer is a CPU hardware boundary issue.
 
+#### Q127. Which of the following is NOT a valid C variable name?
+- A) int_main
+- B) int $main
+- C) _main
+- D) main1
+- **Answer: ✅ B**
+- **Explanation**: Under standard C variable naming rules, identifiers can only contain letters, digits, and underscores. They cannot employ special characters like dollar signs ($).
+
+#### Q128. Which of the following cannot be a variable name in C?
+- A) volatile
+- B) static_value
+- C) main_func
+- D) variable_type
+- **Answer: ✅ A**
+- **Explanation**: Reserved programming language keywords like `volatile` cannot act as local variable strings (identifiers).
+
+#### Q129. What is the result of a logical or relational expression in C?
+- A) True or False (boolean type)
+- B) 0 or 1 (integer type)
+- C) Any non-zero integer
+- D) Void
+- **Answer: ✅ B**
+- **Explanation**: Evaluation operations automatically compute down to boolean flag statuses mapping internally as either explicit integer 0 (False) or 1 (True).
+
+#### Q130. Which of the following is not possible with any two operators in C?
+- A) Same precedence, same associativity
+- B) Same precedence, different associativity
+- C) Different precedence, same associativity
+- D) Different precedence, different associativity
+- **Answer: ✅ B**
+- **Explanation**: Operators that share identical execution precedence layers must share the exact same associative parsing order constraint.
+
+#### Q131. Functions in C language are always:
+- A) Internal
+- B) External
+- C) Inline
+- D) Static
+- **Answer: ✅ B**
+- **Explanation**: C does not support nesting functions directly inside other executable function structures natively.
+
+#### Q132. Which user-defined header file extension is traditionally used in C++?
+- A) .cpp
+- B) .h
+- C) .cxx
+- D) .class
+- **Answer: ✅ B**
+- **Explanation**: Custom user-defined header files in C++ traditionally use the `.h` extension to store definitions and interface signatures.
+
+#### Q133. Which of the following is NOT a type of constructor in C++?
+- A) Copy Constructor
+- B) Friend Constructor
+- C) Parameterized Constructor
+- D) Default Constructor
+- **Answer: ✅ B**
+- **Explanation**: Constructors span Default, Parameterized, and Copy structures. "Friend" options are limited to functional keyword designations outside class constraints.
+
+#### Q134. Which software design approach is used by C++?
+- A) Top-down approach
+- B) Bottom-up approach
+- C) Left-to-right approach
+- D) Inside-out approach
+- **Answer: ✅ B**
+- **Explanation**: C++ uses a bottom-up approach focusing on objects and classes as the core building blocks, assembling them to build the application.
+
+#### Q135. Which of the following data types is provided by C++ but not C natively?
+- A) double
+- B) float
+- C) bool
+- D) char
+- **Answer: ✅ C**
+- **Explanation**: C historically utilizes standard numerical representation fields (0/1) for flags, while C++ added built-in support for native `bool` assignments.
+
+#### Q136. What is virtual inheritance in C++?
+- A) An inheritance model where child classes cannot access base class functions.
+- B) Technique to avoid multiple copies of a base class in diamond inheritance
+- C) Inheritance that occurs only at runtime
+- D) Overriding all base class methods automatically
+- **Answer: ✅ B**
+- **Explanation**: Solves the diamond inheritance conflict by assuring single, streamlined base structural instances pass cleanly into multiple subclass routes.
+
+#### Q137. Which statement is true about Java?
+- A) Java is platform-dependent.
+- B) Java is a platform-independent programming language.
+- C) Java source code compiles directly to native machine binary files.
+- D) Java supports multiple inheritance of classes directly.
+- **Answer: ✅ B**
+- **Explanation**: Java is a platform-independent language because source code compiles to bytecode, which runs on any machine with a Java Virtual Machine (JVM).
+
+#### Q138. Which of the following is NOT a Java feature?
+- A) Platform Independence
+- B) Use of pointers
+- C) Garbage Collection
+- D) Object-Oriented
+- **Answer: ✅ B**
+- **Explanation**: Java abstracts direct structural hardware layout interactions away by omitting raw code pointer operations to ensure safety.
+
+#### Q139. Which environment variable is used to set Java path properties on a system?
+- A) JAVA_PATH
+- B) JAVA_HOME
+- C) JDK_DIR
+- D) JVM_ENV
+- **Answer: ✅ B**
+- **Explanation**: `JAVA_HOME` is the standard environment variable pointing to the installation directory of the JDK/JRE.
+
+#### Q140. What is NOT a valid use of the `this` keyword in Java?
+- A) To pass the current class instance as an argument to a method.
+- B) Passing itself to the method of the same class.
+- C) To invoke the current class constructor.
+- D) To refer to the current class instance variable.
+- **Answer: ✅ B**
+- **Explanation**: Passing `this` to another method of the same class is redundant and invalid since all methods in the class already share the same context.
+
+#### Q141. Which of the following is a type of polymorphism in Java programming?
+- A) Compile-time polymorphism
+- B) Execution-time inheritance
+- C) Linker-level binding
+- D) Static abstraction
+- **Answer: ✅ A**
+- **Explanation**: Implemented natively through standard method overloading properties mapped during raw code compilation.
+

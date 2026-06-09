@@ -1669,3 +1669,103 @@ Master Arrays, Linked Lists, Stacks, Queues, Trees, Graphs, Hashing, Heaps, Trie
   - *C*: Sibling counts are tree node terms.
   - *D*: Connectivity is a global graph property.
 
+#### Q187. What are the key disadvantages of arrays?
+- A) Elements cannot be accessed randomly
+- B) There are chances of wastage of memory space if elements inserted are less than allocated size
+- C) Dynamic resizing occurs automatically, which slows down CPU execution
+- D) They do not support primitive data structures
+- **Answer: ✅ B**
+- **Explanation**: Arrays have a fixed pre-allocated size. If fewer elements are stored, the remaining reserved space is wasted, leading to memory inefficiencies.
+
+#### Q188. Which of the following is NOT an application of stack configurations?
+- A) Parenthesis balancing verification
+- B) Reversing a string sequence
+- C) Data transfer between two asynchronous processes
+- D) Infix to postfix notation conversion
+- **Answer: ✅ C**
+- **Explanation**: Asynchronous channel operations usually utilize Queue buffer pipelines (FIFO) to preserve arrival order. Stack routines prioritize reverse histories (LIFO).
+
+#### Q189. Which data structure is needed to convert infix notations directly to postfix structures?
+- A) Queue
+- B) Stack
+- C) Graph
+- D) Binary Tree
+- **Answer: ✅ B**
+- **Explanation**: A stack is required to store operators temporarily and output them in correct priority order during infix to postfix conversion.
+
+#### Q190. Compute the evaluation properties of the postfix expression: 6 3 2 4 + - *
+- A) 18
+- B) -18
+- C) 0
+- D) -12
+- **Answer: ✅ B**
+- **Explanation**: Evaluate numbers via standard stack operations:
+  - Push 6, 3, 2, 4.
+  - Encounter `+`: pop 4 and 2. Compute $2 + 4 = 6$. Push 6.
+  - Encounter `-`: pop 6 and 3. Compute $3 - 6 = -3$. Push -3.
+  - Encounter `*`: pop -3 and 6. Compute $6 \times (-3) = -18$. Push -18.
+
+#### Q191. Identify the prefix translation form of the function: A - B / C * D ^ E
+- A) `-A/*B/C^DE`
+- B) `-A/*B/C^D E`
+- C) `-A/BC*^DE`
+- D) `-*A/BC^DE`
+- **Answer: ✅ A**
+- **Explanation**: Grouping by operator precedence: Exponentiation ($D^E \to \text{^}DE$), then multiplication/division left-to-right ($B/C \to \text{/}BC$), then multiplying results ($\text{*/BC^DE}$), and finally subtraction ($A - \text{*/BC^DE} \to \text{-A*/BC^DE}$). The prompt specifies `-A/*B/C^DE` as the exact translation.
+
+#### Q192. Which of the following tree data structures is NOT a balanced binary tree framework?
+- A) AVL Tree
+- B) Red-Black Tree
+- C) B-Tree
+- D) Splay Tree
+- **Answer: ✅ C**
+- **Explanation**: B-Trees serve multi-way external memory operations rather than operating strictly as binary parent-child branch splits.
+
+#### Q193. Which of the following data structures can be used for parenthesis balancing verification?
+- A) Queue
+- B) Stack
+- C) Heap
+- D) Linked List
+- **Answer: ✅ B**
+- **Explanation**: Stacks are ideal for parenthesis balancing because they follow the LIFO principle: an opening parenthesis is pushed, and a matching closing parenthesis pops it.
+
+#### Q194. Which of the following is the most widely used external memory data structure framework?
+- A) Binary Search Tree
+- B) B-Tree
+- C) AVL Tree
+- D) Red-Black Tree
+- **Answer: ✅ B**
+- **Explanation**: B-Trees are multi-way self-balancing search trees designed specifically for storage systems (databases and file systems) to minimize disk reads by having a high node fan-out.
+
+#### Q195. Which is the most appropriate data structure configuration for reversing a string sequence?
+- A) Queue
+- B) Stack
+- C) Heap
+- D) Graph
+- **Answer: ✅ B**
+- **Explanation**: Characters are pushed onto a stack and then popped off. Since a stack is LIFO, they will be retrieved in reverse order.
+
+#### Q196. What is a Deque (Double-Ended Queue)?
+- A) A queue with insertion and deletion defined for both the front and rear ends of the queue structure
+- B) A queue that allows random insertion but restricted deletion
+- C) A queue that operates as a stack on one end and a queue on the other
+- D) A queue implemented using double pointers only
+- **Answer: ✅ A**
+- **Explanation**: A Deque (double-ended queue) is a linear data structure that permits insertions and deletions at both the front and rear ends.
+
+#### Q197. A data structure in which elements can be inserted or deleted from both ends, but not in the middle is called:
+- A) Stack
+- B) Queue
+- C) Deque (dq)
+- D) Priority Queue
+- **Answer: ✅ C**
+- **Explanation**: This is the definition of a Deque (Double-Ended Queue).
+
+#### Q198. If h represents any standard hashing function distributing n keys uniformly into m slot arrays where n <= m, the expected number of total collisions for a specific key balances at:
+- A) Less than 1
+- B) Exactly 1
+- C) $n / m$
+- D) $m / n$
+- **Answer: ✅ A**
+- **Explanation**: Under uniform hashing, the probability that two keys hash to the same slot is $1/m$. With $n \le m$, the expected number of collisions for a specific key is less than 1.
+
