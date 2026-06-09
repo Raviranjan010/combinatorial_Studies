@@ -83,3 +83,81 @@ Let $h$ be the height of the tree (where a single root node has height 0):
 *   **BST Skewed Tree Trap**: Do not assume BST operations are always $O(\log N)$. If keys are inserted in sorted order (e.g., $1, 2, 3, 4$), the BST degenerates into a skewed line, and search times degrade to $O(N)$. Self-balancing AVL trees are needed to guarantee $O(\log N)$.
 *   **Heap Sort Array Bounds**: When performing heap calculations, double-check whether the problem assumes 1-based indexing or 0-based indexing for the array representation, as this changes child-parent index calculations.
 *   **Recursion space overhead**: Even though DFS and tree traversals have $O(1)$ auxiliary space excluding the system stack, their actual runtime space complexity is $O(H)$ (where $H$ is the tree height) due to recursion stack frames.
+
+---
+
+## ⚡ 6. Masterclass Revision Kits
+
+### 📋 6.1 5-Minute Quick Reference Sheets
+
+#### Linked Lists
+*   **Core definition:** Nodes connected dynamically using address pointers.
+*   **Types:** Singly Linked List (SLL), Doubly Linked List (DLL), Circular Linked List (CLL), Circular Doubly Linked List (CDLL).
+*   **Operations:** Insert/Delete at Beginning ($O(1)$), End ($O(N)$ or $O(1)$ with tail pointer), Middle ($O(N)$ traversal + $O(1)$ pointer shift).
+*   **Key Advantage:** Dynamic size allocation, fast insertion and deletion without memory shifting.
+*   **Key Disadvantage:** Slow sequential random access ($O(N)$), extra pointer memory overhead.
+
+#### Stacks & Queues
+*   **Stack:** LIFO (Last In First Out) principle. Operations: `push()`, `pop()`, `peek()` ($O(1)$). Used for Undos, parentheses matching, recursion call stack.
+*   **Queue:** FIFO (First In First Out) principle. Operations: `enqueue()`, `dequeue()`, `peek()` ($O(1)$). Used for job queues, CPU scheduling, networking buffers.
+*   **Key Variants:** Circular Queue (avoids space leaks), Priority Queue (processed by importance rating), Deque (insert/delete from both Front and Rear).
+
+#### Trees
+*   **Core structure:** Hierarchical, acyclic node structure containing a Root, internal nodes, and Leaves.
+*   **Binary Tree:** Each node can have at most 2 children.
+*   **Binary Search Tree (BST):** Left Subtree $<$ Root $<$ Right Subtree ordering. Inorder traversal yields sorted ascending values.
+*   **Balanced Trees:** Height is kept to $O(\log N)$ via rotations (AVL) or color flags (Red-Black) to prevent linear degeneration.
+
+#### Graphs
+*   **Formal Math:** $G = (V, E)$. Network representation of many-to-many relationships.
+*   **Representations:** Adjacency Matrix ($O(V^2)$ space, $O(1)$ edge checking) vs. Adjacency List ($O(V+E)$ space, $O(\text{degree})$ edge checking).
+*   **Traversals:** BFS (Queue helper, level-by-level, finds shortest path on unweighted edges) vs. DFS (Stack helper/recursion, deep explorer, cycle detection).
+
+---
+
+### ⏱ 6.2 2-Minute Memory Maps
+*   **Linked List:** Node = Data + Pointer Address. Traversed sequentially.
+*   **Stack:** Pile of Plates $\to$ LIFO order. Insertion/Deletion at `Top`.
+*   **Queue:** Ticket counter line $\to$ FIFO order. Insertion at `Rear`, deletion at `Front`.
+*   **Tree:** Family tree hierarchy $\to$ Root at top, Leaves at bottom. Max 2 kids for Binary.
+*   **Graph:** Cities (vertices) and roads (edges). DFS = Deep explorer; BFS = Ripple expander.
+
+---
+
+### 📑 6.3 Last-Night Study summaries
+
+#### Singly vs. Doubly Linked Lists
+*   *SLL:* Single `next` pointer. Traverses forward only. Low memory.
+*   *DLL:* `next` and `prev` pointers. Traverses bidirectionally. Easy deletion but higher memory cost.
+
+#### Stacks vs. Queues
+*   *Stack (LIFO):* Push $\to$ insert, Pop $\to$ delete. Access limited to `top`.
+*   *Queue (FIFO):* Enqueue $\to$ insert (Rear), Dequeue $\to$ delete (Front). Access limited to `front`.
+
+#### BST vs. AVL Tree
+*   *BST:* Basic ordered tree. Can become skewed ($O(N)$ time) if keys arrive sorted.
+*   *AVL:* Always balanced. Balance factor is Height(Left) - Height(Right) $\in \{-1,0,1\}$. Guaranteed $O(\log N)$ search time.
+
+#### Graph traversals
+*   *BFS:* Uses a Queue. Explores neighbors first. Finds shortest unweighted paths.
+*   *DFS:* Uses a Stack (implicit call stack). Explores branch paths to the bottom before backtracking.
+
+---
+
+## ⏱ 7. The 60-Second Exam Hall Recall Cards
+
+If you have only 60 seconds before entering the exam, memorize these core data structure rules:
+
+1.  **Linked List = Pointers + Nodes:** Memory is non-contiguous. Head stores address of first node. Tail points to NULL.
+2.  **LIFO vs FIFO:** Stack is Last-In-First-Out (plates). Queue is First-In-First-Out (checkout line).
+3.  **Push/Pop vs Enqueue/Dequeue:** Stacks push/pop at Top. Queues enqueue at Rear and dequeue at Front.
+4.  **Recursion uses Stack:** Call stacks process nested returns in LIFO order.
+5.  **Tree is Acyclic Graph:** Trees have exactly one root, no cycles, and exactly $N-1$ edges for $N$ nodes.
+6.  **BST Rule:** Left Child $<$ Root $<$ Right Child. BST Inorder traversal prints values in sorted order.
+7.  **AVL = Balanced BST:** BF = Height(Left) - Height(Right) must be $-1$, $0$, or $+1$. restorers use single (LL/RR) or double (LR/RL) rotations.
+8.  **BST vs AVL Worst Case:** BST search takes $O(N)$ worst-case. AVL search takes $O(\log N)$ worst-case.
+9.  **Matrix vs List:** Adjacency matrix is $O(V^2)$ space (good for dense). Adjacency list is $O(V+E)$ space (good for sparse).
+10. **BFS vs DFS:** BFS explores wide using a Queue. DFS explores deep using a Stack/Recursion.
+11. **Circular Queue Modulo:** $\text{rear} = (\text{rear} + 1) \mathbin{\%} \text{capacity}$. Prevents empty space leaks.
+12. **Heaps are Array Trees:** Root is min/max. Left child is $2i+1$; Right child is $2i+2$ (for 0-indexed arrays).
+

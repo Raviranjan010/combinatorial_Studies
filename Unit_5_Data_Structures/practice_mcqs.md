@@ -1415,3 +1415,257 @@ Master Arrays, Linked Lists, Stacks, Queues, Trees, Graphs, Hashing, Heaps, Trie
 - D) Trie
 - **Answer: ✅ B**
 - **Explanation**: Heaps keep the root node key sorted in min/max priority order, making insertions and extractions highly efficient ($O(\log N)$).
+
+---
+
+## 🔷 Topic 8: Masterclass Core & Trap MCQs
+
+#### Q166. A Linked List is composed of which elements?
+- A) Variables
+- B) Nodes
+- C) Arrays
+- D) Functions
+- **Answer: ✅ B**
+- **Explanation**: A Linked List consists of individual structures called **nodes**, where each node contains a data field and a reference (pointer) to the next node.
+- **Why Other Options Are Wrong**:
+  - *A*: Variables are basic primitives; nodes are structured custom types.
+  - *C*: Arrays are separate, contiguous data structures.
+  - *D*: Functions contain executable logic, not data organization blocks.
+
+#### Q167. In a standard Linked List, what address value is stored in the `next` pointer of the last node?
+- A) Address of the head node
+- B) Integer 0
+- C) NULL
+- D) Address of the tail node
+- **Answer: ✅ C**
+- **Explanation**: In linear linked lists, the last node's `next` pointer is set to `NULL` to signify the boundary/end of the list.
+- **Why Other Options Are Wrong**:
+  - *A*: Circular linked lists point back to the head; standard lists do not.
+  - *B*: NULL is a pointer constant, not a raw integer data value.
+  - *D*: Pointing to itself would create a circular self-reference loop.
+
+#### Q168. Which physical memory arrangement does a Linked List use to store its elements?
+- A) Continuous / Contiguous
+- B) Non-continuous / Non-contiguous
+- C) Fixed static blocks
+- D) Virtual mapping only
+- **Answer: ✅ B**
+- **Explanation**: Unlike arrays, linked list nodes are dynamically allocated at scattered (non-continuous) addresses in memory. They are stitched together using pointer links.
+- **Why Other Options Are Wrong**:
+  - *A*: Arrays use contiguous memory, enabling random indexing.
+  - *C*: Nodes are created on demand, not in pre-allocated static blocks.
+  - *D*: It resides in real memory space, not just virtual maps.
+
+#### Q169. Why is inserting a node at the beginning of a Linked List highly efficient compared to an Array?
+- A) No shifting of elements is required
+- B) Pointers are stored in cache memory
+- C) The list is sorted automatically
+- D) Less memory is allocated for the head node
+- **Answer: ✅ A**
+- **Explanation**: Inserting at the head of a linked list only requires updating pointers ($O(1)$ time). In contrast, arrays require shifting all existing elements in memory to clear slot 0 ($O(N)$ time).
+- **Why Other Options Are Wrong**:
+  - *B*: Pointers are stored in standard RAM, not specifically forced into cache.
+  - *C*: Insertion does not sort the list.
+  - *D*: Nodes consume identical memory size regardless of insertion position.
+
+#### Q170. What does the `Head` pointer of a Linked List store?
+- A) The actual data of the first node
+- B) The size of the linked list
+- C) The memory address of the first node
+- D) A pointer to NULL
+- **Answer: ✅ C**
+- **Explanation**: The `Head` pointer is a reference variable that holds the memory address of the first node. It does not store raw data.
+- **Why Other Options Are Wrong**:
+  - *A*: The data is stored in the data field of the node, which is accessed via the head pointer (`head->data`).
+  - *B*: The size is tracked separately or by traversing nodes.
+  - *D*: Head only points to NULL if the list is empty.
+
+#### Q171. Which access principle does a Stack follow?
+- A) First-In, First-Out (FIFO)
+- B) Last-In, First-Out (LIFO)
+- C) Random Access Order
+- D) Highest Priority First
+- **Answer: ✅ B**
+- **Explanation**: Stacks restrict all operations to the Top, meaning the element pushed last is the first one popped.
+- **Why Other Options Are Wrong**:
+  - *A*: FIFO is the access principle for queues.
+  - *C*: Random access is supported by arrays, not stacks.
+  - *D*: Priority queues process items by priority weight.
+
+#### Q172. Which access principle does a Queue follow?
+- A) Last-In, First-Out (LIFO)
+- B) First-In, First-Out (FIFO)
+- C) Sorted Order Access
+- D) Depth-First Order
+- **Answer: ✅ B**
+- **Explanation**: Queues insert elements at the Rear and delete from the Front, ensuring the first element entered is the first one removed.
+- **Why Other Options Are Wrong**:
+  - *A*: LIFO is stack ordering.
+  - *C*: Elements are retrieved by arrival order, not value sorting.
+  - *D*: Depth-First is a traversal strategy for trees/graphs.
+
+#### Q173. The operation of adding a new item to the top of a Stack is formally called:
+- A) Pop
+- B) Push
+- C) Enqueue
+- D) Peak
+- **Answer: ✅ B**
+- **Explanation**: Pushing is the standard term for inserting an item into a stack.
+- **Why Other Options Are Wrong**:
+  - *A*: Pop is the term for deleting an item from a stack.
+  - *C*: Enqueue is for queues.
+  - *D*: Peek/Peak is for viewing the top without deletion.
+
+#### Q174. The operation of deleting an item from a Queue is called:
+- A) Pop
+- B) Push
+- C) Enqueue
+- D) Dequeue
+- **Answer: ✅ D**
+- **Explanation**: Dequeue is the operation that removes the front element of a queue.
+- **Why Other Options Are Wrong**:
+  - *A*: Pop deletes from a stack.
+  - *B*: Push inserts into a stack.
+  - *C*: Enqueue inserts into a queue.
+
+#### Q175. Why is a Stack the ideal data structure for managing Undo operations in software?
+- A) Undo operations require the oldest action to be reversed first
+- B) Stacks consume less memory than queues
+- C) Undo operations require the most recent action to be reversed first (LIFO)
+- D) Stacks allow random modifications
+- **Answer: ✅ C**
+- **Explanation**: When a user selects "Undo", they expect their most recent (last) action to be undone first. This matches LIFO ordering, which is implemented using a stack.
+- **Why Other Options Are Wrong**:
+  - *A*: Reversing the oldest action first is FIFO, which would break natural undo flow.
+  - *B*: Stacks and queues have identical memory complexity.
+  - *D*: Stacks restrict access to the top node only.
+
+#### Q176. Deleting the oldest element from a Queue occurs at which boundary?
+- A) Top
+- B) Front
+- C) Rear
+- D) Leaf
+- **Answer: ✅ B**
+- **Explanation**: In queues, insertions happen at the Rear, and deletions happen at the Front (representing the oldest element).
+- **Why Other Options Are Wrong**:
+  - *A*: Top is stack terminology.
+  - *C*: Rear is where new elements are enqueued.
+  - *D*: Leaf is tree terminology.
+
+#### Q177. In a Binary Tree, what is the maximum number of child nodes any individual node can have?
+- A) 1
+- B) 2
+- C) 3
+- D) Unlimited
+- **Answer: ✅ B**
+- **Explanation**: By definition, a binary tree node is restricted to a maximum of 2 children: a left child and a right child.
+- **Why Other Options Are Wrong**:
+  - *A*: Skewed trees have 1 child per node, but the maximum allowed in binary trees is 2.
+  - *C & D*: Multi-way trees can have more than 2 children, but binary trees cannot.
+
+#### Q178. What ordering property characterizes a Binary Search Tree (BST)?
+- A) Left child > Root > Right child
+- B) Right child < Root < Left child
+- C) Left subtree keys < Root key < Right subtree keys
+- D) Parent nodes are always smaller than children nodes
+- **Answer: ✅ C**
+- **Explanation**: A BST arranges keys such that all descendants in a node's left subtree are smaller than the node's key, and all descendants in the right subtree are larger.
+- **Why Other Options Are Wrong**:
+  - *A & B*: Inverts sorting properties.
+  - *D*: This defines a min-heap structure, not a BST.
+
+#### Q179. A leaf node in a tree is characterized by having how many children?
+- A) Exactly two children
+- B) One child
+- C) Zero children
+- D) A parent only
+- **Answer: ✅ C**
+- **Explanation**: A leaf node (external node) resides at the boundary of a tree and has no children (degree = 0).
+- **Why Other Options Are Wrong**:
+  - *A*: This represents internal nodes in binary trees.
+  - *B*: This represents single-child internal nodes.
+  - *D*: While leaves do have a parent, they are characterized by their lack of child nodes.
+
+#### Q180. Which tree structure guarantees logarithmic time complexity $O(\log N)$ for search, insertion, and deletion operations in the worst case?
+- A) Unbalanced Binary Search Tree (BST)
+- B) Self-balancing AVL Tree
+- C) Skewed Binary Tree
+- D) General Tree
+- **Answer: ✅ B**
+- **Explanation**: AVL trees dynamically balance themselves using rotations, keeping height bound to $O(\log N)$ and preventing skewing.
+- **Why Other Options Are Wrong**:
+  - *A*: Standard BSTs degrade to $O(N)$ when skewed.
+  - *C*: Skewed trees run in linear $O(N)$ time.
+  - *D*: General trees do not enforce binary search rules.
+
+#### Q181. Which statement correctly describes the relationship between a Binary Search Tree (BST) and a Binary Tree?
+- A) Every Binary Tree is a BST
+- B) Every BST is a Binary Tree
+- C) BSTs and Binary Trees are completely disjoint concepts
+- D) A BST is a special type of Graph, not a Binary Tree
+- **Answer: ✅ B**
+- **Explanation**: A BST is a binary tree that satisfies a sorting property. Therefore, every BST is structurally a binary tree.
+- **Why Other Options Are Wrong**:
+  - *A*: Many binary trees do not satisfy the sorted ordering rules of a BST.
+  - *C*: They are directly related (BST is a subset of Binary Tree).
+  - *D*: A tree is a subset of graph structures, but a BST is classified under binary trees.
+
+#### Q182. Graph Theory originated from the resolution of which historical mathematical problem?
+- A) Four Color Problem
+- B) Traveling Salesman Problem
+- C) Seven Bridges of Königsberg
+- D) Tower of Hanoi
+- **Answer: ✅ C**
+- **Explanation**: Leonhard Euler's 1736 analysis of whether one could walk through the city of Königsberg crossing its seven bridges exactly once led to the invention of graph structures.
+- **Why Other Options Are Wrong**:
+  - *A*: The Four Color Problem was solved much later in the 19th-20th century.
+  - *B*: The Traveling Salesman Problem is an optimization challenge.
+  - *D*: The Tower of Hanoi is a puzzle solved using recursive logic.
+
+#### Q183. A Tree can be defined as which type of Graph?
+- A) Directed cyclic graph
+- B) Connected acyclic graph
+- C) Disconnected undirected graph
+- D) Complete weighted graph
+- **Answer: ✅ B**
+- **Explanation**: A tree is mathematically defined as a graph that is connected (every node reachable) and acyclic (contains no loops).
+- **Why Other Options Are Wrong**:
+  - *A*: Trees cannot have cycles.
+  - *C*: Trees must be connected.
+  - *D*: Trees do not have to be complete or weighted.
+
+#### Q184. Which graph representation is most space-efficient for sparse graphs?
+- A) Adjacency Matrix
+- B) Adjacency List
+- C) Incidence Matrix
+- D) Complete Grid Map
+- **Answer: ✅ B**
+- **Explanation**: Adjacency lists only allocate memory for actual connections, consuming $O(V + E)$ space, which is optimal for sparse graphs.
+- **Why Other Options Are Wrong**:
+  - *A*: Matrices consume $O(V^2)$ space regardless of edge count, wasting memory for sparse graphs.
+  - *C*: Incidence matrices consume $O(V \cdot E)$ space, which is less optimal than adjacency lists.
+
+#### Q185. Which graph traversal algorithm is guaranteed to find the shortest path between two nodes in an unweighted graph?
+- A) Depth-First Search (DFS)
+- B) Breadth-First Search (BFS)
+- C) Kruskal's Algorithm
+- D) Topological Sorting
+- **Answer: ✅ B**
+- **Explanation**: BFS searches layer-by-layer. Since edges are unweighted, the first time BFS reaches a target node, it does so using the minimum number of edge steps.
+- **Why Other Options Are Wrong**:
+  - *A*: DFS goes deep along branches and may find a much longer path before finding the target.
+  - *C*: Kruskal's finds a Minimum Spanning Tree.
+  - *D*: Topological Sort yields a linear schedule order for directed acyclic graphs.
+
+#### Q186. In a directed graph, the number of incoming edges pointing directly into a vertex is defined as its:
+- A) Outdegree
+- B) Indegree
+- C) Sibling count
+- D) Vertex connectivity
+- **Answer: ✅ B**
+- **Explanation**: Indegree measures how many edge arrows point towards a node.
+- **Why Other Options Are Wrong**:
+  - *A*: Outdegree measures outgoing edges.
+  - *C*: Sibling counts are tree node terms.
+  - *D*: Connectivity is a global graph property.
+
