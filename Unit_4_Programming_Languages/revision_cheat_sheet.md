@@ -76,3 +76,67 @@ A rapid-revision summary of language fundamentals, pointers, OOP principles, and
 *   **Constructor calling order**: During inheritance, base constructors execute **before** derived constructors. However, destructors execute in the **reverse** order: derived destructors execute before base destructors.
 *   **Function Signature**: Overloading is resolved based on the parameter list (type, order, and count) and **not** on the return type. Declaring two functions with the same parameters but different return types will fail compilation.
 *   **Virtual Destructor Trap**: In C++, if a base class pointer deletes a derived class object, the base class **must** have a `virtual destructor` (`virtual ~Base()`). Otherwise, only the base destructor will be called, causing memory leaks for the derived portion of the object.
+
+---
+
+## ⚡ 6. Supplemental Masterclass Revision Sheets
+
+### 📋 6.1 5-Minute Quick Reference Sheets
+
+#### Classes
+*   **Core Concept:** Logical blueprints (Class) vs. physical allocations (Object).
+*   **Attributes vs. Methods:** Properties (variables) vs. Behaviors (functions).
+*   **Lifecycle:** Dynamic allocation (`new`) $\to$ Constructor runs $\to$ Usage $\to$ Destructor scope clean.
+*   **Static vs. Instance:** Static belongs to class (shared); Instance belongs to object (individual copies).
+
+#### OOP Pillars (EIPA)
+*   **Encapsulation:** Protect data fields (`private`) with getter/setter filters.
+*   **Inheritance:** Base parent code extended by derived children.
+*   **Polymorphism:** Method overloading (compile-time) vs. overriding (runtime via Vtables).
+*   **Abstraction:** Simple interface masking execution complexity (ATM buttons).
+
+#### Parameter Passing & Binding
+*   **Pass by Value:** Copy made in parameter space; caller's variable remains unchanged.
+*   **Pass by Reference:** Direct memory alias passes; modification affects caller directly.
+*   **Pass by Result:** Write-only output parameter returned at end of function execution.
+*   **Pass by Value-Result:** Copies value in at start, copies updated value back out to caller at function exit.
+*   **Pass by Name:** Textual argument evaluation whenever referencing parameter.
+*   **Binding:** Static compile-time type binding vs. Dynamic runtime lookup (polymorphic overrides).
+
+#### Memory Handling
+*   **Stack:** Compiler-managed, LIFO sequence, extremely fast, auto-cleaned block frames.
+*   **Heap:** Dynamic custom allocations (`new`/`delete`), slower random access, requires manual/GC cleanup.
+*   **Anomalies:** Memory leaks (forgot to free), Dangling pointer (pointing to freed RAM), Double free (releasing heap address twice).
+
+---
+
+### ⏱ 6.2 2-Minute Memory Maps
+*   **Class:** Blueprint design drawing.
+*   **Object:** Physical built house.
+*   **Constructor:** Creator function (Automatic run).
+*   **Destructor:** Janitor function (Automatic cleanup).
+*   **Encapsulation:** Security code lock on variables.
+*   **Inheritance:** Family hierarchy (Animal $\to$ Dog).
+*   **Polymorphism:** One button, multiple actions (Shape drawing).
+*   **Abstraction:** Simple dashboard, complex engine.
+*   **Parameter Passing:** Value = photocopy; Reference = original document.
+*   **Binding:** Static = fixed label; Dynamic = swappable pointer tag.
+*   **Stack vs. Heap:** Stack = strict box slots; Heap = custom open ground storage.
+
+---
+
+## ⏱ 7. The 60-Second Exam Hall Recall Cards
+
+Keep these 10 core PL rules in mind before entering the exam room:
+
+1.  **Class vs. Object Memory:** A Class consumes no RAM. Only instantiated Objects occupy physical memory space.
+2.  **Constructor Rules:** Same name as the class, no return type, runs automatically once per object creation.
+3.  **Encapsulation hides data:** Achieve this by declaring variables `private` and exposing `public` accessor methods.
+4.  **Abstraction hides detail:** Different from Encapsulation. Abstraction hides implementation detail; Encapsulation hides state data.
+5.  **Polymorphism forms:** Overloading is static/compile-time (same class); Overriding is dynamic/runtime (base-derived classes resolved via Vtable).
+6.  **Java parameter passing:** Java is strictly **pass-by-value**. Object arguments copy reference pointers by value.
+7.  **Binding times:** Static binding happens during compilation; Dynamic binding happens during execution.
+8.  **Stack vs. Heap:** Stack manages local variables and stack frames (auto-cleaned). Heap stores dynamic objects (manually or GC cleaned).
+9.  **Memory Leak definition:** Losing all pointer addresses to a heap allocation without deallocating it.
+10. **Dangling Pointer definition:** Storing the memory address of an object that has already been deleted.
+

@@ -434,3 +434,72 @@ GC identifies unreachable objects using **Reachability Analysis**:
 >     delete ptr; // If ~Base() is not virtual, only Base's destructor is called!
 >     ```
 >     This leaves all resources allocated inside `Derived` unreleased, causing memory leaks. To prevent this, always declare the base destructor as virtual: `virtual ~Base() {}`.
+
+---
+
+## 8. Supplemental Masterclass Theory (Classes, OOP, Parameter Passing & Memory Handling)
+
+### 🏫 8.1 Classes: Blueprints, Lifecycle & Memory Layout
+*   **The Blueprint Analogy:** A Class is a user-defined blueprint, template, or design used to construct objects. An architectural drawing of a house is not a physical house itself. Using that drawing, you can build many houses.
+    $$\text{Class (Blueprint)} \longrightarrow \text{new} \longrightarrow \begin{cases} \text{Object 1 (House 1)} \\ \text{Object 2 (House 2)} \\ \text{Object 3 (House 3)} \end{cases}$$
+*   **Why Classes Exist:** To prevent variable clutter (e.g., tracking 10,000 students as separate individual variables like `student1_name`, `student1_age`). Classes group attributes (properties) and methods (actions) together.
+*   **History & Motivation:** Bounded in the 1960s-1970s (Simula-67, Smalltalk) to model real-world concepts directly in code.
+*   **Anatomy of a Class:**
+    *   *Attributes (Properties):* Variable data members storing object states.
+    *   *Methods (Behaviors):* Function members operating on class properties.
+    *   *Access Specifiers:* `public` (accessible anywhere), `private` (hidden inside class), `protected` (visible to child classes).
+*   **Object Lifecycle & Creation Flow:**
+    $$\text{Class Blueprint} \longrightarrow \text{new keyword} \longrightarrow \text{Memory Allocation in Heap} \longrightarrow \text{Constructor Execution} \longrightarrow \text{Object Ready}$$
+*   **Constructors vs. Destructors:**
+    *   *Constructor:* A special method with the same name as the class and no return type. Runs automatically once per object creation to initialize fields (supports default and parameterized overloads).
+    *   *Destructor (C++):* Prefixed with a tilde (`~ClassName()`). Cleans up dynamic memory resources when the object scope terminates.
+*   **Static vs. Instance Members:**
+    *   *Instance Members:* Belong to each individual object. Every object has its own copy in the heap.
+    *   *Static Members:* Belong to the class itself. A single copy resides in static memory and is shared by all objects.
+
+---
+
+### 🏛 8.2 The Four Pillars of OOP (EIPA)
+*   **Encapsulation (Data Hiding):** Binding data fields and their modifier methods together into a single class unit while hiding inner variables (`private`) to prevent unauthorized corruption.
+*   **Inheritance (Code Reuse):** A child subclass inherits attributes and methods from a parent class, modeling an "is-a" relationship (e.g., `Dog` inherits from `Animal`).
+*   **Polymorphism (Many Forms):** Allows the same interface/method call to execute different behaviors based on the object type.
+    *   *Compile-Time (Static):* Method Overloading (same name, different parameter signature in the same class).
+    *   *Runtime (Dynamic):* Method Overriding (same name and parameters in child class, resolved via Vtable).
+*   **Abstraction (Complexity Hiding):** Hiding low-level implementation details and exposing only vital control interfaces to the user.
+    *   *Analogy:* An ATM machine hides complex database and security algorithms behind simple "Withdraw" and "Deposit" screen buttons.
+
+---
+
+### 🔀 8.3 Parameter Passing & Binding Mechanics
+*   **Pass by Result:** The parameter acts as an output-only variable. Its initial value is ignored; the final local value is copied back to the caller's variable upon function return.
+*   **Pass by Value-Result (Copy-In Copy-Out):** Combines value and reference properties. The caller's argument value is copied into a local parameter block at execution start. The function modifies this local block. Upon return, the final value is copied back to overwrite the caller's original variable.
+*   **Pass by Name (Text Substitution):** Evaluates the argument expression each time the parameter is referenced inside the function (like C-style macro substitution). Historically used in ALGOL 60.
+*   **The Java Parameter Passing Model:** Java is strictly **pass-by-value**. However, for object variables, the "value" passed is the memory address reference. This means you can modify object properties inside functions, but you cannot change the caller's reference variable to point to a different object.
+*   **Stack Frame Parameter Layout:**
+    When a function is called, the compiler allocates a new Activation Record (Stack Frame) containing:
+    ```
+    ┌──────────────────────────────────────────────┐
+    │ Arguments / Parameters (Pointers or Copies)  │
+    ├──────────────────────────────────────────────┤
+    │ Return Address (Instruction Pointer)         │
+    ├──────────────────────────────────────────────┤
+    │ Local Variables                              │
+    └──────────────────────────────────────────────┘
+    ```
+*   **Binding Times:** Binding is the connection between a program entity and its attribute.
+    *   *Language Design Time:* Binding operator symbols (e.g. `+`) to mathematical operations.
+    *   *Compile Time:* Binding variables to static types.
+    *   *Load Time:* Binding variables to physical storage addresses.
+    *   *Runtime:* Binding virtual methods to execution blocks (dynamic binding).
+
+---
+
+### 💾 8.4 Heap vs. Stack Memory Handling
+*   **Stack Segment:** Stores local variables and function execution activation records. Highly structured LIFO order, fast, managed automatically by CPU stack pointers.
+*   **Heap Segment:** Stores objects created dynamically (via `new`). Managed manually (C++ `delete`) or automatically (Java GC). Leads to fragmentation if not cleaned up.
+*   **Memory Lifespans:** Stack variables live only as long as their enclosing function execution. Heap objects live from explicit creation (`new`) until explicit deletion or garbage collection.
+*   **Memory Anomalies:**
+    *   *Memory Leak:* Allocating heap memory but losing all references without deallocating it.
+    *   *Dangling Reference:* A pointer holding the address of an object that has already been deallocated.
+    *   *Double Free:* Attempting to deallocate the same heap address twice, corrupting heap headers.
+

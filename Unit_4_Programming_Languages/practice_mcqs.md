@@ -984,3 +984,254 @@ int main() {
 - D) PC Register
 - **Answer: ✅ C**
 - **Explanation**: The Method Area (historically PermGen, now Metaspace) stores class-level data, constants, static variables, and method codes.
+
+---
+
+## 🔷 Topic 5: Masterclass Core & Trap MCQs
+
+#### Q106. A Class in Object-Oriented Programming is defined as a:
+- A) Runtime entity residing in RAM
+- B) Blueprint or template for creating objects
+- C) Variable that stores pointer addresses
+- D) Function that executes code
+- **Answer: ✅ B**
+- **Explanation**: A Class is a logical template or blueprint. It occupies no physical object data memory until instances (objects) are created from it.
+- **Why Other Options Are Wrong**:
+  - *A*: This describes an object (instance of a class).
+  - *C*: Pointers store addresses; classes are types.
+  - *D*: Functions contain code; classes wrap both variables and functions.
+
+#### Q107. An Object is defined as a/an:
+- A) Blueprint of a class
+- B) System compiler keyword
+- C) Physical instance of a class
+- D) Local execution stack frame
+- **Answer: ✅ C**
+- **Explanation**: Objects are concrete, physical instances created from a class template. They store actual data and occupy memory space.
+- **Why Other Options Are Wrong**:
+  - *A*: Classes are blueprints of objects, not the other way around.
+  - *B*: "new" or "class" are keywords; objects are user-allocated instances.
+  - *D*: Activation records are stack frames; objects reside on the heap.
+
+#### Q108. Which class member function runs automatically when an object is created?
+- A) Destructor
+- B) Static helper function
+- C) Constructor
+- D) Virtual method override
+- **Answer: ✅ C**
+- **Explanation**: A Constructor is a special method with the same name as the class that is invoked automatically to allocate resources and initialize properties during object instantiation.
+- **Why Other Options Are Wrong**:
+  - *A*: Destructors run when objects are destroyed/deallocated.
+  - *B*: Static functions must be called manually or inside initializers.
+  - *D*: Virtual overrides are triggered manually by reference calls.
+
+#### Q109. Which keyword is used in languages like Java and C++ to instantiate a new object on the Heap?
+- A) create
+- B) class
+- C) new
+- D) alloc
+- **Answer: ✅ C**
+- **Explanation**: The `new` keyword allocates physical space on the heap, triggers constructor initialization, and returns the reference/pointer.
+- **Why Other Options Are Wrong**:
+  - *A*: "create" is not a standard keyword for instantiation in these languages.
+  - *B*: "class" declares class types.
+  - *D*: "alloc" is used in Objective-C or as an OS memory interface.
+
+#### Q110. Encapsulation achieves data hiding and security primarily by:
+- A) Using multiple inheritance structures
+- B) Declaring variables as private and restricting access via public methods
+- C) Compiling code to machine binaries
+- D) Statically binding methods at compile time
+- **Answer: ✅ B**
+- **Explanation**: Encapsulation bundles attributes and methods together and protects attributes by declaring them `private`, forcing callers to use `public` getter/setter methods.
+- **Why Other Options Are Wrong**:
+  - *A*: Inheritance is code reuse, not data hiding.
+  - *C*: Compilation is a build phase.
+  - *D*: Static binding refers to method mapping.
+
+#### Q111. Which statement correctly describes the relationship between Classes and Objects?
+- A) An object creates a class definition in RAM
+- B) A class is a physical instance of an object
+- C) Objects are instantiated from classes
+- D) A method creates classes at runtime
+- **Answer: ✅ C**
+- **Explanation**: A class defines the structure and behavior of a type. Objects are instances created from that class definition.
+- **Why Other Options Are Wrong**:
+  - *A & B*: Inverts the relationship.
+  - *D*: Methods execute inside classes/objects; they do not create the class type structure.
+
+#### Q112. Object-Oriented Programming (OOP) is centered around organizing software code as:
+- A) Nested functional operations
+- B) Sequential top-down procedure blocks
+- C) Objects containing data and behaviors
+- D) Unstructured register memory addresses
+- **Answer: ✅ C**
+- **Explanation**: Unlike procedural programming, OOP bundles data (attributes) and behavior (methods) into objects that interact with each other.
+- **Why Other Options Are Wrong**:
+  - *A & B*: This describes procedural/imperative and functional paradigms.
+  - *D*: This describes low-level assembly paradigms.
+
+#### Q113. Which of the following is NOT one of the four core pillars of Object-Oriented Programming?
+- A) Compilation
+- B) Encapsulation
+- C) Inheritance
+- D) Polymorphism
+- **Answer: ✅ A**
+- **Explanation**: The four pillars are Encapsulation, Inheritance, Polymorphism, and Abstraction (EIPA). Compilation is a compiler translation process.
+- **Why Other Options Are Wrong**:
+  - *B, C, & D*: These are core pillars of OOP.
+
+#### Q114. Which OOP pillar promotes data security by preventing external code from directly modifying internal variables?
+- A) Abstraction
+- B) Polymorphism
+- C) Encapsulation
+- D) Overloading
+- **Answer: ✅ C**
+- **Explanation**: Encapsulation protects data fields using private modifiers, ensuring state changes only occur through validated public class interfaces.
+- **Why Other Options Are Wrong**:
+  - *A*: Abstraction hides complexity, not specifically variable security.
+  - *B*: Polymorphism allows multiple execution forms.
+  - *D*: Overloading is static compile-time polymorphism.
+
+#### Q115. Which OOP pillar permits a child class to inherit and reuse methods from a parent class?
+- A) Abstraction
+- B) Inheritance
+- C) Overriding
+- D) Encapsulation
+- **Answer: ✅ B**
+- **Explanation**: Inheritance allows child subclasses to inherit properties and code structures from base parent classes, promoting reuse.
+- **Why Other Options Are Wrong**:
+  - *A*: Abstraction reduces complex interfaces.
+  - *C*: Overriding changes method behavior but is not the inheritance mechanism itself.
+  - *D*: Encapsulation hides data fields.
+
+#### Q116. Which OOP pillar concerns hiding complex underlying code structures behind a simplified user interface?
+- A) Inheritance
+- B) Polymorphism
+- C) Abstraction
+- D) Virtualization
+- **Answer: ✅ C**
+- **Explanation**: Abstraction hides internal algorithms or data schemas (e.g. an ATM menu), presenting a simple execution interface.
+- **Why Other Options Are Wrong**:
+  - *A*: Inheritance deals with hierarchy.
+  - *B*: Polymorphism deals with multi-form methods.
+  - *D*: Virtualization is an OS or compilation technique.
+
+#### Q117. Which OOP pillar allows a single method call (e.g., `draw()`) to behave differently depending on the concrete class type invoking it?
+- A) Encapsulation
+- B) Polymorphism
+- C) Abstraction
+- D) Binding
+- **Answer: ✅ B**
+- **Explanation**: Polymorphism ("many forms") resolves method overrides dynamically at runtime, enabling specific subclass execution paths.
+- **Why Other Options Are Wrong**:
+  - *A*: Encapsulation hides state fields.
+  - *C*: Abstraction hides low-level details.
+  - *D*: Binding is the general concept of connecting entities.
+
+#### Q118. In "Pass by Value" parameter passing, how are arguments transferred to a function?
+- A) The function receives a direct pointer address to the caller's variable
+- B) A physical copy of the argument value is created in the parameter stack slot
+- C) The expression text is substituted and re-evaluated during execution
+- D) The parameter acts as an output-only variable
+- **Answer: ✅ B**
+- **Explanation**: Pass by value copies the argument. The parameter is a completely separate stack copy, meaning updates to it do not modify the caller's original variable.
+- **Why Other Options Are Wrong**:
+  - *A*: This describes pass by reference/pointer.
+  - *C*: This describes pass by name.
+  - *D*: This describes pass by result.
+
+#### Q119. Which parameter passing technique allows a function to modify the caller's variable directly without using pointer arithmetic symbols?
+- A) Pass by Value
+- B) Pass by Reference
+- C) Pass by Result
+- D) Pass by Value-Result
+- **Answer: ✅ B**
+- **Explanation**: Pass by reference passes an alias to the original variable, meaning any local updates affect the caller's memory directly.
+- **Why Other Options Are Wrong**:
+  - *A*: Pass by value copies, blocking modifications.
+  - *C*: Pass by result is output-only.
+  - *D*: Pass by value-result does not modify the caller directly until the function returns (copies back).
+
+#### Q120. When a function call is bound to its execution code block during compilation, it is called:
+- A) Dynamic binding
+- B) Static binding
+- C) Load-time binding
+- D) Delayed binding
+- **Answer: ✅ B**
+- **Explanation**: Static (early) binding binds entity properties or method calls during compilation. Non-virtual and overloaded functions resolve statically.
+- **Why Other Options Are Wrong**:
+  - *A*: Dynamic binding resolves at runtime.
+  - *C*: Load-time binding happens when the application is loaded into RAM.
+  - *D*: Delayed binding is synonymous with dynamic binding.
+
+#### Q121. How are parameters passed to methods in Java?
+- A) Primitives are passed by value; objects are passed by reference
+- B) All parameters are passed by reference
+- C) All parameters are passed by value (where object variables pass copies of reference addresses)
+- D) Java uses pass-by-name
+- **Answer: ✅ C**
+- **Explanation**: Java is strictly pass-by-value. For objects, Java copies the reference address value. Thus, while you can modify the object's properties, you cannot overwrite the caller's reference variable to point to a different object.
+- **Why Other Options Are Wrong**:
+  - *A & B*: Java does not support passing variable reference slots like C++.
+  - *D*: Pass-by-name is an older technique (ALGOL 60).
+
+#### Q122. Which statement correctly distinguishes Scope from Binding?
+- A) Scope is compile-time; Binding is runtime only
+- B) Scope determines variable visibility; Binding is the association of a program entity with an attribute
+- C) Binding determines variable visibility; Scope determines type allocation
+- D) There is no difference
+- **Answer: ✅ B**
+- **Explanation**: Scope refers to the program region where a name is visible. Binding is the association of a name with an attribute (like type, memory slot, or execution block).
+- **Why Other Options Are Wrong**:
+  - *A*: Static binding occurs at compile time.
+  - *C*: Inverts scope and binding functions.
+
+#### Q123. Local variables declared inside function blocks are stored in which memory segment?
+- A) Heap
+- B) Code segment
+- C) Stack
+- D) Data Segment
+- **Answer: ✅ C**
+- **Explanation**: Local variables are allocated inside stack frames in a strict LIFO order and are deallocated automatically when the function exits.
+- **Why Other Options Are Wrong**:
+  - *A*: Heap stores dynamically allocated objects (`new`).
+  - *B*: Code segment stores instructions.
+  - *D*: Data segment stores static and global variables.
+
+#### Q124. Dynamic objects instantiated using the `new` keyword reside in which memory segment?
+- A) Stack
+- B) Heap
+- C) Static Area
+- D) Metaspace
+- **Answer: ✅ B**
+- **Explanation**: The heap segment is used for dynamic memory allocations. Objects reside on the heap until explicitly deleted or garbage collected.
+- **Why Other Options Are Wrong**:
+  - *A*: Stack is for local variables.
+  - *C*: Static area is for shared static class variables.
+  - *D*: Metaspace holds class blueprints and compilation metadata.
+
+#### Q125. A memory leak occurs when:
+- A) The program runs out of stack frames
+- B) Heap memory is allocated but never released when no longer needed
+- C) Pointers are initialized to NULL
+- D) CPU cache memory is flushed
+- **Answer: ✅ B**
+- **Explanation**: A memory leak happens when memory is reserved on the heap but is not deallocated when its reference is lost, leaving the memory occupied and unreachable.
+- **Why Other Options Are Wrong**:
+  - *A*: This causes stack overflows.
+  - *C*: Initializing pointers to NULL is a safe programming practice.
+  - *D*: Cache flushing is handled by CPU hardware.
+
+#### Q126. A dangling pointer refers to:
+- A) A pointer initialized to point to NULL
+- B) A pointer pointing to a memory address that has already been deallocated
+- C) A pointer pointing to a static method
+- D) An unaligned memory pointer
+- **Answer: ✅ B**
+- **Explanation**: If heap memory is deallocated (`delete`) but a pointer still retains that address, accessing the pointer causes undefined behavior or crashes.
+- **Why Other Options Are Wrong**:
+  - *A*: This is a null pointer, not a dangling pointer.
+  - *C*: Pointers to methods are function pointers.
+  - *D*: Unaligned pointer is a CPU hardware boundary issue.
+
